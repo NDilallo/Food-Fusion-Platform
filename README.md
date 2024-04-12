@@ -9,13 +9,14 @@
 
 
  ## Project Members
+ If finished early the member will help on other areas. 
 | Member | Area  
 | ----------- | ----------- |
 | Matt | Following |
 | Fritz | Profile |
 | Nick | Sign in |
 | Marisa | Upload/Search |
-If finished early the member will help on other areas. 
+
 
  ## Conflict Resolution
  In the event of a conflict or disagreement among group members, we will vote on a decision to be made. The option with the majority of votes will be the one that we choose.
