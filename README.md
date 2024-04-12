@@ -5,6 +5,8 @@
 ## Communication Mechanism
  Will meet using Discord on Tuesdays @ 7:00 PM, and Fridays @ 12:00 PM
 
+ ## Conflict Resolution
+ In the event of a conflict or disagreement among group members, we will vote on a decision to be made. The option with the majority of votes will be the one that we choose.
 
 ## Decision Made
 | # | Area | Decision | Alternative | Rationale |
