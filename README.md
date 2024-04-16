@@ -5,7 +5,7 @@
 ## Communication Mechanism
  Will meet using Discord on Tuesdays @ 7:00 PM, and Fridays @ 12:00 PM!
 
-
+## Hello
 
 
  ## Project Members
