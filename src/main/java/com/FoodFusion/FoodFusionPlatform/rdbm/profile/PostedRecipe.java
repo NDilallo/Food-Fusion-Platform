@@ -9,12 +9,14 @@ import jakarta.validation.constraints.Size;
 
 import lombok.Data;
 
-/**
- * Test code for database
- */
 @Data
 @Entity
-public class PostedRecipes {
+@Table(name="PostedRecipes")
+public class PostedRecipe {
+    
+    @OneToMany
+    private List<Rating> ratings;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
