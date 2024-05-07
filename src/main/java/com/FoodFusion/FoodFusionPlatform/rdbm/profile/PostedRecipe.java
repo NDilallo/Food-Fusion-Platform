@@ -1,5 +1,7 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
 
+import com.FoodFusion.FoodFusionPlatform.rdbm.home.Rating;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +19,11 @@ public class PostedRecipe {
     @OneToMany
     private List<Rating> ratings;
 
+    /* unsure if this is necessary
+    @ManyToMany
+    @ToStringExclude
+    private List<Restaurant> restaurants;
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
@@ -26,16 +33,16 @@ public class PostedRecipe {
     private String recipeName;
 
     @NotBlank(message = "Ingredients must be set")
-    @Size(min= 2,max = 5, message = "Ingredients must be 2 or more characters")
+    @Size(min= 2, message = "Ingredients must be 2 or more characters")
     private String ingredients;
     
-    @NotBlank(message = "Steos dept must be set")
-    @Size(min= 2,max = 5, message = "Steps must be 2 or more characters")
+    @NotBlank(message = "Steps dept must be set")
+    @Size(min= 2, message = "Steps must be 2 or more characters")
     private String steps;
 
     @NotBlank(message = "Cuisine must be set")
-    @Size(min= 2,max = 5, message = "Cuisine must be 2 or more characters")
-    private String cuisine;
+    @Size(min= 2, message = "Cuisine must be 2 or more characters")
+    private String recipeCuisine;
 
     @NotBlank(message = "Average rating must be set")
     @Size(min= 0.0,max = 5.0, message = "Average rating must be between 0 and 5")
