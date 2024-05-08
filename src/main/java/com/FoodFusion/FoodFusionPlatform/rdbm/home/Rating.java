@@ -3,9 +3,12 @@ package com.FoodFusion.FoodFusionPlatform.rdbm.home;
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -34,6 +37,6 @@ public class Rating {
     private PostedRecipe recipe;
 
     @NotBlank(message = "Rating should be set")
-    @Size(min= 0.0, max=5.0, message = "Rating should be between 0 and 5")
+    @Size(min= 0, max=5, message = "Rating should be between 0 and 5")
     private double rating;
 }

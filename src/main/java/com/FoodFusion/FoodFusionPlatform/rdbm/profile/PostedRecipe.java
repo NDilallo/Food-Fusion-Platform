@@ -1,5 +1,7 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
 
+import java.util.List;
+
 import com.FoodFusion.FoodFusionPlatform.rdbm.home.Rating;
 
 import jakarta.persistence.Entity;
@@ -8,7 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
@@ -45,7 +48,7 @@ public class PostedRecipe {
     private String recipeCuisine;
 
     @NotBlank(message = "Average rating must be set")
-    @Size(min= 0.0,max = 5.0, message = "Average rating must be between 0 and 5")
+    @Size(min= 0,max = 5, message = "Average rating must be between 0 and 5")
     private double avgRating;
 
 }
