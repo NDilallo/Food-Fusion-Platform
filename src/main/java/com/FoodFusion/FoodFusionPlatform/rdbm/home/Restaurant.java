@@ -15,11 +15,7 @@ import lombok.ToString;
 @Entity
 @Table(name="Restaurants")
 public class Restaurant {
-    /* Unsure if this is necessary
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "restaurant_recs",
-        joinColumns = @JoinColumn(name = ))
-    */
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long restaurantId;
