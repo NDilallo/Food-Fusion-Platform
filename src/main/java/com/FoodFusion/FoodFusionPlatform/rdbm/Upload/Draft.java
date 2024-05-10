@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.Upload;
+package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
