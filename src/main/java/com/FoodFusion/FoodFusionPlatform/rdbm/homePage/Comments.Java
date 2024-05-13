@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.HhomePage;
+package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,14 +11,14 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Notification {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull(message = "User link must be set")
-    private long userId; // Link to the user that followed you
+    private long userId; // Link to the profile that commented
 
-    @NotBlank(message = "Notification type must be set")
-    private String notificationType; // Type of notification (liked, reposted, etc)
+    @NotBlank(message = "Comment on recipe must be set")
+    private String commentOnRecipe; // Comment on recipe
 }
