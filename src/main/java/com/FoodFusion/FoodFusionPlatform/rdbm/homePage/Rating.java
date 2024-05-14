@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.home;
+package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
 
@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
 import lombok.Data;
 import lombok.ToString;
 
