@@ -8,10 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -33,7 +33,7 @@ public class PostedRecipe {
 
     @NotBlank(message = "Recipe name dept must be set")
     @Size(min= 2, message = "Recipe name must be 2 or more characters")
-    private String recipeName;
+    private String name;
 
     @NotBlank(message = "Ingredients must be set")
     @Size(min= 2, message = "Ingredients must be 2 or more characters")
