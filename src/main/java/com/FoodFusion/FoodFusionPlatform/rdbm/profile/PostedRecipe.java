@@ -31,7 +31,7 @@ public class PostedRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
 
-    @NotBlank(message = "Recipe name dept must be set")
+    @NotBlank(message = "Recipe name must be set")
     @Size(min= 2, message = "Recipe name must be 2 or more characters")
     private String name;
 

@@ -9,8 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
@@ -35,7 +33,6 @@ public class Rating {
     @ToString.Exclude
     private PostedRecipe recipe;
 
-    @NotBlank(message = "Rating should be set")
-    @Size(min= 0, max=5, message = "Rating should be between 0 and 5")
+    // how to keep rating between 0 and 5?
     private double rating;
 }
