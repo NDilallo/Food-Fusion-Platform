@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
+package com.FoodFusion.FoodFusionPlatform.rdbm.Profile;
 
 import java.util.List;
 
