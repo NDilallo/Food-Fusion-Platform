@@ -30,8 +30,8 @@ public class User {
     @Size(min= 3,max = 15, message = "password must be between 3 and 15 characters")
     private String pass;
 
-    @OneToOne
-    @JoinColumn(name = "profile_id") // profile_id is the name of col in this table w/ the foregin key
-    private Profile profile_link; // profile_link will link to the primary key of the Independent entity 
+    // @OneToOne
+    // @JoinColumn(name = "profile_id") // profile_id is the name of col in this table w/ the foregin key
+    // private Profile profile_link; // profile_link will link to the primary key of the Independent entity 
     
 }
