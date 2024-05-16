@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.home.Rating;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,7 @@ import lombok.Data;
 @Table(name="PostedRecipes")
 public class PostedRecipe {
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
     /* unsure if this is necessary

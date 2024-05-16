@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller;
+package com.FoodFusion.FoodFusionPlatform.controller.searchHistory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.users.User;
-import com.FoodFusion.FoodFusionPlatform.services.users.UserService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory.SearchHistory;
+import com.FoodFusion.FoodFusionPlatform.services.searchHistory.SearchHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,24 +31,24 @@ import lombok.extern.log4j.Log4j2;
  * Documented controller using OpenAPI
  */
 @RestController
-@RequestMapping("/api/user")
-@Tag(name = "User", description = "All user profiles")
+@RequestMapping("/api/searchHistory")
+@Tag(name = "SearchHistory", description = "All previous searches for user")
 @Log4j2
-public class UserRestController {
+public class SearchHistoryRestController {
     @Autowired
-    private UserService service;
+    private SearchHistoryService service;
 
     @GetMapping
-    @Operation(summary = "Returns all the users on the website")
+    @Operation(summary = "Returns all the previous searches for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=User.class))})
-    public List<User> list() {
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=SearchHistory.class))})
+    public List<SearchHistory> list() {
         return service.list();
     }
 
     @PostMapping
-    @Operation(summary = "Save the user and returns the user id")
-    public long save(User user) {
+    @Operation(summary = "Save the search and returns the search id")
+    public long save(@RequestBody SearchHistory user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);        
@@ -56,8 +56,8 @@ public class UserRestController {
     }
 
     @PostMapping("/validated")
-    @Operation(summary = "Save the user and returns the user id")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody User user) {
+    @Operation(summary = "Save the search to history and return the search")
+    public ResponseEntity<String> validatedSave(@Valid @RequestBody SearchHistory user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);
@@ -65,7 +65,7 @@ public class UserRestController {
     }
 
     @DeleteMapping
-    @Operation(summary = "Delete the user")
+    @Operation(summary = "Delete the search from history")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);

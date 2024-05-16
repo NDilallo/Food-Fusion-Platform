@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "search history") // Escape the table name "user" to avoid conflicts with reserved keywords
-public class searchHistory {
+public class SearchHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
