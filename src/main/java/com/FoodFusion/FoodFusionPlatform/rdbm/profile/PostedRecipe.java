@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.OneToMany;
@@ -19,9 +21,6 @@ import lombok.Data;
 @Entity
 @Table(name="PostedRecipes")
 public class PostedRecipe {
-    
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Rating> ratings;
 
     /* unsure if this is necessary
     @ManyToMany
@@ -31,6 +30,9 @@ public class PostedRecipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 
     @NotBlank(message = "Recipe name dept must be set")
     @Size(min= 2, message = "Recipe name must be 2 or more characters")
@@ -48,8 +50,8 @@ public class PostedRecipe {
     @Size(min= 2, message = "Cuisine must be 2 or more characters")
     private String recipeCuisine;
 
-    @NotBlank(message = "Average rating must be set")
-    @Size(min= 0,max = 5, message = "Average rating must be between 0 and 5")
+    @Min(value = 0, message = "Average rating must be at least 0")
+    @Max(value = 5, message = "Average rating must be at most 5")
     private double avgRating;
 
 }
