@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
+package com.FoodFusion.FoodFusionPlatform.rdbm.HomePage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.Data;
-
 @SpringBootApplication
 public class ChefsController {
 
@@ -21,7 +19,7 @@ public class ChefsController {
     }
 }
 
-@Data
+//@Data
 // @NoArgsConstructor
 // @AllArgsConstructor
 // class Chef {
@@ -36,7 +34,7 @@ class ChefController {
     private final List<Chefs> chefs = new ArrayList<>();
 
     @PostMapping("/add")
-    public String addChef(@RequestBody Chefs chef) {
+    public <Chefs, chefs> String addChef(@RequestBody com.FoodFusion.FoodFusionPlatform.rdbm.HomePage.Chefs chef) {
         chefs.add(chef);
         return "Chef added successfully!";
     }

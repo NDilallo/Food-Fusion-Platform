@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
+package com.FoodFusion.FoodFusionPlatform.rdbm.Upload;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
