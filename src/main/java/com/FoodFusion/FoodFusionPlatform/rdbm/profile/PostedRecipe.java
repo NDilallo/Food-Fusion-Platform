@@ -47,8 +47,7 @@ public class PostedRecipe {
     @Size(min= 2, message = "Cuisine must be 2 or more characters")
     private String recipeCuisine;
 
-    @NotBlank(message = "Average rating must be set")
-    @Size(min= 0,max = 5, message = "Average rating must be between 0 and 5")
+    // calculated by avaeraging all the ratings on the given posted recipe
     private double avgRating;
 
 }
