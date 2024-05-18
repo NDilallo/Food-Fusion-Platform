@@ -1,14 +1,19 @@
 package com.FoodFusion.FoodFusionPlatform.services.profile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.RatingRepository;
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipeRepository;
 import com.FoodFusion.FoodFusionPlatform.services.PostedRecipeService;
 
 /**
@@ -18,6 +23,51 @@ import com.FoodFusion.FoodFusionPlatform.services.PostedRecipeService;
 public class PostedRecipeServiceTest {
     @Autowired
     private PostedRecipeService service;
+
+    @Autowired
+    private PostedRecipeRepository recipeRepo;
+
+    @Autowired
+    private RatingRepository ratingRepo;
+
+    /**
+     * Test one to many relationship between PostedRecipe and Rating
+     */
+    @AutoConfigureMockMvc
+	@Test
+    public void testPostedRecipeService() {
+        ArrayList<Rating> ratings = new ArrayList<Rating>();
+        
+        Rating rating1 = new Rating();
+        rating1.setRating(5.0);
+        ratingRepo.save(rating1);
+        ratings.add(rating1);
+
+        Rating rating2 = new Rating();
+        rating2.setRating(4.0);
+        ratingRepo.save(rating2);
+        ratings.add(rating2);
+
+        Rating rating3 = new Rating();
+        rating3.setRating(3.0);
+        ratingRepo.save(rating3);
+        ratings.add(rating3);
+
+        PostedRecipe recipe1 = new PostedRecipe();
+        recipe1.setRatings(ratings);
+        recipe1.setIngredients("rice, veggies, soy sauce");
+        recipe1.setName("Best Stir fry");
+        recipe1.setRecipeCuisine("Asian");
+        recipe1.setSteps("make rice, cook veggies, combine");
+        recipeRepo.save(recipe1);
+
+        Rating r = ratingRepo.findById(rating3.getRatingId());
+        r.setRecipe(recipe1);
+        ratingRepo.save(r);
+
+        assertEquals(r.getRecipe().getName(), recipe1.getName());
+        assertEquals(3, recipe1.getRatings().size());
+    }
 
     @BeforeEach
     public void addRecipe() {
