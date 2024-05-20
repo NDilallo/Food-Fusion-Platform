@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
-import com.FoodFusion.FoodFusionPlatform.services.RatingService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
+import com.FoodFusion.FoodFusionPlatform.services.PostedRecipeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,41 +33,41 @@ import lombok.extern.log4j.Log4j2;
  * Documented controller using OpenAPI
  */
 @RestController
-@RequestMapping("/api/rating")
-@Tag(name = "Rating", description = "All ratings")
+@RequestMapping("/api/postedrecipe")
+@Tag(name = "PostedRecipe", description = "All posted recipes for a user")
 @Log4j2
-public class RatingRestController {
+public class PostedRecipeController {
     @Autowired
-    private RatingService service;
+    private PostedRecipeService service;
 
     @GetMapping
-    @Operation(summary = "Returns all the ratings for a post")
+    @Operation(summary = "Returns all the posted recipes for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=Rating.class))})
-    public List<Rating> list() {
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=PostedRecipe.class))})
+    public List<PostedRecipe> list() {
         return service.list();
     }
 
     @PostMapping
-    @Operation(summary = "Save the rating and returns the saved rating's id")
-    public long save(@RequestBody Rating r) {
+    @Operation(summary = "Save the posted recipe and returns the saved posted recipe's id")
+    public long save(@RequestBody PostedRecipe r) {
         log.traceEntry("enter save", r);
         service.save(r);
         log.traceExit("exit save", r);        
-        return r.getRatingId();
+        return r.getRecipeId();
     }
 
     @PostMapping("/validated")
-    @Operation(summary = "Save the rating to the user's post")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody Rating r) {
+    @Operation(summary = "Save the posted recipe to the user's profile")
+    public ResponseEntity<String> validatedSave(@Valid @RequestBody PostedRecipe r) {
         log.traceEntry("enter save", r);
         service.save(r);
         log.traceExit("exit save", r);
-        return ResponseEntity.ok("new id is " + r.getRatingId());
+        return ResponseEntity.ok("new id is " + r.getRecipeId());
     }
 
     @DeleteMapping
-    @Operation(summary = "Delete the rating")
+    @Operation(summary = "Delete the posted recipe")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);
