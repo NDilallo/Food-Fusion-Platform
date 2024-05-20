@@ -1,7 +1,13 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.Profile;
+package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
 
-public interface ProfileRepository
+import org.springframework.data.repository.CrudRepository;
 
-    Object findAll(); extends JpaRepository<Profile, long>{
 
-}
+/**
+ * @see JpaRepository 
+ */
+
+ public interface ProfileRepository extends CrudRepository<Profile, Long> {
+
+ }
+ 

@@ -1,6 +1,6 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.Profile.PostedRecipe;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
