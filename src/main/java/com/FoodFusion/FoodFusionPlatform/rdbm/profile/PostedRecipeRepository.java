@@ -1,7 +1,13 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 public interface PostedRecipeRepository extends CrudRepository<PostedRecipe, Long> {
-    public PostedRecipe findByName(String recipeName);
+    public List<PostedRecipe> findByName(String name);
+
+    public PostedRecipe findByRecipeId(long recipeId);
+
+    public List<PostedRecipe> findByRecipeCuisine(String recipeCuisine);
 }

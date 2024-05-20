@@ -1,0 +1,2 @@
+2024-05-20 13:36:03,602 INFO o.s.b.StartupInfoLogger [main] Starting RatingControllerTest using Java 21.0.2 with PID 20612 (started by Margo in C:\Users\Margo\Documents\GitHub\Food-Fusion-Platform)
+2024-05-20 13:36:03,629 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
