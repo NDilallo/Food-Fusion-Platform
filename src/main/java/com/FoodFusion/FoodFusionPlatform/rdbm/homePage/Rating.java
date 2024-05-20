@@ -3,14 +3,13 @@ package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 @Entity
@@ -29,10 +28,12 @@ public class Rating {
      */
 
     // foreign key, link to recipe that was rated
-    @ManyToOne(fetch = FetchType.EAGER)
-    @ToString.Exclude
-    private PostedRecipe recipe;
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @ToString.Exclude
+    // @JsonBackReference
+    // private PostedRecipe recipe;
 
-    // how to keep rating between 0 and 5?
+    @Min(value = 0, message = "Rating must be at least 0")
+    @Max(value = 5, message = "Rating must be at most 5")
     private double rating;
 }

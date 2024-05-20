@@ -4,12 +4,15 @@ import java.util.List;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -18,9 +21,6 @@ import lombok.Data;
 @Entity
 @Table(name="PostedRecipes")
 public class PostedRecipe {
-    
-    @OneToMany
-    private List<Rating> ratings;
 
     /* unsure if this is necessary
     @ManyToMany
@@ -30,6 +30,12 @@ public class PostedRecipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> ratings;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 
     @NotBlank(message = "Recipe name must be set")
     @Size(min= 2, message = "Recipe name must be 2 or more characters")
@@ -47,6 +53,8 @@ public class PostedRecipe {
     @Size(min= 2, message = "Cuisine must be 2 or more characters")
     private String recipeCuisine;
 
+    @Min(value = 0, message = "Average rating must be at least 0")
+    @Max(value = 5, message = "Average rating must be at most 5")
     // calculated by avaeraging all the ratings on the given posted recipe
     private double avgRating;
 
