@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,10 +30,7 @@ public class PostedRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Rating> ratings;
-
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Rating> ratings;
 
     @NotBlank(message = "Recipe name must be set")
@@ -55,7 +51,6 @@ public class PostedRecipe {
 
     @Min(value = 0, message = "Average rating must be at least 0")
     @Max(value = 5, message = "Average rating must be at most 5")
-    // calculated by avaeraging all the ratings on the given posted recipe
     private double avgRating;
 
 }
