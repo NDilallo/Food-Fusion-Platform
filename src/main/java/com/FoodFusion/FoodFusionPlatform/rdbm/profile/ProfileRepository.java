@@ -1,5 +1,7 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.Profile;
 
-public interface ProfileRepository extends JpaRepository<Profile, long>{
+public interface ProfileRepository
+
+    Object findAll(); extends JpaRepository<Profile, long>{
 
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * Nick Dilallo - Saved and SavedRepository
  * Define tables regarding any posts saved by the user - and their repositories.
@@ -12,10 +11,3 @@
 */
 
 package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
-=======
-/**
- * Working on Profile, Settings, and Following (and all their Repos, Services, and Controllers)
- * @author Fritz
- */
-package com.FoodFusion.FoodFusionPlatform.rdbm.Profile;
->>>>>>> milestone3-fritz
