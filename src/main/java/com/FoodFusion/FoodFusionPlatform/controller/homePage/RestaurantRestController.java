@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller.profile;
+package com.FoodFusion.FoodFusionPlatform.controller.homePage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +33,8 @@ import lombok.extern.log4j.Log4j2;
  * Documented controller using OpenAPI
  */
 @RestController
-@RequestMapping("/api/rating")
-@Tag(name = "Rating", description = "All ratings")
+@RequestMapping("/api/restaurant")
+@Tag(name = "Restaurant", description = "All restaurants")
 @Log4j2
 public class RestaurantRestController {
     @Autowired
@@ -67,7 +67,7 @@ public class RestaurantRestController {
     }
 
     @DeleteMapping
-    @Operation(summary = "Delete the rating")
+    @Operation(summary = "Delete the posted recipe")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);
