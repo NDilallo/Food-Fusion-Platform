@@ -36,7 +36,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api/ratings")
 @Tag(name = "Rating", description = "All ratings")
 @Log4j2
-public class RatingRestController {
+public class RatingController {
     @Autowired
     private RatingService service;
 
