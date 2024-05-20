@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
-import com.FoodFusion.FoodFusionPlatform.services.PostedRecipeService;
+import com.FoodFusion.FoodFusionPlatform.services.profile.PostedRecipeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

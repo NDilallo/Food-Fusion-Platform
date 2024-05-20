@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Restaurant;
-import com.FoodFusion.FoodFusionPlatform.services.RestaurantService;
+import com.FoodFusion.FoodFusionPlatform.services.homePage.RestaurantService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,7 +36,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api/restaurant")
 @Tag(name = "Restaurant", description = "All restaurants")
 @Log4j2
-public class RestaurantRestController {
+public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
