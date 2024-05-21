@@ -10,10 +10,11 @@
  If finished early the member will help on other areas. 
 | Member | Area  
 | ----------- | ----------- |
-| Matt | Following |
-| Fritz | Profile |
-| Nick | Sign in |
-| Marisa | Upload/Search |
+| Matt | Comments, user notifications, and drafts of recipes |
+| Fritz | User profile, settings, and following |
+| Nick | Users, saved posts, and search history |
+| Marisa | Posted recipes, ratings on posts, restaurants |
+| Dhruvi | Ingredients, employees, and chefs
 
 
  ## Conflict Resolution
