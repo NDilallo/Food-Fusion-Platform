@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Saved;
-import com.FoodFusion.FoodFusionPlatform.services.profile.SavedService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
+import com.FoodFusion.FoodFusionPlatform.services.profile.ProfileService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,40 +33,40 @@ import lombok.extern.log4j.Log4j2;
  */
 @RestController
 @RequestMapping("/api/profile")
-@Tag(name = "Saved", description = "All saved posts for user")
+@Tag(name = "Profile", description = "All user profiles")
 @Log4j2
-public class SavedController {
+public class ProfileRestController {
     @Autowired
-    private SavedService service;
+    private ProfileService service;
 
-    @GetMapping("/api/profile/saved")
-    @Operation(summary = "Returns all the saved posts for a user")
+    @GetMapping("/api/profile")
+    @Operation(summary = "Returns all the profiles on the website")
     @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=Saved.class))})
-    public List<Saved> list() {
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=Profile.class))})
+    public List<Profile> list() {
         return service.list();
     }
 
-    @PostMapping("/api/profile/saved")
-    @Operation(summary = "Save the post and returns the saved post's id")
-    public long save(@RequestBody Saved user) {
-        log.traceEntry("enter save", user);
-        service.save(user);
-        log.traceExit("exit save", user);        
-        return user.getId();
+    @PostMapping("/api/profile")
+    @Operation(summary = "Save the profile and returns the profile id")
+    public long save(@RequestBody Profile profile) {
+        log.traceEntry("enter save", profile);
+        service.save(profile);
+        log.traceExit("exit save", profile);        
+        return profile.getUserID();
     }
 
-    @PostMapping("/saved/validated")
-    @Operation(summary = "Save the post to user's profile")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody Saved user) {
-        log.traceEntry("enter save", user);
-        service.save(user);
-        log.traceExit("exit save", user);
-        return ResponseEntity.ok("new id is " + user.getId());
+    @PostMapping("/validated")
+    @Operation(summary = "Save the profile and returns the profile id")
+    public ResponseEntity<String> validatedSave(@Valid @RequestBody Profile profile) {
+        log.traceEntry("enter save", profile);
+        service.save(profile);
+        log.traceExit("exit save", profile);
+        return ResponseEntity.ok("new id is " + profile.getUserID());
     }
 
-    @DeleteMapping("/api/pofile/saved/{id}")
-    @Operation(summary = "Delete the saved post")
+    @DeleteMapping("/api/pofile/{id}")
+    @Operation(summary = "Delete the profile")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);

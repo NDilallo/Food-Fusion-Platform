@@ -3,6 +3,7 @@ package com.FoodFusion.FoodFusionPlatform.controller.profile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Saved;
-import com.FoodFusion.FoodFusionPlatform.services.profile.SavedService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
+import com.FoodFusion.FoodFusionPlatform.services.profile.PostedRecipeService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,41 +33,41 @@ import lombok.extern.log4j.Log4j2;
  * Documented controller using OpenAPI
  */
 @RestController
-@RequestMapping("/api/profile")
-@Tag(name = "Saved", description = "All saved posts for user")
+@RequestMapping("/api/postedrecipe")
+@Tag(name = "PostedRecipe", description = "All posted recipes for a user")
 @Log4j2
-public class SavedController {
+public class PostedRecipeController {
     @Autowired
-    private SavedService service;
+    private PostedRecipeService service;
 
-    @GetMapping("/api/profile/saved")
-    @Operation(summary = "Returns all the saved posts for a user")
+    @GetMapping
+    @Operation(summary = "Returns all the posted recipes for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=Saved.class))})
-    public List<Saved> list() {
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=PostedRecipe.class))})
+    public List<PostedRecipe> list() {
         return service.list();
     }
 
-    @PostMapping("/api/profile/saved")
-    @Operation(summary = "Save the post and returns the saved post's id")
-    public long save(@RequestBody Saved user) {
-        log.traceEntry("enter save", user);
-        service.save(user);
-        log.traceExit("exit save", user);        
-        return user.getId();
+    @PostMapping
+    @Operation(summary = "Save the posted recipe and returns the saved posted recipe's id")
+    public long save(@RequestBody PostedRecipe r) {
+        log.traceEntry("enter save", r);
+        service.save(r);
+        log.traceExit("exit save", r);        
+        return r.getRecipeId();
     }
 
-    @PostMapping("/saved/validated")
-    @Operation(summary = "Save the post to user's profile")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody Saved user) {
-        log.traceEntry("enter save", user);
-        service.save(user);
-        log.traceExit("exit save", user);
-        return ResponseEntity.ok("new id is " + user.getId());
+    @PostMapping("/validated")
+    @Operation(summary = "Save the posted recipe to the user's profile")
+    public ResponseEntity<String> validatedSave(@Valid @RequestBody PostedRecipe r) {
+        log.traceEntry("enter save", r);
+        service.save(r);
+        log.traceExit("exit save", r);
+        return ResponseEntity.ok("new id is " + r.getRecipeId());
     }
 
-    @DeleteMapping("/api/pofile/saved/{id}")
-    @Operation(summary = "Delete the saved post")
+    @DeleteMapping
+    @Operation(summary = "Delete the posted recipe")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);
@@ -84,4 +85,5 @@ public class SavedController {
         });
         return errors;
     }
+
 }
