@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.users;
+package com.FoodFusion.FoodFusionPlatform.rdbm.users;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
