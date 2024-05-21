@@ -14,7 +14,7 @@
 | Fritz | User profile, settings, and following |
 | Nick | Users, saved posts, and search history |
 | Marisa | Posted recipes, ratings on posts, restaurants |
-| Dhruvi | Ingredients, employees, and chefs
+| Dhruvi | Ingredients, employees, and chefs |
 
 
  ## Conflict Resolution
