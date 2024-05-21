@@ -1,8 +1,11 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
+package com.FoodFusion.FoodFusionPlatform.services.upload;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
+import com.FoodFusion.FoodFusionPlatform.rdbm.upload.Ingredients;
+import com.FoodFusion.FoodFusionPlatform.rdbm.upload.IngredientsRepository;
 
 @Service
 public class IngredientsService {
