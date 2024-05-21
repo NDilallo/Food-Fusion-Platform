@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * @see JpaRepository that extends PagingAndSortingRepository that expends CrudRepository
  */
-public interface SearchHistoryRepository extends CrudRepository<searchHistory, Long> {
+public interface SearchHistoryRepository extends CrudRepository<SearchHistory, Long> {
     
 }
