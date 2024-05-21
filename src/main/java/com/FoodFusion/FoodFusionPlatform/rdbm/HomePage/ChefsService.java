@@ -25,8 +25,8 @@ public class ChefsService {
         return chefs;
     }
 
-    public String cook(String name, String role) {
-        // TODO Auto-generated method stub
+       public String cook(String name, String role) {
+        
         throw new UnsupportedOperationException("Unimplemented method 'cook'");
     }
 }
