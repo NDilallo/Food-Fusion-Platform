@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.Upload;
+package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
 
 import java.util.List;
 

@@ -1,4 +1,5 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.Upload;
+package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -7,9 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@jakarta.persistence.Entity
 public class Ingredients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

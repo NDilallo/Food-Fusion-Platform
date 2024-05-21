@@ -1,6 +1,8 @@
 package com.FoodFusion.FoodFusionPlatform.services.homePage;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class NotificationServices {
 
     public List<Notification> listAll() {
         log.traceEntry("Enter listAll");
-        List<Notification> notifications = notificationRepository.findAll();
+        List<Notification> notifications = StreamSupport.stream(notificationRepository.findAll().spliterator(), false).collect(Collectors.toList());
         log.traceExit("Exit listAll", notifications);
         return notifications;
     }

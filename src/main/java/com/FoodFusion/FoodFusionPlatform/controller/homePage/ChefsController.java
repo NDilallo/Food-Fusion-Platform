@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.HomePage;
+package com.FoodFusion.FoodFusionPlatform.controller.homePage;
 
 import java.util.List;
 
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Chefs;
+import com.FoodFusion.FoodFusionPlatform.services.homePage.ChefsService;
 
 @SpringBootApplication
 public class ChefsController {
