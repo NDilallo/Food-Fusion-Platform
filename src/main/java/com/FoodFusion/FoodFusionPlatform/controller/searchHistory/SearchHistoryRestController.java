@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory.tmp;
+import com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory.SearchHistory;
 import com.FoodFusion.FoodFusionPlatform.services.searchHistory.SearchHistoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -41,14 +41,14 @@ public class SearchHistoryRestController {
     @GetMapping
     @Operation(summary = "Returns all the previous searches for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=tmp.class))})
-    public List<tmp> list() {
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=SearchHistory.class))})
+    public List<SearchHistory> list() {
         return service.list();
     }
 
     @PostMapping
     @Operation(summary = "Save the search and returns the search id")
-    public long save(@RequestBody tmp user) {
+    public long save(@RequestBody SearchHistory user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);        
@@ -57,7 +57,7 @@ public class SearchHistoryRestController {
 
     @PostMapping("/validated")
     @Operation(summary = "Save the search to history and return the search")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody tmp user) {
+    public ResponseEntity<String> validatedSave(@Valid @RequestBody SearchHistory user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);
