@@ -39,7 +39,7 @@ public class ProfileRestController {
     @Autowired
     private ProfileService service;
 
-    @GetMapping
+    @GetMapping("/api/profile")
     @Operation(summary = "Returns all the profiles on the website")
     @ApiResponse(responseCode = "200", description = "valid response", 
         content = {@Content(mediaType="application/json", schema=@Schema(implementation=Profile.class))})
@@ -47,7 +47,7 @@ public class ProfileRestController {
         return service.list();
     }
 
-    @PostMapping
+    @PostMapping("/api/profile")
     @Operation(summary = "Save the profile and returns the profile id")
     public long save(@RequestBody Profile profile) {
         log.traceEntry("enter save", profile);
@@ -65,7 +65,7 @@ public class ProfileRestController {
         return ResponseEntity.ok("new id is " + profile.getUserID());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/api/pofile/{id}")
     @Operation(summary = "Delete the profile")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);

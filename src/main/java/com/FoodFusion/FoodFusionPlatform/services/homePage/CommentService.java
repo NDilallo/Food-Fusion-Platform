@@ -3,11 +3,13 @@ package com.FoodFusion.FoodFusionPlatform.services.homePage;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-import org.hibernate.annotations.Comments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.CommentRepository;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.PostComments;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -18,23 +20,23 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<Comments> listAll() {
+    public List<PostComments> listAll() {
         log.traceEntry("Enter listAll");
-        List<Comments> comments = commentRepository.findAll();
+        List<PostComments> comments = StreamSupport.stream(commentRepository.findAll().spliterator(), false).collect(Collectors.toList());
         log.traceExit("Exit listAll", comments);
         return comments;
     }
 
-    public Comments save(Comments comment) {
+    public PostComments save(PostComments comment) {
         log.traceEntry("Enter save", comment);
-        Comments savedComment = commentRepository.save(comment);
+        PostComments savedComment = commentRepository.save(comment);
         log.traceExit("Exit save", savedComment);
         return savedComment;
     }
 
-    public Optional<Comments> getById(long id) {
+    public Optional<PostComments> getById(long id) {
         log.traceEntry("Enter getById", id);
-        Optional<Comments> comment = commentRepository.findById(id);
+        Optional<PostComments> comment = commentRepository.findById(id);
         log.traceExit("Exit getById", comment);
         return comment;
     }
