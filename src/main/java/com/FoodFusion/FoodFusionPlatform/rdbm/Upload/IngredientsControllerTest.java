@@ -1,4 +1,5 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.Upload;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/ingredients")
 @RequiredArgsConstructor
-public class IngredientsController {
+public class IngredientsControllerTest {
 
     private final IngredientsRepository ingredientsRepository;
 
@@ -33,7 +34,7 @@ public class IngredientsController {
     public String addDietaryRestrictions(@RequestParam String dietaryRestrictions, @RequestBody Ingredients ingredients) {
         ingredients.addDietaryRestrictions(dietaryRestrictions);
         ingredientsRepository.save(ingredients);
-        return "The Dietary restrictions added successfully!";
+        return "Dietary restrictions added successfully!";
     }
 
     @GetMapping("/checkDietaryRestrictions")
@@ -45,6 +46,7 @@ public class IngredientsController {
         }
     }
 
+    
     @GetMapping("/checkVegetarian")
     public String checkVegetarian(@RequestBody Ingredients ingredients) {
         if (ingredients.isVegetarian()) {

@@ -1,8 +1,8 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.HomePage;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,30 +19,20 @@ public class ChefsController {
     }
 }
 
-//@Data
-// @NoArgsConstructor
-// @AllArgsConstructor
-// class Chef {
-//     private String name;
-//     private String specialty;
-// }
-
 @RestController
 @RequestMapping("/chef")
 class ChefController {
 
-    private final List<Chefs> chefs = new ArrayList<>();
+    @Autowired
+    private ChefsService chefService;
 
     @PostMapping("/add")
-    public <Chefs, chefs> String addChef(@RequestBody com.FoodFusion.FoodFusionPlatform.rdbm.HomePage.Chefs chef) {
-        chefs.add(chef);
-        return "Chef added successfully!";
+    public String addChef(@RequestBody Chefs chef) {
+        return chefService.addChef(chef);
     }
 
     @GetMapping("/all")
     public List<Chefs> getAllChefs() {
-        return chefs;
+        return chefService.getAllChefs();
     }
 }
-
-

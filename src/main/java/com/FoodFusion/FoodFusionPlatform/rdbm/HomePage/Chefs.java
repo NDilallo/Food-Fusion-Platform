@@ -1,5 +1,4 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.HomePage;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Chefs {
     private String name;
-    private String specialtyofchef;
+    private String specialty;
 }

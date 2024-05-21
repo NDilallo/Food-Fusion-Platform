@@ -21,12 +21,13 @@ public class Employees {
 }
 
     public class WaiterService {
-    public void serve(String name, String role) {
+    public String serve(String name, String role) {
         if (role.equalsIgnoreCase("waiter")) {
             System.out.println(name + " is serving all customers.");
         } else {
             System.out.println(name + " is not authorized to serve all customers.");
         }
+        return role;
     }
 
       

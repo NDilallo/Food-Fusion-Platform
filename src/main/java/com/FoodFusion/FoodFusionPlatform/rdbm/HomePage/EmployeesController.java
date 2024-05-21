@@ -1,6 +1,5 @@
 package com.FoodFusion.FoodFusionPlatform.rdbm.HomePage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +14,6 @@ public class EmployeesController {
     private final ChefsService chefsService;
     private final WaiterService waiterService;
 
-    @Autowired
     public EmployeesController(ChefsService chefsService, WaiterService waiterService) {
         this.chefsService = chefsService;
         this.waiterService = waiterService;
