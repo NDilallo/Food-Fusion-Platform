@@ -1,14 +1,10 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.users;
+package com.foodFusion.foodFusionPlatform.rdbm.users;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.foodFusion.foodFusionPlatform.rdbm.users.User;
-import com.foodFusion.foodFusionPlatform.rdbm.users.UserRepository;
 
 @SpringBootTest
 public class UserRepositoryTest {

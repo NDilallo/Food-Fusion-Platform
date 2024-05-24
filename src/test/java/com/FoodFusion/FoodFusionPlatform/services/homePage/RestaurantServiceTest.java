@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.Restaurant;
-import com.foodFusion.foodFusionPlatform.services.homePage.RestaurantService;
 
 /**
  * Test out the service
