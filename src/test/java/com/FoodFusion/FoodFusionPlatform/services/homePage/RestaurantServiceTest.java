@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Restaurant;
-import com.FoodFusion.FoodFusionPlatform.services.RestaurantService;
+import com.FoodFusion.FoodFusionPlatform.services.homePage.RestaurantService;
 
 /**
  * Test out the service

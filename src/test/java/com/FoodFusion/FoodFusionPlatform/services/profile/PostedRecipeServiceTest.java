@@ -14,7 +14,7 @@ import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.RatingRepository;
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
 import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipeRepository;
-import com.FoodFusion.FoodFusionPlatform.services.PostedRecipeService;
+import com.FoodFusion.FoodFusionPlatform.services.profile.PostedRecipeService;
 
 /**
  * Test out the service

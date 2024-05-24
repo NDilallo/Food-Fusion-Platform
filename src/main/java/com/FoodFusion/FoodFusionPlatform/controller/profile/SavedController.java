@@ -39,7 +39,7 @@ public class SavedController {
     @Autowired
     private SavedService service;
 
-    @GetMapping
+    @GetMapping("/api/profile/saved")
     @Operation(summary = "Returns all the saved posts for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
         content = {@Content(mediaType="application/json", schema=@Schema(implementation=Saved.class))})
@@ -47,7 +47,7 @@ public class SavedController {
         return service.list();
     }
 
-    @PostMapping
+    @PostMapping("/api/profile/saved")
     @Operation(summary = "Save the post and returns the saved post's id")
     public long save(@RequestBody Saved user) {
         log.traceEntry("enter save", user);
@@ -56,7 +56,7 @@ public class SavedController {
         return user.getId();
     }
 
-    @PostMapping("/validated")
+    @PostMapping("/saved/validated")
     @Operation(summary = "Save the post to user's profile")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody Saved user) {
         log.traceEntry("enter save", user);
@@ -65,7 +65,7 @@ public class SavedController {
         return ResponseEntity.ok("new id is " + user.getId());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/api/pofile/saved/{id}")
     @Operation(summary = "Delete the saved post")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);

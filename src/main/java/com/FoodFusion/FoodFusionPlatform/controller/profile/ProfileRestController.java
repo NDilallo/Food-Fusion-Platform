@@ -3,7 +3,6 @@ package com.FoodFusion.FoodFusionPlatform.controller.profile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
-import com.FoodFusion.FoodFusionPlatform.services.profile.PostedRecipeService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
+import com.FoodFusion.FoodFusionPlatform.services.profile.ProfileService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,41 +32,41 @@ import lombok.extern.log4j.Log4j2;
  * Documented controller using OpenAPI
  */
 @RestController
-@RequestMapping("/api/postedrecipe")
-@Tag(name = "PostedRecipe", description = "All posted recipes for a user")
+@RequestMapping("/api/profile")
+@Tag(name = "Profile", description = "All user profiles")
 @Log4j2
-public class PostedRecipeController {
+public class ProfileRestController {
     @Autowired
-    private PostedRecipeService service;
+    private ProfileService service;
 
-    @GetMapping
-    @Operation(summary = "Returns all the posted recipes for a user")
+    @GetMapping("/api/profile")
+    @Operation(summary = "Returns all the profiles on the website")
     @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=PostedRecipe.class))})
-    public List<PostedRecipe> list() {
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=Profile.class))})
+    public List<Profile> list() {
         return service.list();
     }
 
-    @PostMapping
-    @Operation(summary = "Save the posted recipe and returns the saved posted recipe's id")
-    public long save(@RequestBody PostedRecipe r) {
-        log.traceEntry("enter save", r);
-        service.save(r);
-        log.traceExit("exit save", r);        
-        return r.getRecipeId();
+    @PostMapping("/api/profile")
+    @Operation(summary = "Save the profile and returns the profile id")
+    public long save(@RequestBody Profile profile) {
+        log.traceEntry("enter save", profile);
+        service.save(profile);
+        log.traceExit("exit save", profile);        
+        return profile.getUserID();
     }
 
     @PostMapping("/validated")
-    @Operation(summary = "Save the posted recipe to the user's profile")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody PostedRecipe r) {
-        log.traceEntry("enter save", r);
-        service.save(r);
-        log.traceExit("exit save", r);
-        return ResponseEntity.ok("new id is " + r.getRecipeId());
+    @Operation(summary = "Save the profile and returns the profile id")
+    public ResponseEntity<String> validatedSave(@Valid @RequestBody Profile profile) {
+        log.traceEntry("enter save", profile);
+        service.save(profile);
+        log.traceExit("exit save", profile);
+        return ResponseEntity.ok("new id is " + profile.getUserID());
     }
 
-    @DeleteMapping
-    @Operation(summary = "Delete the posted recipe")
+    @DeleteMapping("/api/pofile/{id}")
+    @Operation(summary = "Delete the profile")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);
@@ -85,5 +84,4 @@ public class PostedRecipeController {
         });
         return errors;
     }
-
 }

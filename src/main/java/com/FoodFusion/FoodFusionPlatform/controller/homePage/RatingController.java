@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
-import com.FoodFusion.FoodFusionPlatform.services.RatingService;
+import com.FoodFusion.FoodFusionPlatform.services.homePage.RatingService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
