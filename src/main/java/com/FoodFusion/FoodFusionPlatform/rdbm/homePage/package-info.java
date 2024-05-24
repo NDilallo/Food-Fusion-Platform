@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
+package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
 /*
  * Marisa Ban - Rating and Restaurant tables, RatingRepository and RestaurantRepository

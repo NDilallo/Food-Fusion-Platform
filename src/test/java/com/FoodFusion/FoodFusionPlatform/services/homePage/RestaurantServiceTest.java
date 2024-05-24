@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Restaurant;
-import com.FoodFusion.FoodFusionPlatform.services.homePage.RestaurantService;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Restaurant;
+import com.foodFusion.foodFusionPlatform.services.homePage.RestaurantService;
 
 /**
  * Test out the service

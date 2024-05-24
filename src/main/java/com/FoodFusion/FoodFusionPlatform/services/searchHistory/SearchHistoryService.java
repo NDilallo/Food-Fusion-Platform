@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.searchHistory;
+package com.foodFusion.foodFusionPlatform.services.searchHistory;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,8 +7,9 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory.SearchHistory;
-import com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory.SearchHistoryRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.searchHistory.SearchHistory;
+import com.foodFusion.foodFusionPlatform.rdbm.searchHistory.SearchHistoryRepository;
+
 import lombok.extern.log4j.Log4j2;
 
 @Service

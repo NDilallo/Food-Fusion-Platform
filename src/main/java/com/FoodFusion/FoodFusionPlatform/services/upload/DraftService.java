@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.upload;
+package com.foodFusion.foodFusionPlatform.services.upload;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.upload.Draft;
-import com.FoodFusion.FoodFusionPlatform.rdbm.upload.DraftRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.upload.Draft;
+import com.foodFusion.foodFusionPlatform.rdbm.upload.DraftRepository;
 
 import lombok.extern.log4j.Log4j2;
 

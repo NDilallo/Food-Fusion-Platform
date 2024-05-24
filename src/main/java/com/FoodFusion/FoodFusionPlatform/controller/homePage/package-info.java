@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller.homePage;
+package com.foodFusion.foodFusionPlatform.controller.homePage;
 
 /*
  * Marisa Ban - RatingController, RestaurantController

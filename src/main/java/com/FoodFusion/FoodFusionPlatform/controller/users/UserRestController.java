@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller.users;
+package com.foodFusion.foodFusionPlatform.controller.users;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.users.User;
-import com.FoodFusion.FoodFusionPlatform.services.users.UserService;
+import com.foodFusion.foodFusionPlatform.rdbm.users.User;
+import com.foodFusion.foodFusionPlatform.services.users.UserService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

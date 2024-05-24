@@ -1,6 +1,6 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.users;
+package com.foodFusion.foodFusionPlatform.rdbm.users;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
+import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

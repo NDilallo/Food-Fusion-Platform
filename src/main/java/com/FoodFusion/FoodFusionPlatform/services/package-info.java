@@ -2,4 +2,4 @@
  * Services to encapsulate the various CRUD/Table interactions
  */
 
-package com.FoodFusion.FoodFusionPlatform.services;
+package com.foodFusion.foodFusionPlatform.services;

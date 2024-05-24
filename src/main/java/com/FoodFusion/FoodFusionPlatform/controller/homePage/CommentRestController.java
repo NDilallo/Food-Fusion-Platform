@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller.homePage;
+package com.foodFusion.foodFusionPlatform.controller.homePage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.PostComments;
-import com.FoodFusion.FoodFusionPlatform.services.homePage.CommentService;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.PostComments;
+import com.foodFusion.foodFusionPlatform.services.homePage.CommentService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller.searchHistory;
+package com.foodFusion.foodFusionPlatform.controller.searchHistory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory.SearchHistory;
-import com.FoodFusion.FoodFusionPlatform.services.searchHistory.SearchHistoryService;
+import com.foodFusion.foodFusionPlatform.rdbm.searchHistory.SearchHistory;
+import com.foodFusion.foodFusionPlatform.services.searchHistory.SearchHistoryService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

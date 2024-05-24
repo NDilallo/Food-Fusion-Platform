@@ -1,6 +1,6 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
+package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
+import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipe;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
