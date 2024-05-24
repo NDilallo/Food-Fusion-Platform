@@ -1,8 +1,0 @@
-2024-05-20 13:36:03,602 INFO o.s.b.StartupInfoLogger [main] Starting RatingControllerTest using Java 21.0.2 with PID 20612 (started by Margo in C:\Users\Margo\Documents\GitHub\Food-Fusion-Platform)
-2024-05-20 13:36:03,629 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
-2024-05-20 21:19:20,912 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplication using Java 21.0.3 with PID 21088 (C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform\target\classes started by Matt in C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform)
-2024-05-20 21:19:20,920 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
-2024-05-20 21:19:27,767 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplication in 7.214 seconds (process running for 8.024)
-2024-05-20 21:37:18,387 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplication using Java 21.0.3 with PID 28364 (C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform\target\classes started by Matt in C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform)
-2024-05-20 21:37:18,398 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
-2024-05-20 21:37:26,297 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplication in 8.357 seconds (process running for 9.277)
