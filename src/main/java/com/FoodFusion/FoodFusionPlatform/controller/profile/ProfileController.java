@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.controller.profile;
+package com.FoodFusion.FoodFusionPlatform.controller.profile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
-import com.foodFusion.foodFusionPlatform.services.profile.ProfileService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
+import com.FoodFusion.FoodFusionPlatform.services.profile.ProfileService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,7 +35,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api/profile")
 @Tag(name = "Profile", description = "All user profiles")
 @Log4j2
-public class ProfileRestController {
+public class ProfileController {
     @Autowired
     private ProfileService service;
 

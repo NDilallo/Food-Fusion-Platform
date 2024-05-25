@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.users;
+package com.FoodFusion.FoodFusionPlatform.rdbm.users;
 
 import org.springframework.data.repository.CrudRepository;
 

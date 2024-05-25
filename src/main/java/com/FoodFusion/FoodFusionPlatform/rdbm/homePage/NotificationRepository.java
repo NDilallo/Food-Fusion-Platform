@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.homePage;
+package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
 
 // import org.springframework.data.jpa.repository.JpaRepository;
 // import org.springframework.data.repository.CrudRepository;

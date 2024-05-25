@@ -1,5 +1,6 @@
 package com.FoodFusion.FoodFusionPlatform.services.profile;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -7,29 +8,29 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.ProfileRepository;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Settings;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.SettingsRepository;
 
 import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-public class ProfileService {
+public class SettingsService {
     @Autowired
-    private ProfileRepository repo;
+    private SettingsRepository repo;
 
-    public List<Profile> list() {
+    public List<Settings> list() {
         log.traceEntry("Enter list");
-        List<Profile> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Settings> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
         log.traceExit("Exit list", retval);        
         return retval;
     }
 
-    public Profile save(Profile profile) {
-        log.traceEntry("enter save", profile);
-        repo.save(profile);
-        log.traceExit("exit save", profile);        
-        return profile;
+    public Settings save(Settings settings) {
+        log.traceEntry("enter save", settings);
+        repo.save(settings);
+        log.traceExit("exit save", settings);        
+        return settings;
     }
 
     public void delete(long id) {

@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.controller.homePage;
+package com.FoodFusion.FoodFusionPlatform.controller.homePage;
 
 import java.util.HashMap;
 import java.util.List;

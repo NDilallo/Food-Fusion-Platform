@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.RatingRepository;
-import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipe;
-import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipeRepository;
-import com.foodFusion.foodFusionPlatform.services.profile.PostedRecipeService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.RatingRepository;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipe;
+import com.FoodFusion.FoodFusionPlatform.rdbm.profile.PostedRecipeRepository;
+import com.FoodFusion.FoodFusionPlatform.services.profile.PostedRecipeService;
 
 /**
  * Test out the service

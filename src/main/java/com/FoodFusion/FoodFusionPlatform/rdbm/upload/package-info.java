@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.upload;
+package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
 /*
  * Matt Nice - Entire Package
  * Define tables regarding a user's upload drafts - and their repositories.

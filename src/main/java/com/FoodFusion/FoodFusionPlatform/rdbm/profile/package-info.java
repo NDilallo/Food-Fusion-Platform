@@ -11,4 +11,4 @@
  * 
 */
 
-package com.foodFusion.foodFusionPlatform.rdbm.profile;
+package com.FoodFusion.FoodFusionPlatform.rdbm.profile;

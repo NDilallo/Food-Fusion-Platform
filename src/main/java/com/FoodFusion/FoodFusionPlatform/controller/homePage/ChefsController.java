@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.controller.homePage;
+package com.FoodFusion.FoodFusionPlatform.controller.homePage;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.Chefs;
-import com.foodFusion.foodFusionPlatform.services.homePage.ChefsService;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Chefs;
+import com.FoodFusion.FoodFusionPlatform.services.homePage.ChefsService;
 
 @SpringBootApplication
 public class ChefsController {

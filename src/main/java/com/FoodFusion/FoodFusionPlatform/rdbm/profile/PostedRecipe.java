@@ -1,8 +1,8 @@
-package com.foodFusion.foodFusionPlatform.rdbm.profile;
+package com.FoodFusion.FoodFusionPlatform.rdbm.profile;
 
 import java.util.List;
 
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

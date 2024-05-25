@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform;
+package com.FoodFusion.FoodFusionPlatform;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

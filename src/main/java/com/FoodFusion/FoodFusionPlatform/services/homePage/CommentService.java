@@ -9,8 +9,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.CommentRepository;
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.PostComments;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.CommentRepository;
+import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.PostComments;
 
 import lombok.extern.log4j.Log4j2;
 
