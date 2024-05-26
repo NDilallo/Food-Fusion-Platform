@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
-import com.FoodFusion.FoodFusionPlatform.services.profile.ProfileService;
+import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
+import com.foodFusion.foodFusionPlatform.services.profile.ProfileService;
 
 @SpringBootTest
 public class ProfileServiceTest {
