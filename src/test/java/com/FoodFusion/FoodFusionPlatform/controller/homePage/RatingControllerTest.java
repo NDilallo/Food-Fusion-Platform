@@ -14,8 +14,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.RatingRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.RatingRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc

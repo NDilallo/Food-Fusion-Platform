@@ -8,4 +8,4 @@
  * 
  */
 
-package com.FoodFusion.FoodFusionPlatform.services.profile;
+package com.foodFusion.foodFusionPlatform.services.profile;

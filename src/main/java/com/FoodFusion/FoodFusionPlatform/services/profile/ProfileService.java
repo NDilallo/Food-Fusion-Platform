@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.profile;
+package com.foodFusion.foodFusionPlatform.services.profile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,8 +7,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.ProfileRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
+import com.foodFusion.foodFusionPlatform.rdbm.profile.ProfileRepository;
 
 import lombok.extern.log4j.Log4j2;
 

@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
+package com.foodFusion.foodFusionPlatform.rdbm.upload;
 
  import org.springframework.data.repository.CrudRepository;
 
