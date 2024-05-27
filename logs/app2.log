@@ -6,3 +6,47 @@
 2024-05-20 21:37:18,387 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplication using Java 21.0.3 with PID 28364 (C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform\target\classes started by Matt in C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform)
 2024-05-20 21:37:18,398 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
 2024-05-20 21:37:26,297 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplication in 8.357 seconds (process running for 9.277)
+2024-05-24 16:47:56,584 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplication using Java 22.0.1 with PID 21616 (C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform\target\classes started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 16:47:56,600 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 16:48:03,658 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplication in 7.584 seconds (process running for 8.533)
+2024-05-24 17:46:05,118 INFO o.s.b.StartupInfoLogger [main] Starting RatingControllerTest using Java 22.0.1 with PID 13628 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:46:05,131 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:46:08,689 INFO o.s.b.StartupInfoLogger [main] Starting ProfileControllerTest using Java 22.0.1 with PID 13628 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:46:08,690 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:46:13,083 INFO o.s.b.StartupInfoLogger [main] Started ProfileControllerTest in 4.515 seconds (process running for 10.287)
+2024-05-24 17:46:14,434 INFO o.s.b.StartupInfoLogger [main] Starting DraftRestControllerTest using Java 22.0.1 with PID 13628 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:46:14,441 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:46:17,372 INFO o.s.b.StartupInfoLogger [main] Started DraftRestControllerTest in 3.018 seconds (process running for 14.576)
+2024-05-24 17:46:17,722 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplicationTests using Java 22.0.1 with PID 13628 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:46:17,725 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:46:19,556 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplicationTests in 1.863 seconds (process running for 16.761)
+2024-05-24 17:46:57,492 INFO o.s.b.StartupInfoLogger [main] Starting RatingControllerTest using Java 22.0.1 with PID 21928 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:46:57,507 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:47:00,558 INFO o.s.b.StartupInfoLogger [main] Starting ProfileControllerTest using Java 22.0.1 with PID 21928 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:47:00,560 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:47:04,626 INFO o.s.b.StartupInfoLogger [main] Started ProfileControllerTest in 4.139 seconds (process running for 9.192)
+2024-05-24 17:47:05,828 INFO o.s.b.StartupInfoLogger [main] Starting DraftRestControllerTest using Java 22.0.1 with PID 21928 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:47:05,830 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:47:08,328 INFO o.s.b.StartupInfoLogger [main] Started DraftRestControllerTest in 2.537 seconds (process running for 12.894)
+2024-05-24 17:47:08,705 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplicationTests using Java 22.0.1 with PID 21928 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-24 17:47:08,707 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-24 17:47:11,217 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplicationTests in 2.544 seconds (process running for 15.783)
+2024-05-25 11:19:59,169 INFO o.s.b.StartupInfoLogger [main] Starting DraftRepositoryTest using Java 22.0.1 with PID 25040 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-25 11:19:59,189 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-25 11:20:12,524 INFO o.s.b.StartupInfoLogger [main] Started DraftRepositoryTest in 14.083 seconds (process running for 16.75)
+2024-05-25 11:20:44,583 INFO o.s.b.StartupInfoLogger [main] Starting DraftRestControllerTest using Java 22.0.1 with PID 22752 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-25 11:20:44,621 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-25 11:21:00,538 INFO o.s.b.StartupInfoLogger [main] Started DraftRestControllerTest in 17.279 seconds (process running for 20.614)
+2024-05-25 11:28:23,577 INFO o.s.b.StartupInfoLogger [main] Starting DraftRestControllerTest using Java 22.0.1 with PID 11136 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-25 11:28:23,601 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-25 11:28:40,176 INFO o.s.b.StartupInfoLogger [main] Started DraftRestControllerTest in 17.773 seconds (process running for 20.436)
+2024-05-25 13:50:23,006 INFO o.s.b.StartupInfoLogger [main] Starting NotificationRestControllerTest using Java 22.0.1 with PID 22788 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-25 13:50:23,057 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-25 13:54:20,073 INFO o.s.b.StartupInfoLogger [main] Starting NotificationRepositoryTest using Java 22.0.1 with PID 8060 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-25 13:54:20,098 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-25 13:54:29,793 INFO o.s.b.StartupInfoLogger [main] Started NotificationRepositoryTest in 11.174 seconds (process running for 13.743)
+2024-05-26 20:03:47,740 INFO o.s.b.StartupInfoLogger [main] Starting CommentRestControllerTest using Java 22.0.1 with PID 7464 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-26 20:03:47,753 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-26 20:04:59,250 INFO o.s.b.StartupInfoLogger [main] Starting CommentRepositoryTest using Java 22.0.1 with PID 24904 (started by mattn in C:\Users\mattn\Documents\GitHub\Food-Fusion-Platform)
+2024-05-26 20:04:59,265 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-26 20:05:03,225 INFO o.s.b.StartupInfoLogger [main] Started CommentRepositoryTest in 4.577 seconds (process running for 6.185)
