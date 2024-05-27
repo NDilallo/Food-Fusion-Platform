@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.controller.searchHistory;
+package com.foodFusion.FoodFusionPlatform.controller.searchHistory;
 
 import java.util.HashMap;
 import java.util.List;

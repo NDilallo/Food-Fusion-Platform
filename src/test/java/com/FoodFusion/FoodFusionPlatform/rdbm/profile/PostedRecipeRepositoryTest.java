@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.profile;
+package com.foodFusion.FoodFusionPlatform.rdbm.profile;
 
 import java.util.List;
 
@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipe;
+import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipeRepository;
 
 @SpringBootTest
 public class PostedRecipeRepositoryTest {

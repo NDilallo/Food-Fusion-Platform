@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.upload;
+package com.foodFusion.FoodFusionPlatform.rdbm.upload;
 
 import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
 

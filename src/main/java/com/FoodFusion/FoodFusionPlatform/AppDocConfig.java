@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform;
+package com.foodFusion.FoodFusionPlatform;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;

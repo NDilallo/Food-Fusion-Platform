@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform;
+package com.foodFusion.FoodFusionPlatform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

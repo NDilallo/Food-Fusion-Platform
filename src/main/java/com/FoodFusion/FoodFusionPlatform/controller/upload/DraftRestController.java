@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.controller.upload;
+package com.foodFusion.FoodFusionPlatform.controller.upload;
 
 import java.util.HashMap;
 import java.util.List;

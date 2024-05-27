@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.controller.profile;
+package com.foodFusion.FoodFusionPlatform.controller.profile;
 
 import org.hamcrest.CoreMatchers;
 import static org.junit.jupiter.api.Assertions.assertEquals;

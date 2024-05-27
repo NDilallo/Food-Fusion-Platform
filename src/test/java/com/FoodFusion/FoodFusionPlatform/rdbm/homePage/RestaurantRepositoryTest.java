@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.homePage;
+package com.foodFusion.FoodFusionPlatform.rdbm.homePage;
 
 import java.util.List;
 

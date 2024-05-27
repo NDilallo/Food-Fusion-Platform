@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.searchHistory;
+package com.foodFusion.FoodFusionPlatform.rdbm.searchHistory;
 
 
 import org.springframework.data.repository.CrudRepository;

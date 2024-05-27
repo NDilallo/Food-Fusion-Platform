@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.services.profile;
+package com.foodFusion.FoodFusionPlatform.services.profile;
 
 import java.util.ArrayList;
 import java.util.List;

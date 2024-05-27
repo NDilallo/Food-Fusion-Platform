@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.homePage;
+package com.foodFusion.FoodFusionPlatform.rdbm.homePage;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

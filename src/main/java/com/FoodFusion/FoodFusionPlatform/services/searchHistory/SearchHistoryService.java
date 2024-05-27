@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.services.searchHistory;
+package com.foodFusion.FoodFusionPlatform.services.searchHistory;
 
 import java.util.List;
 import java.util.stream.Collectors;
