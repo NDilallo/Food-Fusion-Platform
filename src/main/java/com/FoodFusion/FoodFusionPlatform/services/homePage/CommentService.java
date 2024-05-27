@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 
 import java.util.List;

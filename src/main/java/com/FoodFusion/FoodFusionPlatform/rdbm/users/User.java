@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.rdbm.users;
+package com.foodFusion.foodFusionPlatform.rdbm.users;
 
 import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
 

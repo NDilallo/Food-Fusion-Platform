@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.services.users;
+package com.foodFusion.foodFusionPlatform.services.users;
 
 import java.util.List;
 import java.util.stream.Collectors;

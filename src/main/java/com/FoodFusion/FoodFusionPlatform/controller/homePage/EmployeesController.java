@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.controller.homePage;
+package com.foodFusion.foodFusionPlatform.controller.homePage;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

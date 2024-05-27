@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.rdbm.searchHistory;
+package com.foodFusion.foodFusionPlatform.rdbm.searchHistory;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

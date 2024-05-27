@@ -3,4 +3,4 @@
  * Encapsulation layer for interaction with the users table.
  */
 
-package com.foodFusion.FoodFusionPlatform.services.users;
+package com.foodFusion.foodFusionPlatform.services.users;

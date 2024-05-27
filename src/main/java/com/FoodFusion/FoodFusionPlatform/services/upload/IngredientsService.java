@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.services.upload;
+package com.foodFusion.foodFusionPlatform.services.upload;
 
 import java.util.List;
 

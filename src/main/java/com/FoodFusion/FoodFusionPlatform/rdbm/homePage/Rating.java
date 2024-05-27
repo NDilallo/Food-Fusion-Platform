@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.rdbm.homePage;
+package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
 import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipe;
 

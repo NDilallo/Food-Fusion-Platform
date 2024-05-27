@@ -10,4 +10,4 @@
  * 
  */
 
-package com.foodFusion.FoodFusionPlatform.controller.profile;
+package com.foodFusion.foodFusionPlatform.controller.profile;

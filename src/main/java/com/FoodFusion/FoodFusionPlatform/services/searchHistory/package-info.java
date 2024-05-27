@@ -3,4 +3,4 @@
  * Encapsulation layer for interaction with the searchHistory table.
  */
 
-package com.foodFusion.FoodFusionPlatform.services.searchHistory;
+package com.foodFusion.foodFusionPlatform.services.searchHistory;
