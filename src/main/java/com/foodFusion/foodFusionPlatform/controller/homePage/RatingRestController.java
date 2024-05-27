@@ -36,11 +36,11 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api/ratings")
 @Tag(name = "Rating", description = "All ratings")
 @Log4j2
-public class RatingController {
+public class RatingRestController {
     @Autowired
     private RatingService service;
 
-    @GetMapping
+    @GetMapping("/api/ratings")
     @Operation(summary = "Returns all the ratings for a post")
     @ApiResponse(responseCode = "200", description = "valid response", 
         content = {@Content(mediaType="application/json", schema=@Schema(implementation=Rating.class))})
@@ -48,7 +48,7 @@ public class RatingController {
         return service.list();
     }
 
-    @PostMapping
+    @PostMapping("/api/ratings")
     @Operation(summary = "Save the rating and returns the saved rating's id")
     public long save(@RequestBody Rating r) {
         log.traceEntry("enter save", r);
@@ -66,7 +66,7 @@ public class RatingController {
         return ResponseEntity.ok("new id is " + r.getRatingId());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/api/ratings/{id}")
     @Operation(summary = "Delete the rating")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
