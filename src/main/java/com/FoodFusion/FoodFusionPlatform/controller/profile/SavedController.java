@@ -32,14 +32,14 @@ import lombok.extern.log4j.Log4j2;
  * Documented controller using OpenAPI
  */
 @RestController
-@RequestMapping("/api/profile")
+@RequestMapping("/api/saved")
 @Tag(name = "Saved", description = "All saved posts for user")
 @Log4j2
 public class SavedController {
     @Autowired
     private SavedService service;
 
-    @GetMapping("/api/profile/saved")
+    @GetMapping
     @Operation(summary = "Returns all the saved posts for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
         content = {@Content(mediaType="application/json", schema=@Schema(implementation=Saved.class))})
@@ -47,7 +47,7 @@ public class SavedController {
         return service.list();
     }
 
-    @PostMapping("/api/profile/saved")
+    @PostMapping
     @Operation(summary = "Save the post and returns the saved post's id")
     public long save(@RequestBody Saved user) {
         log.traceEntry("enter save", user);
@@ -56,7 +56,7 @@ public class SavedController {
         return user.getId();
     }
 
-    @PostMapping("/saved/validated")
+    @PostMapping("/validated")
     @Operation(summary = "Save the post to user's profile")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody Saved user) {
         log.traceEntry("enter save", user);
@@ -65,7 +65,7 @@ public class SavedController {
         return ResponseEntity.ok("new id is " + user.getId());
     }
 
-    @DeleteMapping("/api/pofile/saved/{id}")
+    @DeleteMapping
     @Operation(summary = "Delete the saved post")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
