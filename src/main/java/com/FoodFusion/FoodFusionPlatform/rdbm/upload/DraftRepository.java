@@ -1,4 +1,4 @@
-package com.foodFusion.foodFusionPlatform.rdbm.upload;
+package com.foodFusion.FoodFusionPlatform.rdbm.upload;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

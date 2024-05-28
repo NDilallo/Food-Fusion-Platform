@@ -7,4 +7,4 @@
  * The search history table holds direct info about prior searches.
 */
 
-package com.foodFusion.foodFusionPlatform.rdbm.searchHistory;
+package com.foodFusion.FoodFusionPlatform.rdbm.searchHistory;
