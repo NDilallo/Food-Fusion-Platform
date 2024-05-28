@@ -8,4 +8,4 @@
  * Potentially replaced with proper security for login later.
 */
 
-package com.FoodFusion.FoodFusionPlatform.rdbm.users;
+package com.foodFusion.foodFusionPlatform.rdbm.users;

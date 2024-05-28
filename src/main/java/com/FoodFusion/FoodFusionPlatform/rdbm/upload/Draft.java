@@ -1,4 +1,6 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.upload;
+package com.foodFusion.foodFusionPlatform.rdbm.upload;
+
+import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,8 +12,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import jakarta.validation.constraints.NotNull;
-import com.FoodFusion.FoodFusionPlatform.rdbm.profile.Profile;
-
 import lombok.Data;
 
 @Data

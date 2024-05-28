@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.homePage;
+package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
 import java.util.List;
 
@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Restaurant;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.RestaurantRepository;
 
 @SpringBootTest
 public class RestaurantRepositoryTest {

@@ -1,12 +1,12 @@
-package com.FoodFusion.FoodFusionPlatform.controller.homePage;
+package com.foodFusion.foodFusionPlatform.controller.homePage;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Employees;
-import com.FoodFusion.FoodFusionPlatform.services.homePage.ChefsService;
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Employees.WaiterService;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Employees;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Employees.WaiterService;
+import com.foodFusion.foodFusionPlatform.services.homePage.ChefsService;
 
 
 @RestController

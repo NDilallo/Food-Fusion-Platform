@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Chefs;
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.ChefsRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Chefs;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.ChefsRepository;
 
 import lombok.extern.log4j.Log4j2;
 

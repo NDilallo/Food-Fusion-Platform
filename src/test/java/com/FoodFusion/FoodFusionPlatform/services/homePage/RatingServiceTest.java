@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Rating;
-import com.FoodFusion.FoodFusionPlatform.services.homePage.RatingService;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
+import com.foodFusion.foodFusionPlatform.services.homePage.RatingService;
 /**
  * Test out the service
  */

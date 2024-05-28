@@ -2,4 +2,4 @@
  * Access for web access layer
  */
 
-package com.FoodFusion.FoodFusionPlatform.controller;
+package com.foodFusion.foodFusionPlatform.controller;

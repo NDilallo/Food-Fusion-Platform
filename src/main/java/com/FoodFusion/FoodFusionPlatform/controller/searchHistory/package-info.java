@@ -3,4 +3,4 @@
  * Provides web access for the SearchHistory Table interactions
  */
 
-package com.FoodFusion.FoodFusionPlatform.controller.searchHistory;
+package com.foodFusion.foodFusionPlatform.controller.searchHistory;

@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,8 +7,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.Restaurant;
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.RestaurantRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.Restaurant;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.RestaurantRepository;
 
 import lombok.extern.log4j.Log4j2;
 

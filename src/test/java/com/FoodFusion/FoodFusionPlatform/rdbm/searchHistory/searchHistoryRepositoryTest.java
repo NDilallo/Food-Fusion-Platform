@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.rdbm.searchHistory;
+package com.foodFusion.foodFusionPlatform.rdbm.searchHistory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
