@@ -6,3 +6,21 @@
 2024-05-20 21:37:18,387 INFO o.s.b.StartupInfoLogger [main] Starting FoodFusionPlatformApplication using Java 21.0.3 with PID 28364 (C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform\target\classes started by Matt in C:\Users\Matt\Desktop\webdev\assignment1\Food-Fusion-Platform)
 2024-05-20 21:37:18,398 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
 2024-05-20 21:37:26,297 INFO o.s.b.StartupInfoLogger [main] Started FoodFusionPlatformApplication in 8.357 seconds (process running for 9.277)
+2024-05-21 00:32:11,710 INFO o.s.b.StartupInfoLogger [main] Starting searchHistoryRepositoryTest using Java 21.0.1 with PID 31708 (started by nickd in C:\Users\nickd\OneDrive\Documents\Desktop\Depaul_Classes\Junior\Q3\SE352\Food-Fusion-Platform\Food-Fusion-Platform)
+2024-05-21 00:32:11,719 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-21 00:32:17,304 INFO o.s.b.StartupInfoLogger [main] Started searchHistoryRepositoryTest in 5.817 seconds (process running for 6.764)
+2024-05-21 01:47:37,750 INFO o.s.b.StartupInfoLogger [main] Starting searchHistoryRepositoryTest using Java 21.0.1 with PID 30872 (started by nickd in C:\Users\nickd\OneDrive\Documents\Desktop\Depaul_Classes\Junior\Q3\SE352\Food-Fusion-Platform\Food-Fusion-Platform)
+2024-05-21 01:47:37,757 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-21 01:47:43,957 INFO o.s.b.StartupInfoLogger [main] Started searchHistoryRepositoryTest in 6.429 seconds (process running for 7.439)
+2024-05-27 23:21:37,447 INFO o.s.b.StartupInfoLogger [main] Starting searchHistoryRepositoryTest using Java 21.0.1 with PID 26340 (started by nickd in C:\Users\nickd\OneDrive\Documents\Desktop\Depaul_Classes\Junior\Q3\SE352\Food-Fusion-Platform\Food-Fusion-Platform)
+2024-05-27 23:21:37,452 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-27 23:21:43,720 INFO o.s.b.StartupInfoLogger [main] Started searchHistoryRepositoryTest in 6.563 seconds (process running for 7.79)
+2024-05-27 23:22:34,389 INFO o.s.b.StartupInfoLogger [main] Starting searchHistoryRepositoryTest using Java 21.0.1 with PID 12972 (started by nickd in C:\Users\nickd\OneDrive\Documents\Desktop\Depaul_Classes\Junior\Q3\SE352\Food-Fusion-Platform\Food-Fusion-Platform)
+2024-05-27 23:22:34,396 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-27 23:22:40,045 INFO o.s.b.StartupInfoLogger [main] Started searchHistoryRepositoryTest in 5.882 seconds (process running for 6.779)
+2024-05-27 23:23:44,564 INFO o.s.b.StartupInfoLogger [main] Starting searchHistoryRepositoryTest using Java 21.0.1 with PID 22324 (started by nickd in C:\Users\nickd\OneDrive\Documents\Desktop\Depaul_Classes\Junior\Q3\SE352\Food-Fusion-Platform\Food-Fusion-Platform)
+2024-05-27 23:23:44,570 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-27 23:23:50,267 INFO o.s.b.StartupInfoLogger [main] Started searchHistoryRepositoryTest in 5.928 seconds (process running for 6.834)
+2024-05-27 23:29:42,561 INFO o.s.b.StartupInfoLogger [main] Starting UserRepositoryTest using Java 21.0.1 with PID 11476 (started by nickd in C:\Users\nickd\OneDrive\Documents\Desktop\Depaul_Classes\Junior\Q3\SE352\Food-Fusion-Platform\Food-Fusion-Platform)
+2024-05-27 23:29:42,567 INFO o.s.b.SpringApplication [main] The following 1 profile is active: "local"
+2024-05-27 23:29:47,840 INFO o.s.b.StartupInfoLogger [main] Started UserRepositoryTest in 5.479 seconds (process running for 6.34)

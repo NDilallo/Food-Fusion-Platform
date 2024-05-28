@@ -2,13 +2,11 @@ package com.FoodFusion.FoodFusionPlatform.rdbm.users;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.FoodFusion.FoodFusionPlatform.rdbm.users.User;
-import com.FoodFusion.FoodFusionPlatform.rdbm.users.UserRepository;
 
 @SpringBootTest
 public class UserRepositoryTest {
@@ -18,6 +16,9 @@ public class UserRepositoryTest {
 
     String updatedPass = "def456";
     String updatedName = "Nick Updated";
+    
+    String invalidUsername = "a";
+    String invalidPassword = "a";
 
     @Autowired
     private UserRepository repo;
@@ -67,5 +68,5 @@ public class UserRepositoryTest {
         aftercount = repo.count();
         assertEquals(b4count - 1, aftercount);
 
-    }    
+    }
 }
