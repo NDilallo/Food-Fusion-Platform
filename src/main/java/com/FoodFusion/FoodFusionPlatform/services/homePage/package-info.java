@@ -1,4 +1,4 @@
-package com.foodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 /*
  * Marisa Ban - RatingService and RestaurantService
