@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.profile;
+package com.foodFusion.foodFusionPlatform.services.profile;
 
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
