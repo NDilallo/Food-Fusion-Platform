@@ -23,18 +23,18 @@ public class ChefsController {
 }
 
 @RestController
-@RequestMapping("/chef")
+@RequestMapping("/api/chef")
 class ChefController {
 
     @Autowired
     private ChefsService chefService;
 
-    @PostMapping("/add")
+    @PostMapping
     public String addChef(@RequestBody Chefs chef) {
         return chefService.addChef(chef);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Chefs> getAllChefs() {
         return chefService.getAllChefs();
     }
