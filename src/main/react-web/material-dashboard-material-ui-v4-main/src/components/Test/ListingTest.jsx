@@ -1,13 +1,20 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
+import { listUsers } from 'services/UserService';
 
 const ListingTest = () => {
 
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        
-    })
+
+        listUsers().then((response) => {
+            setUsers(response.data);
+        }).catch(error => {
+            console.error(error);
+        })
+
+    }, [])
 
     return (
         <div>
@@ -22,15 +29,20 @@ const ListingTest = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {dummyData.map((user, index) => (
+                    {users.map((user, index) => (
                         <tr key={index}>
                             <td>{user.id}</td>
                             <td>{user.username}</td>
                             <td>{user.pass}</td>
                             <td>
-                                {/* Access specific properties of the profile_link object */}
-                                userID: {user.profile_link.userID}, 
-                                {/* Add other properties as needed */}
+                            {user.profile_link ? (
+                                    <>
+                                        userID: {user.profile_link.userID}, 
+                                        {/* Add other properties as needed */}
+                                    </>
+                                ) : (
+                                    'No profile link available'
+                                )}
                             </td>
                         </tr>
                     ))}
