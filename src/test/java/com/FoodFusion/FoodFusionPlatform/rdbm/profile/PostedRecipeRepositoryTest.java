@@ -17,20 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class PostedRecipeRepositoryTest {
     @Autowired
     private PostedRecipeRepository repo;
-/* 
-    @BeforeEach
-    public void addRecipes() {
-        PostedRecipe recipe1 = new PostedRecipe();
-        recipe1.setAvgRating(3.5);
-        recipe1.setIngredients("rice, veggies, soy sauce");
-        recipe1.setName("Stir fry");
-        recipe1.setRecipeCuisine("Asian");
-        recipe1.setSteps("make rice, cook veggies, combine");
-        repo.save(recipe1);
-        
-        
-    }
-    */
+
      /**
      * Test create, read, update, and delete
      */
@@ -136,11 +123,11 @@ public class PostedRecipeRepositoryTest {
 
         long count = repo.count();
         System.out.println(count);
-        List<PostedRecipe> american = repo.findByRecipeCuisine("USA");
+        List<PostedRecipe> usa = repo.findByRecipeCuisine("USA");
         List<PostedRecipe> ethiopian = repo.findByRecipeCuisine("Ethiopian");
 
         assertNotEquals(0, count);
-        assertEquals(2, american.size());
+        assertEquals(2, usa.size());
         assertEquals(0, ethiopian.size());
     }
 
