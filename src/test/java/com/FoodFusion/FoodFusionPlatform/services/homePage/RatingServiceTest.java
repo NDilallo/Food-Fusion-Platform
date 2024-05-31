@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
+import com.foodFusion.foodFusionPlatform.services.homePage.RatingService;
 /**
  * Test out the service
  */

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class PostedRecipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long recipeId;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
     @NotBlank(message = "Recipe name must be set")

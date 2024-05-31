@@ -31,10 +31,10 @@ public class Rating {
      */
 
     // foreign key, link to recipe that was rated
-    @ManyToOne(fetch = FetchType.EAGER)
-    @ToString.Exclude
-    //@JsonBackReference
-    private PostedRecipe recipe;
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @ToString.Exclude
+    // //@JsonBackReference
+    // private PostedRecipe recipe;
 
     @Min(value = 0, message = "Rating must be at least 0")
     @Max(value = 5, message = "Rating must be at most 5")
