@@ -59,17 +59,18 @@ public class RestaurantRepositoryTest {
     @Order(2)
     public void findByAddress() {
         Restaurant restaurant1 = new Restaurant();
-        restaurant1.setAddress("123 W Dr");
+        restaurant1.setAddress("111 W Dr");
         restaurant1.setCuisine("American");
         restaurant1.setName("Burgers");
         repo.save(restaurant1);
 
         long count = repo.count();
-        Restaurant addr = repo.findByAddress("123 W Dr");
+        Restaurant addr = repo.findByAddress("111 W Dr");
 
         assertNotEquals(0, count);
-        assertEquals("123 W Dr", addr.getAddress());
+        assertEquals("111 W Dr", addr.getAddress());
         assertEquals("Burgers", addr.getName());
+        repo.delete(restaurant1);
     }
 
     @Test
@@ -87,6 +88,7 @@ public class RestaurantRepositoryTest {
         assertNotEquals(0, count);
         assertEquals(1, asian.size());
         assertEquals(0, ethiopian.size());
+        repo.delete(restaurant2);
     }
 
     @Test
@@ -111,5 +113,7 @@ public class RestaurantRepositoryTest {
         assertNotEquals(0, count);
         assertEquals(2, burger.size());
         assertEquals(0, eggs.size());
+        repo.delete(restaurant1);
+        repo.delete(restaurant3);
     }
 }
