@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import { useEffect } from 'react';
 import { listUsers } from 'services/UserService';
 
+
 const ListingTest = () => {
+
 
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-
+        
         listUsers().then((response) => {
             setUsers(response.data);
         }).catch(error => {
