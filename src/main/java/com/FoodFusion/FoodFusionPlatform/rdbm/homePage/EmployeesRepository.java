@@ -1,9 +1,13 @@
 package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
-    import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-    public interface EmployeesRepository extends CrudRepository<Employees, Long> {
-        public Employees findByName(String name);
-    }
-    
+import org.springframework.data.repository.CrudRepository;
+
+public interface EmployeesRepository extends CrudRepository<Employees, Long> {
+    Employees findByName(String name);
+    List<Employees> findAll();
+    List<Employees> findByRole(String role);
+}
+
 

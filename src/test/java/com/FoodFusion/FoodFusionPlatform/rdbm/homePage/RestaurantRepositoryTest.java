@@ -1,16 +1,13 @@
 package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.Restaurant;
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.RestaurantRepository;
 
 @SpringBootTest
 public class RestaurantRepositoryTest {

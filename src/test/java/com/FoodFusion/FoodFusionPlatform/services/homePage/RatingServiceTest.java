@@ -1,15 +1,15 @@
 package com.foodFusion.foodFusionPlatform.services.homePage;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
-import com.foodFusion.foodFusionPlatform.services.homePage.RatingService;
 /**
  * Test out the service
  */

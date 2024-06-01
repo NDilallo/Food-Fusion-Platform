@@ -1,9 +1,10 @@
 package com.foodFusion.foodFusionPlatform.services.profile;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import com.foodFusion.foodFusionPlatform.rdbm.homePage.Rating;
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.RatingRepository;
 import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipe;
 import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipeRepository;
-import com.foodFusion.foodFusionPlatform.services.profile.PostedRecipeService;
 
 /**
  * Test out the service
