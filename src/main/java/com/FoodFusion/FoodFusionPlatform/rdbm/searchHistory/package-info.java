@@ -5,6 +5,9 @@
  * <li>Search History table - No connections</li>
  * </ul>
  * The search history table holds direct info about prior searches.
+ * 
+ * Marisa Ban - javadoc comments
+ * 
 */
 
 package com.foodFusion.foodFusionPlatform.rdbm.searchHistory;

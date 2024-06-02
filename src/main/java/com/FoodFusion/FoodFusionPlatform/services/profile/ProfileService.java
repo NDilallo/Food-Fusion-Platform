@@ -12,12 +12,20 @@ import com.foodFusion.foodFusionPlatform.rdbm.profile.ProfileRepository;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Defines the services for the Profile table
+ * @author Fritz Nastor
+ */
 @Service
 @Log4j2
 public class ProfileService {
     @Autowired
     private ProfileRepository repo;
 
+    /**
+     * list the profiles
+     * @return a list of Profile instances
+     */
     public List<Profile> list() {
         log.traceEntry("Enter list");
         List<Profile> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
@@ -25,6 +33,11 @@ public class ProfileService {
         return retval;
     }
 
+    /**
+     * save a profile
+     * @param profile
+     * @return the saved Profile instance
+     */
     public Profile save(Profile profile) {
         log.traceEntry("enter save", profile);
         repo.save(profile);
@@ -32,6 +45,10 @@ public class ProfileService {
         return profile;
     }
 
+    /**
+     * delete a profile
+     * @param id
+     */
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);

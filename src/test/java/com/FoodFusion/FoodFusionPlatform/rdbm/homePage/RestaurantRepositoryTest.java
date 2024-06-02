@@ -70,6 +70,7 @@ public class RestaurantRepositoryTest {
         assertNotEquals(0, count);
         assertEquals("111 W Dr", addr.getAddress());
         assertEquals("Burgers", addr.getName());
+
         repo.delete(restaurant1);
     }
 
@@ -88,6 +89,7 @@ public class RestaurantRepositoryTest {
         assertNotEquals(0, count);
         assertEquals(1, asian.size());
         assertEquals(0, ethiopian.size());
+
         repo.delete(restaurant2);
     }
 
@@ -113,6 +115,7 @@ public class RestaurantRepositoryTest {
         assertNotEquals(0, count);
         assertEquals(2, burger.size());
         assertEquals(0, eggs.size());
+        
         repo.delete(restaurant1);
         repo.delete(restaurant3);
     }

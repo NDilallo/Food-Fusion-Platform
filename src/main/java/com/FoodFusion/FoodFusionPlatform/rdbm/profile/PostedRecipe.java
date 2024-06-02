@@ -17,6 +17,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * 
+ * @author Marisa Ban
+ * This class defines the contents of the PostedRecipe table.
+ * 
+ */
 @Data
 @Entity
 @Table(name="PostedRecipes")

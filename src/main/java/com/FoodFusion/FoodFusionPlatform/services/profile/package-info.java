@@ -1,7 +1,7 @@
 /*
  * Nick Dilallo - ProfileService and SavedService
  * 
- * Marisa Ban - PostedRecipeService
+ * Marisa Ban - PostedRecipeService, javadoc comments
  * 
  * 
  * Encapsulation layer for interaction with the Saved table.

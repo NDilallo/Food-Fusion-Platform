@@ -12,6 +12,10 @@ import com.foodFusion.foodFusionPlatform.rdbm.homePage.NotificationRepository;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Defines the services for Notifications
+ * @author Matt Nice
+ */
 @Service
 @Log4j2
 public class NotificationServices {
@@ -19,6 +23,10 @@ public class NotificationServices {
     @Autowired
     private NotificationRepository notificationRepository;
 
+    /**
+     * List all the notifications
+     * @return a list of Notification instances
+     */
     public List<Notification> listAll() {
         log.traceEntry("Enter listAll");
         List<Notification> notifications = StreamSupport.stream(notificationRepository.findAll().spliterator(), false).collect(Collectors.toList());
@@ -26,6 +34,11 @@ public class NotificationServices {
         return notifications;
     }
 
+    /**
+     * Save a notification
+     * @param notification
+     * @return the saved Notification instance
+     */
     public Notification save(Notification notification) {
         log.traceEntry("Enter save", notification);
         Notification savedNotification = notificationRepository.save(notification);
@@ -33,6 +46,11 @@ public class NotificationServices {
         return savedNotification;
     }
 
+    /**
+     * Retrieve the notification with the given id
+     * @param id
+     * @return the retrieved Notification instance
+     */
     public Optional<Notification> getById(long id) {
         log.traceEntry("Enter getById", id);
         Optional<Notification> notification = notificationRepository.findById(id);
@@ -40,6 +58,10 @@ public class NotificationServices {
         return notification;
     }
 
+    /**
+     * delete the notification with the given id
+     * @param id
+     */
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         notificationRepository.deleteById(id);

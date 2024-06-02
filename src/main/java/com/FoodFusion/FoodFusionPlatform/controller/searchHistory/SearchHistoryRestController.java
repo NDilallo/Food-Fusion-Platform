@@ -3,6 +3,7 @@ package com.foodFusion.foodFusionPlatform.controller.searchHistory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/*
- * Documented controller using OpenAPI
+/**
+ * Controller for managing SearchHistory entities.
+ * @author Nick Dilallo
  */
 @RestController
 @RequestMapping("/api/searchHistory")
@@ -39,6 +41,10 @@ public class SearchHistoryRestController {
     @Autowired
     private SearchHistoryService service;
 
+    /**
+     * List all the SearchHistory instances in the table
+     * @return a list of SearchHistory instances
+     */
     @GetMapping
     @Operation(summary = "Returns all the previous searches for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
@@ -47,6 +53,11 @@ public class SearchHistoryRestController {
         return service.list();
     }
 
+    /**
+     * Save a new SearchHistory to the table
+     * @param user
+     * @return long id of new SearchHistory instance
+     */
     @PostMapping
     @Operation(summary = "Save the search and returns the search id")
     public long save(@RequestBody SearchHistory user) {
@@ -56,6 +67,11 @@ public class SearchHistoryRestController {
         return user.getId();
     }
 
+    /**
+     * Validate the saved SearchHistory
+     * @param user
+     * @return ResponseEntity<String> 
+     */
     @PostMapping("/validated")
     @Operation(summary = "Save the search to history and return the search")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody SearchHistory user) {
@@ -65,6 +81,10 @@ public class SearchHistoryRestController {
         return ResponseEntity.ok("new id is " + user.getId());
     }
 
+    /**
+     * Delete a SearchHistory instance with the given id from the table
+     * @param id
+     */
     @DeleteMapping
     @Operation(summary = "Delete the search from history")
     public void delete(long id) {
@@ -73,6 +93,10 @@ public class SearchHistoryRestController {
         log.traceExit("Exit delete");
     }
     
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

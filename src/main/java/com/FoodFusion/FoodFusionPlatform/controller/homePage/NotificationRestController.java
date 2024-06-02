@@ -29,12 +29,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 /**
  * Controller for managing Notification entities.
+ * @author Matt Nice
  */
 @RestController
 @RequestMapping("/api/notification")
@@ -45,6 +45,10 @@ public class NotificationRestController {
     @Autowired
     private NotificationServices notificationServices;
 
+    /**
+     * List all notifications in the table
+     * @return a list of Notification instances
+     */
     @GetMapping
     @Operation(summary = "Returns all the notifications")
     @ApiResponse(responseCode = "200", description = "Valid response", 
@@ -53,6 +57,11 @@ public class NotificationRestController {
         return notificationServices.listAll();
     }
 
+    /**
+     * Get a Notification by the given id
+     * @param id
+     * @return ResponseEntity<Notification>
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Returns a notification by ID")
     @ApiResponse(responseCode = "200", description = "Valid response", 
@@ -62,6 +71,11 @@ public class NotificationRestController {
         return notification.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Save a Notification to the table
+     * @param notification
+     * @return ResponseEntity<Long> id of saved Notification
+     */
     @PostMapping
     @Operation(summary = "Save a new notification and returns the notification ID")
     public ResponseEntity<Long> save(@Valid @RequestBody Notification notification) {
@@ -71,6 +85,12 @@ public class NotificationRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedNotification.getId());
     }
 
+    /**
+     * Update a Notification's contents
+     * @param id
+     * @param notification
+     * @return ResponseEntity<Void>
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing notification")
     public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody Notification notification) {
@@ -85,6 +105,11 @@ public class NotificationRestController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Delete a Notification from the table
+     * @param id
+     * @return ResponseEntity<Void>
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a notification by ID")
     public ResponseEntity<Void> delete(@PathVariable long id) {
@@ -97,6 +122,10 @@ public class NotificationRestController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

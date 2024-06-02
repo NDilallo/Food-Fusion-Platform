@@ -12,12 +12,20 @@ import com.foodFusion.foodFusionPlatform.rdbm.searchHistory.SearchHistoryReposit
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Defines the services for theh SearchHistory table
+ * @author Nick Dilallo
+ */
 @Service
 @Log4j2
 public class SearchHistoryService {
     @Autowired
     private SearchHistoryRepository repo;
 
+    /**
+     * list all the SearchHistory instances
+     * @return a list of SearchHistory instances
+     */
     public List<SearchHistory> list() {
         log.traceEntry("Enter list");
         List<SearchHistory> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
@@ -25,6 +33,11 @@ public class SearchHistoryService {
         return retval;
     }
 
+    /**
+     * save a new search history
+     * @param user
+     * @return the saved SearchHistory instance
+     */
     public SearchHistory save(SearchHistory user) {
         log.traceEntry("enter save", user);
         repo.save(user);
@@ -32,6 +45,10 @@ public class SearchHistoryService {
         return user;
     }
 
+    /**
+     * delete a search history with the given id
+     * @param id
+     */
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);

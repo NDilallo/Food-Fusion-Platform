@@ -2,9 +2,10 @@ package com.foodFusion.foodFusionPlatform.services.homePage;
 
 import org.springframework.stereotype.Service;
 
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.Employees;
-import com.foodFusion.foodFusionPlatform.rdbm.homePage.Employees.WaiterService;
-
+/**
+ * Defines the services for Employees
+ * @author Dhruvi
+ */
 @Service
 public class EmployeesService {
 

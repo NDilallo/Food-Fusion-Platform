@@ -29,8 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/*
- * Documented controller using OpenAPI
+/**
+ * Controller for managing PostedRecipe entities.
+ * @author Marisa Ban
  */
 @RestController
 @RequestMapping("/api/postedrecipe")
@@ -40,6 +41,10 @@ public class PostedRecipeController {
     @Autowired
     private PostedRecipeService service;
 
+    /**
+     * List all PostedRecipe instances from the table
+     * @return a list of PostedRecipe instances
+     */
     @GetMapping
     @Operation(summary = "Returns all the posted recipes for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
@@ -48,6 +53,11 @@ public class PostedRecipeController {
         return service.list();
     }
 
+    /**
+     * Save a new PostedRecipe to the table
+     * @param r
+     * @return long id of the saved PostedRecipe
+     */
     @PostMapping
     @Operation(summary = "Save the posted recipe and returns the saved posted recipe's id")
     public long save(@RequestBody PostedRecipe r) {
@@ -57,6 +67,11 @@ public class PostedRecipeController {
         return r.getRecipeId();
     }
 
+    /**
+     * Validate saving a PostedRecipe
+     * @param r
+     * @return ResponseEntity<String>
+     */
     @PostMapping("/validated")
     @Operation(summary = "Save the posted recipe to the user's profile")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody PostedRecipe r) {
@@ -66,6 +81,10 @@ public class PostedRecipeController {
         return ResponseEntity.ok("new id is " + r.getRecipeId());
     }
 
+    /**
+     * Delete a PostedRecipe from the table with the given id
+     * @param id
+     */
     @DeleteMapping
     @Operation(summary = "Delete the posted recipe")
     public void delete(long id) {
@@ -74,6 +93,10 @@ public class PostedRecipeController {
         log.traceExit("Exit delete");
     }
     
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

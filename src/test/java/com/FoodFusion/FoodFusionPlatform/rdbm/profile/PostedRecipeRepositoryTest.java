@@ -99,6 +99,7 @@ public class PostedRecipeRepositoryTest {
         assertEquals(2, cheeseburger.size());
         assertEquals(1, stirFry.size());
         assertEquals(0, chicken.size());
+
         repo.delete(rtest);
         repo.delete(recipe3);
         repo.delete(recipe2);
@@ -132,6 +133,7 @@ public class PostedRecipeRepositoryTest {
         assertNotEquals(0, count);
         assertEquals(2, usa.size());
         assertEquals(0, ethiopian.size());
+        
         repo.delete(recipe3);
         repo.delete(recipe2);
     }

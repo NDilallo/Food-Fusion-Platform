@@ -5,6 +5,11 @@ package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 // import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.CrudRepository;
 
-// @Repository
+/**
+ * 
+ * @author Matt Nice
+ * This class defines the repository for the Notifications table.
+ * 
+ */
 public interface NotificationRepository extends CrudRepository<Notification, Long> {
 }

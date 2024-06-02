@@ -10,6 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author Fritz Nastor
+ * This class defines the contents of the Profile table.
+ * 
+ */
 @Data
 @Entity
 @AllArgsConstructor

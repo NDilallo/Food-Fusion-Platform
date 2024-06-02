@@ -3,6 +3,7 @@ package com.foodFusion.foodFusionPlatform.controller.profile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/*
- * Documented controller using OpenAPI
+/**
+ * Controller for managing Profile entities.
+ * @author Fritz Nastor
  */
 @RestController
 @RequestMapping("/api/profile")
@@ -39,6 +41,10 @@ public class ProfileRestController {
     @Autowired
     private ProfileService service;
 
+    /**
+     * Lists all the Profile instances in the table
+     * @return a list of Profile instances
+     */
     @GetMapping("/api/profile")
     @Operation(summary = "Returns all the profiles on the website")
     @ApiResponse(responseCode = "200", description = "valid response", 
@@ -47,6 +53,11 @@ public class ProfileRestController {
         return service.list();
     }
 
+    /**
+     * Saves a new Profile to the table
+     * @param profile
+     * @return long id of the saved Profile
+     */
     @PostMapping("/api/profile")
     @Operation(summary = "Save the profile and returns the profile id")
     public long save(@RequestBody Profile profile) {
@@ -56,6 +67,11 @@ public class ProfileRestController {
         return profile.getUserID();
     }
 
+    /**
+     * Validate the saved Profile
+     * @param profile
+     * @return ResponseEntity<String>
+     */
     @PostMapping("/validated")
     @Operation(summary = "Save the profile and returns the profile id")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody Profile profile) {
@@ -65,6 +81,10 @@ public class ProfileRestController {
         return ResponseEntity.ok("new id is " + profile.getUserID());
     }
 
+    /**
+     * Delete a Profile with the given id from the table
+     * @param id
+     */
     @DeleteMapping("/api/pofile/{id}")
     @Operation(summary = "Delete the profile")
     public void delete(long id) {
@@ -73,6 +93,10 @@ public class ProfileRestController {
         log.traceExit("Exit delete");
     }
     
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
