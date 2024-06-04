@@ -205,6 +205,9 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:522)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 50 more
+2024-05-31 12:27:29.078983-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]ID COMMENT_TMP"; expected "INSERT"; SQL statement:
+ID COMMENT_TMP [42001-224]
 2024-05-31 16:53:51.376663-05:00 database: flush
 org.h2.message.DbException: General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Administrator/Desktop/Food-Fusion-Platform/data/demo.mv.db [2.2.224/7]" [50000-224]
 	at org.h2.message.DbException.get(DbException.java:212)

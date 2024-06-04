@@ -26,7 +26,7 @@ public class ChefsController {
         return chefsService.addChef(chef);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Chefs> getAllChefs() {
         return chefsService.getAllChefs();
     }

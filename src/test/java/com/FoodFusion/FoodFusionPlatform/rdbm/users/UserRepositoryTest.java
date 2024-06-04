@@ -14,6 +14,9 @@ public class UserRepositoryTest {
 
     String updatedPass = "def456";
     String updatedName = "Nick Updated";
+    
+    String invalidUsername = "a";
+    String invalidPassword = "a";
 
     @Autowired
     private UserRepository repo;
@@ -63,5 +66,5 @@ public class UserRepositoryTest {
         aftercount = repo.count();
         assertEquals(b4count - 1, aftercount);
 
-    }    
+    }
 }
