@@ -16,10 +16,15 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
     public class ChefsService {
 
+    
     @Autowired
-    private static ChefsRepository chefRepository;
+    //private static ChefsRepository chefRepository = new ChefsRepository() {
+    private final ChefsRepository chefRepository;
+    public ChefsService(ChefsRepository chefRepository) {
+            this.chefRepository = chefRepository;
+    };
 
-    public static Chefs addChef(Chefs chef) {
+    public Chefs addChef(Chefs chef) {
         return chefRepository.save(chef);
     }
 

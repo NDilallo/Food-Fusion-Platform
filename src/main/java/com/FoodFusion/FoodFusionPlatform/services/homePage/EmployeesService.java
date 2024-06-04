@@ -22,7 +22,7 @@ public class EmployeesService {
     }
 
     public List<Employees> getAllEmployees() {
-        return EmployeesRepository.findAll();
+        return employeesRepository.findAll();
     }
 
     public Employees getEmployeeByName(String name) {
