@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.controller.upload;
+package com.foodFusion.foodFusionPlatform.controller.upload;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.upload.Draft;
-import com.FoodFusion.FoodFusionPlatform.services.upload.DraftService;
+import com.foodFusion.foodFusionPlatform.rdbm.upload.Draft;
+import com.foodFusion.foodFusionPlatform.services.upload.DraftService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest

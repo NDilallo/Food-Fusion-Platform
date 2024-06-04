@@ -1,4 +1,4 @@
-package com.FoodFusion.FoodFusionPlatform.services.homePage;
+package com.foodFusion.foodFusionPlatform.services.homePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -15,8 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.CommentRepository;
-import com.FoodFusion.FoodFusionPlatform.rdbm.homePage.PostComments;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.CommentRepository;
+import com.foodFusion.foodFusionPlatform.rdbm.homePage.PostComments;
 
 @ExtendWith(MockitoExtension.class)
 public class CommentServiceTest {
