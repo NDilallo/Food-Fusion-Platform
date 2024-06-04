@@ -34,6 +34,7 @@ import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import TestPage from "views/Test/Test.js";
+import SettingsPage from "views/Settings/Settings.js";
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -116,6 +117,13 @@ const dashboardRoutes = [
     rtlName: "idk",
     icon: Dashboard,
     component: TestPage,
+    layout: "/admin",
+  },{
+    path: "/settings",
+    name: "Settings",
+    rtlName: "idk",
+    icon: Dashboard,
+    component: SettingsPage,
     layout: "/admin",
   },
 ];
