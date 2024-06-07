@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, TextField, MenuItem } from "@material-ui/core";
+import { Box, TextField, MenuItem, Button } from "@material-ui/core";
 
 
 const cuisines = [
@@ -101,10 +101,9 @@ export default function UserPage() {
         <p>Current ingredients: {ingredients}</p>
         <p>Current descrip: {description}</p>
         <p>Current cuisine: {cuisine}</p>
-        
-        
         <div>
-        
+            <Button variant="contained">Post</Button>
+            <Button variant="contained">Save</Button>
         </div>
       </Box>
     );
