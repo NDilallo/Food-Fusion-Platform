@@ -13,6 +13,9 @@ const dashboardStyle = {
     width: "16px",
     height: "16px",
   },
+  container: {
+    backgroundColor: "#000000",
+  },
   stats: {
     color: grayColor[0],
     display: "inline-flex",

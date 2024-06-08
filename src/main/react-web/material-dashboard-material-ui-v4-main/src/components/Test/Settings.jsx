@@ -1,78 +1,45 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { settingsList } from 'services/SettingsService'; // Ensure this path matches your project structure
 
-const Settings = () => {
-    const [darkMode, setDarkMode] = useState(false);
-    const [setting1, setSetting1] = useState(false);
-    const [setting2, setSetting2] = useState(false);
 
-    const handleDarkModeChange = async () => {
-        try {
-            const response = await axios.put('/api/settings', { darkMode: !darkMode });
-            if (response.status === 200) {
-                setDarkMode(!darkMode);
-            }
-        } catch (error) {
-            console.error('Error updating dark mode setting:', error);
-        }
-    };
+const ListingTest = () => {
+    
+    const [settings, setSettings] = useState([])
 
-    const handleSetting1Change = async () => {
-        try {
-            const response = await axios.put('/api/settings', { setting1: !setting1 });
-            if (response.status === 200) {
-                setSetting1(!setting1);
-            }
-        } catch (error) {
-            console.error('Error updating setting 1:', error);
-        }
-    };
-
-    const handleSetting2Change = async () => {
-        try {
-            const response = await axios.put('/api/settings', { setting2: !setting2 });
-            if (response.status === 200) {
-                setSetting2(!setting2);
-            }
-        } catch (error) {
-            console.error('Error updating setting 2:', error);
-        }
-    };
+    useEffect(() => {
+        settingsList().then((response) => {
+            setSettings(response.data);
+        }).catch(error => {
+            console.error(error);
+        })
+    }, [])
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>Settings</h1>
-            <div>
-                <label htmlFor="darkMode">Dark Mode</label>
-                <input
-                    type="checkbox"
-                    id="darkMode"
-                    checked={darkMode}
-                    onChange={handleDarkModeChange}
-                />
-            </div>
+        <div>
+            <h2>Settings List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Settings ID</th>
+                        <th>User ID</th>
+                        <th>Enable Dark Mode</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {settings.map((setting, index) => (
+                        <tr key={index}>
+                            <td>{setting.settingsID}</td>
+                            <td>{setting.userID}</td>
+                            <td>{setting.enableDarkMode ? 'Yes' : 'No'}</td>
 
-            <div>
-                <label htmlFor="setting1">Setting 1</label>
-                <input
-                    type="checkbox"
-                    id="setting1"
-                    checked={setting1}
-                    onChange={handleSetting1Change}
-                />
-            </div>
-
-            <div>
-                <label htmlFor="setting2">Setting 2</label>
-                <input
-                    type="checkbox"
-                    id="setting2"
-                    checked={setting2}
-                    onChange={handleSetting2Change}
-                />
-            </div>
+                        
+                        </tr>
+                        
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
 
-export default Settings;
+export default ListingTest;

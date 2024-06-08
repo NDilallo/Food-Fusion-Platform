@@ -38,7 +38,6 @@ import {
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
@@ -52,7 +51,7 @@ export default function Dashboard() {
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>Used Space</p>
+              <p className={classes.cardCategory}>Test</p>
               <h3 className={classes.cardTitle}>
                 49/50 <small>GB</small>
               </h3>
