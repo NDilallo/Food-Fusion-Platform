@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, MenuItem, Button } from "@material-ui/core";
+import axios from "axios";
 
 
 const cuisines = [
@@ -30,15 +31,44 @@ export default function UserPage() {
     const [ingredients, setIngredients] = useState('');
     const [description, setDescription] = useState('');
     const [cuisine, setCuisine] = useState('');
-/*
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setPostData(prevState => ({
-            ...prevState,
-            [name]: value,
-        }));
+
+    //
+    const handlePost = (e) => {
+        e.preventDefault();
+        const recipeData = {
+            recipeName: recipeName,
+            ingredients: ingredients,
+            description: description,
+            cuisine: cuisine,
+        };
+
+        axios.post('http://localhost:8080/api/postedrecipe', recipeData)
+            .then(response => {
+                console.log("data submitted successfully", response.data);
+            })
+            .catch(error => {
+                console.error('error submitting the form', error);
+            });
     };
-*/
+
+    const handleDraft = (e) => {
+        e.preventDefault();
+        const recipeData = {
+            recipeName: recipeName,
+            ingredients: ingredients,
+            description: description,
+            cuisine: cuisine,
+        };
+
+        axios.post('http://localhost:8080/api/draft', recipeData)
+            .then(response => {
+                console.log("data submitted successfully", response.data);
+            })
+            .catch(error => {
+                console.error('error submitting the form', error);
+            });
+    };
+
     return (
       <Box
         component="form"
@@ -47,6 +77,7 @@ export default function UserPage() {
         }}
         noValidate
         autoComplete="off"
+        //onSubmit={handleSubmit}
       >
         <h1>Upload a new recipe</h1>
         <div>
@@ -102,8 +133,8 @@ export default function UserPage() {
         <p>Current descrip: {description}</p>
         <p>Current cuisine: {cuisine}</p>
         <div>
-            <Button variant="contained">Post</Button>
-            <Button variant="contained">Save</Button>
+            <Button variant="contained" onClick={handlePost}>Post</Button>
+            <Button variant="contained" onClick={handleDraft}>Save as Draft</Button>
         </div>
       </Box>
     );
