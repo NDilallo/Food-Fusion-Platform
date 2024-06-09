@@ -488,3 +488,9 @@ INSERT INTO settings (userID, enableDarkMode) VALUES (1, true) [42122-224]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-06-09 02:53:26.781231-05:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USERS" not found; SQL statement:
+select * from Users [42102-224]
+2024-06-09 03:38:57.147253-05:00 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from settings[*]';"; SQL statement:
+select * from settings'; [42000-224]
