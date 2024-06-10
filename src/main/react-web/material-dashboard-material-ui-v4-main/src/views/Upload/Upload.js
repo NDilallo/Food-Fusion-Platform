@@ -1,5 +1,21 @@
-import React, { useState } from "react";
-import { Box, TextField, MenuItem, Button } from "@material-ui/core";
+import React from "react";
+
+import UploadComponent from "components/Upload/UploadComponent.jsx";
+
+export default function Upload() {
+  return (
+    <div>
+        <p>Hello</p>
+        <UploadComponent />
+    </div>
+  );
+}
+
+
+
+
+//import React, { useState } from "react";
+/*import { Box, TextField, MenuItem, Button } from "@material-ui/core";
 import axios from "axios";
 
 
@@ -26,6 +42,8 @@ const cuisines = [
     },
   ];
 
+  const REST_API_BASE_URL = 'http://localhost/api/postedrecipe';
+
 export default function UserPage() {
     const [recipeName, setRecipeName] = useState('');
     const [ingredients, setIngredients] = useState('');
@@ -42,7 +60,7 @@ export default function UserPage() {
             cuisine: cuisine,
         };
 
-        axios.post('http://localhost:8080/api/postedrecipe', recipeData)
+        axios.post(REST_API_BASE_URL, recipeData)
             .then(response => {
                 console.log("data submitted successfully", response.data);
             })
@@ -60,7 +78,7 @@ export default function UserPage() {
             cuisine: cuisine,
         };
 
-        axios.post('http://localhost:8080/api/draft', recipeData)
+        axios.post(REST_API_BASE_URL, recipeData)
             .then(response => {
                 console.log("data submitted successfully", response.data);
             })
@@ -139,3 +157,4 @@ export default function UserPage() {
       </Box>
     );
   }
+  */
