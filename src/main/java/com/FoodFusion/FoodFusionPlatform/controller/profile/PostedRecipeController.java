@@ -42,7 +42,7 @@ public class PostedRecipeController {
     @Autowired
     private PostedRecipeService service;
 
-    /* 
+    
     @PostMapping
     public ResponseEntity<String> submitRecipe(@RequestBody Map<String, String> recipeData) {
         PostedRecipe postedRecipe = new PostedRecipe();
@@ -56,7 +56,7 @@ public class PostedRecipeController {
 
         return ResponseEntity.ok("recipe received and saved");
     }
-    */
+    
 
     @GetMapping
     @Operation(summary = "Returns all the posted recipes for a user")
@@ -66,7 +66,7 @@ public class PostedRecipeController {
         return service.list();
     }
 
-    
+    /* 
     @PostMapping
     @Operation(summary = "Save the posted recipe and returns the saved posted recipe's id")
     public long save(@RequestBody PostedRecipe r) {
@@ -75,6 +75,7 @@ public class PostedRecipeController {
         log.traceExit("exit save", r);        
         return r.getRecipeId();
     }
+    */
 
     @PostMapping("/validated")
     @Operation(summary = "Save the posted recipe to the user's profile")
