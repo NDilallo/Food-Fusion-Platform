@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +30,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 /**
  * Controller for managing Draft entities.
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/draft")
 @Tag(name = "Draft", description = "All draft recipes")
@@ -48,8 +50,8 @@ public class DraftRestController {
     @Operation(summary = "Returns all the drafts")
     @ApiResponse(responseCode = "200", description = "Valid response", 
         content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Draft.class))})
-    public List<Draft> listAll() {
-        return draftService.listAll();
+    public List<Draft> list() {
+        return draftService.list();
     }
 
     @GetMapping("/{id}")
@@ -61,6 +63,21 @@ public class DraftRestController {
         return draft.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
+    @PostMapping
+    public ResponseEntity<String> submitRecipe(@RequestBody Map<String, String> recipeData) {
+        Draft draft = new Draft();
+        draft.setRecipeName(recipeData.get("recipeName"));
+        draft.setIngredients(recipeData.get("ingredients"));
+        draft.setDescription(recipeData.get("description"));
+        draft.setCuisine(recipeData.get("cuisine"));
+        draft.setDraftNotes("yo");
+
+        draftService.save(draft);
+
+        return ResponseEntity.ok("draft received and saved");
+    }
+    /* 
     @PostMapping
     @Operation(summary = "Save a new draft and returns the draft ID")
     public ResponseEntity<Long> save(@Valid @RequestBody Draft draft) {
@@ -69,7 +86,7 @@ public class DraftRestController {
         log.traceExit("exit save", savedDraft);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedDraft.getRecipeId());
     }
-
+*/
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing draft")
     public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody Draft draft) {

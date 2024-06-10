@@ -52,6 +52,11 @@ export default function UserPage() {
            .catch(error => {
                console.error('error submitting the form', error);
            });
+
+        setRecipeName('');
+        setIngredients('');
+        setDescription('');
+        setCuisine('');
    };
 
 
@@ -72,6 +77,11 @@ export default function UserPage() {
            .catch(error => {
                console.error('error submitting the form', error);
            });
+
+        setRecipeName('');
+        setIngredients('');
+        setDescription('');
+        setCuisine('');
    };
 
 
@@ -83,7 +93,6 @@ export default function UserPage() {
        }}
        noValidate
        autoComplete="off"
-       //onSubmit={handleSubmit}
      >
        <h1>Upload a new recipe</h1>
        <div>
