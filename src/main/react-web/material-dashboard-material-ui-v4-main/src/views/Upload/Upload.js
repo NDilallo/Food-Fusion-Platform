@@ -32,6 +32,7 @@ export default function UserPage() {
    const [ingredients, setIngredients] = useState('');
    const [description, setDescription] = useState('');
    const [cuisine, setCuisine] = useState('');
+   const [draftNotes, setDraftNotes] = useState('');
 
 
    //
@@ -42,6 +43,7 @@ export default function UserPage() {
            ingredients: ingredients,
            description: description,
            cuisine: cuisine,
+           draftNotes: draftNotes,
        };
 
 
@@ -57,6 +59,7 @@ export default function UserPage() {
         setIngredients('');
         setDescription('');
         setCuisine('');
+        setDraftNotes('');
    };
 
 
@@ -67,6 +70,7 @@ export default function UserPage() {
            ingredients: ingredients,
            description: description,
            cuisine: cuisine,
+           draftNotes: draftNotes,
        };
 
 
@@ -82,6 +86,7 @@ export default function UserPage() {
         setIngredients('');
         setDescription('');
         setCuisine('');
+        setDraftNotes('');
    };
 
 
@@ -105,6 +110,7 @@ export default function UserPage() {
                onChange={(e) => setRecipeName(e.target.value)}
            />
        </div>
+       <br></br>
        <div>
            <TextField
                fullWidth
@@ -116,6 +122,7 @@ export default function UserPage() {
                onChange={(e) => setIngredients(e.target.value)}
            />
        </div>
+       <br></br>
        <div>
            <TextField
                fullWidth
@@ -127,6 +134,7 @@ export default function UserPage() {
                onChange={(e) => setDescription(e.target.value)}
            />
        </div>
+       <br></br>
        <div>
            <TextField
                id="outlined-select-cuisine"
@@ -143,13 +151,22 @@ export default function UserPage() {
                ))}
            </TextField>
        </div>
-       <p>Current recipe name: {recipeName}</p>
-       <p>Current ingredients: {ingredients}</p>
-       <p>Current descrip: {description}</p>
-       <p>Current cuisine: {cuisine}</p>
+       <br></br>
        <div>
-           <Button variant="contained" onClick={handlePost}>Post</Button>
-           <Button variant="contained" onClick={handleDraft}>Save as Draft</Button>
+           <TextField
+               fullWidth
+               id="outlined-textarea"
+               label="Draft Notes"
+               placeholder="Placeholder"
+               multiline
+               value={draftNotes}
+               onChange={(e) => setDraftNotes(e.target.value)}
+           />
+       </div>
+       <br></br>
+       <div>
+            <Button variant="contained" onClick={handlePost}>Post</Button>
+            <Button variant="contained" onClick={handleDraft}>Save as Draft</Button>
        </div>
      </Box>
    );

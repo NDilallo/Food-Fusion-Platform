@@ -71,7 +71,7 @@ public class DraftRestController {
         draft.setIngredients(recipeData.get("ingredients"));
         draft.setDescription(recipeData.get("description"));
         draft.setCuisine(recipeData.get("cuisine"));
-        draft.setDraftNotes("yo");
+        draft.setDraftNotes(recipeData.get("draftNotes"));
 
         draftService.save(draft);
 
