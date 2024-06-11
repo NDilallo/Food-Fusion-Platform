@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ import lombok.extern.log4j.Log4j2;
 /*
  * Documented controller using OpenAPI
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/postedrecipe")
 @Tag(name = "PostedRecipe", description = "All posted recipes for a user")
@@ -39,6 +41,22 @@ import lombok.extern.log4j.Log4j2;
 public class PostedRecipeController {
     @Autowired
     private PostedRecipeService service;
+
+    
+    @PostMapping
+    public ResponseEntity<String> submitRecipe(@RequestBody Map<String, String> recipeData) {
+        PostedRecipe postedRecipe = new PostedRecipe();
+        postedRecipe.setName(recipeData.get("recipeName"));
+        postedRecipe.setIngredients(recipeData.get("ingredients"));
+        postedRecipe.setSteps(recipeData.get("description"));
+        postedRecipe.setRecipeCuisine(recipeData.get("cuisine"));
+        postedRecipe.setAvgRating(0); // initial rating
+
+        service.save(postedRecipe);
+
+        return ResponseEntity.ok("recipe received and saved");
+    }
+    
 
     @GetMapping
     @Operation(summary = "Returns all the posted recipes for a user")
@@ -48,6 +66,7 @@ public class PostedRecipeController {
         return service.list();
     }
 
+    /* 
     @PostMapping
     @Operation(summary = "Save the posted recipe and returns the saved posted recipe's id")
     public long save(@RequestBody PostedRecipe r) {
@@ -56,6 +75,7 @@ public class PostedRecipeController {
         log.traceExit("exit save", r);        
         return r.getRecipeId();
     }
+    */
 
     @PostMapping("/validated")
     @Operation(summary = "Save the posted recipe to the user's profile")

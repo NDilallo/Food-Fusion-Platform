@@ -1,36 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useEffect } from 'react';
+import { listUsers } from 'services/UserService';
 
 const ListingTest = () => {
-    const dummyData = [
-        {
-            "id": 1,
-            "username": "n_dilallo",
-            "pass": "abc123",
-            "profile_link": {
-                "userID": 1,
-                "postedRecipesTableID": 0,
-                "settingsTableID": 0,
-                "followingTableID": 0,
-                "draftsTableID": 0,
-                "commentID": 0,
-                "notificationID": 0
-            }
-        },
-        {
-            "id": 0,
-            "username": "new_user",
-            "pass": "user_password",
-            "profile_link": {
-                "userID": 2,
-                "postedRecipesTableID": 1,
-                "settingsTableID": 1,
-                "followingTableID": 1,
-                "draftsTableID": 1,
-                "commentID": 1,
-                "notificationID": 1
-            }
-        }
-    ];
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+
+        listUsers().then((response) => {
+            setUsers(response.data);
+        }).catch(error => {
+            console.error(error);
+        })
+
+    }, [])
 
     return (
         <div>
@@ -45,15 +29,20 @@ const ListingTest = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {dummyData.map((user, index) => (
+                    {users.map((user, index) => (
                         <tr key={index}>
                             <td>{user.id}</td>
                             <td>{user.username}</td>
                             <td>{user.pass}</td>
                             <td>
-                                {/* Access specific properties of the profile_link object */}
-                                userID: {user.profile_link.userID}, 
-                                {/* Add other properties as needed */}
+                            {user.profile_link ? (
+                                    <>
+                                        userID: {user.profile_link.userID}, 
+                                        {/* Add other properties as needed */}
+                                    </>
+                                ) : (
+                                    'No profile link available'
+                                )}
                             </td>
                         </tr>
                     ))}

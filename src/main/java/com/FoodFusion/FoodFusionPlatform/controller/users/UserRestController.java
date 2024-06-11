@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ import lombok.extern.log4j.Log4j2;
 /*
  * Documented controller using OpenAPI
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/user")
 @Tag(name = "User", description = "All user profiles")
