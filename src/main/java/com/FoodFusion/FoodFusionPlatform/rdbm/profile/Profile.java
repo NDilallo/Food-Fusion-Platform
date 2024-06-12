@@ -4,7 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,25 +19,18 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userID;
 
-    // Other fields
+    @NotEmpty(message = "First name must be set")
+    private String firstName;
 
-    // Foreign keys
-    @NotNull(message = "Posted recipes table ID must be set")
-    private long postedRecipesTableID; // Link to Posted Recipes Table
-    
-    @NotNull(message = "Settings table ID must be set")
-    private long settingsTableID; // Link to Settings Table
-    
-    @NotNull(message = "Following table ID must be set")
-    private long followingTableID; // Link to Following Table
-    
-    @NotNull(message = "Drafts table ID must be set")
-    private long draftsTableID; // Link to Drafts Table
+    @NotEmpty(message = "Last name must be set")
+    private String lastName;
 
-    // Foreign keys referencing Comment and Notification tables
-    @NotNull(message = "Comment ID must be set")
-    private long commentID; // Link to Comment Table
-    
-    @NotNull(message = "Notification ID must be set")
-    private long notificationID; // Link to Notification Table
+    @NotEmpty(message = "City must be set")
+    private String city;
+
+    private String aboutMe;
+
+    @Email(message = "Email should be valid")
+    @NotEmpty(message = "Email address must be set")
+    private String emailAddress;
 }

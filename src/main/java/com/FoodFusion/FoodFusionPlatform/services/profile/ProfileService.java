@@ -27,14 +27,21 @@ public class ProfileService {
 
     public Profile save(Profile profile) {
         log.traceEntry("enter save", profile);
-        repo.save(profile);
+        Profile savedProfile = repo.save(profile);
         log.traceExit("exit save", profile);        
-        return profile;
+        return savedProfile;
     }
 
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);
         log.traceExit("Exit delete");
+    }
+
+    public Profile findById(long id) {
+        log.traceEntry("Enter findById", id);
+        Profile profile = repo.findById(id).orElse(null);
+        log.traceExit("Exit findById", profile);
+        return profile;
     }
 }
