@@ -10,9 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,13 +29,9 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/**
- * Controller for managing Profile entities.
- * @author Fritz Nastor
- */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/profile")
 @Tag(name = "Profile", description = "All user profiles")
@@ -41,11 +40,7 @@ public class ProfileRestController {
     @Autowired
     private ProfileService service;
 
-    /**
-     * Lists all the Profile instances in the table
-     * @return a list of Profile instances
-     */
-    @GetMapping("/api/profile")
+    @GetMapping
     @Operation(summary = "Returns all the profiles on the website")
     @ApiResponse(responseCode = "200", description = "valid response", 
         content = {@Content(mediaType="application/json", schema=@Schema(implementation=Profile.class))})
@@ -53,50 +48,49 @@ public class ProfileRestController {
         return service.list();
     }
 
-    /**
-     * Saves a new Profile to the table
-     * @param profile
-     * @return long id of the saved Profile
-     */
-    @PostMapping("/api/profile")
+    @GetMapping("/{id}")
+    @Operation(summary = "Returns the profile by id")
+    public Profile getProfileById(@PathVariable long id) {
+        return service.findById(id);
+    }
+
+    @PostMapping
     @Operation(summary = "Save the profile and returns the profile id")
     public long save(@RequestBody Profile profile) {
         log.traceEntry("enter save", profile);
-        service.save(profile);
+        Profile savedProfile = service.save(profile);
         log.traceExit("exit save", profile);        
-        return profile.getUserID();
+        return savedProfile.getUserID();
     }
 
-    /**
-     * Validate the saved Profile
-     * @param profile
-     * @return ResponseEntity<String>
-     */
-    @PostMapping("/validated")
-    @Operation(summary = "Save the profile and returns the profile id")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody Profile profile) {
-        log.traceEntry("enter save", profile);
-        service.save(profile);
-        log.traceExit("exit save", profile);
-        return ResponseEntity.ok("new id is " + profile.getUserID());
+    @PutMapping("/{id}")
+    @Operation(summary = "Update the profile")
+    public ResponseEntity<String> updateProfile(@PathVariable long id, @RequestBody Profile profile) {
+        log.traceEntry("enter update", profile);
+        Profile existingProfile = service.findById(id);
+        if (existingProfile == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profile not found");
+        }
+
+        existingProfile.setFirstName(profile.getFirstName());
+        existingProfile.setLastName(profile.getLastName());
+        existingProfile.setCity(profile.getCity());
+        existingProfile.setAboutMe(profile.getAboutMe());
+        existingProfile.setEmailAddress(profile.getEmailAddress());
+
+        service.save(existingProfile);
+        log.traceExit("exit update", profile);
+        return ResponseEntity.ok("Profile updated successfully");
     }
 
-    /**
-     * Delete a Profile with the given id from the table
-     * @param id
-     */
-    @DeleteMapping("/api/pofile/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete the profile")
-    public void delete(long id) {
+    public void delete(@PathVariable long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);
         log.traceExit("Exit delete");
     }
     
-    /**
-     * @param ex
-     * @return Map<String, String>
-     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

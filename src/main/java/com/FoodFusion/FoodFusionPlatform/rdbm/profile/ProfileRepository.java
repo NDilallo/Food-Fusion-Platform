@@ -3,12 +3,7 @@ package com.foodFusion.foodFusionPlatform.rdbm.profile;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * 
- * @author Fritz Nastor
- * This class defines the repository for the Profile table.
- * 
+ * @see JpaRepository that extends PagingAndSortingRepository that expends CrudRepository
  */
- public interface ProfileRepository extends CrudRepository<Profile, Long> {
-
- }
- 
+public interface ProfileRepository extends CrudRepository<Profile, Long> {
+}

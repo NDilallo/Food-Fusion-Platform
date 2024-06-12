@@ -14,12 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.Chefs;
 import com.foodFusion.foodFusionPlatform.services.homePage.ChefsService;
 
-/**
- * 
- * @author Dhruvi
- * This class defines the controller for the Chefs table.
- * 
- */
 @SpringBootApplication
 public class ChefsController {
 
@@ -29,27 +23,18 @@ public class ChefsController {
 }
 
 @RestController
-@RequestMapping("/chef")
+@RequestMapping("/api/chef")
 class ChefController {
 
     @Autowired
     private ChefsService chefService;
 
-    /**
-     * Add a chef to the Chef table
-     * @param chef
-     * @return string
-     */
-    @PostMapping("/add")
+    @PostMapping
     public String addChef(@RequestBody Chefs chef) {
         return chefService.addChef(chef);
     }
 
-    /**
-     * Get all the chefs from the Chef table
-     * @return a list of Chef instances
-     */
-    @GetMapping("/all")
+    @GetMapping
     public List<Chefs> getAllChefs() {
         return chefService.getAllChefs();
     }
