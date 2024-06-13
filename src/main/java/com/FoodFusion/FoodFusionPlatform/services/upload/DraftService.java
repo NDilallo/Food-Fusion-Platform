@@ -18,7 +18,7 @@ public class DraftService {
     @Autowired
     private DraftRepository draftRepository;
 
-    public List<Draft> listAll() {
+    public List<Draft> list() {
         log.traceEntry("Enter listAll");
         List<Draft> drafts = draftRepository.findAll();
         log.traceExit("Exit listAll", drafts);
@@ -27,9 +27,9 @@ public class DraftService {
 
     public Draft save(Draft draft) {
         log.traceEntry("Enter save", draft);
-        Draft savedDraft = draftRepository.save(draft);
-        log.traceExit("Exit save", savedDraft);
-        return savedDraft;
+        draftRepository.save(draft);
+        log.traceExit("Exit save", draft);
+        return draft;
     }
 
     public Optional<Draft> getById(long id) {

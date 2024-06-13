@@ -9,6 +9,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+/**
+ * 
+ * @author Matt Nice
+ * This class defines the contents of the PostComments table.
+ * 
+ */
 @Data
 @Entity
 @Table(name="CommentTmp")

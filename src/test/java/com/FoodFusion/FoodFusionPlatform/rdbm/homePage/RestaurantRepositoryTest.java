@@ -4,41 +4,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeEach;
+=======
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+>>>>>>> 3b37e5a4d33637191d5a4dc1f6a0af596eb5f255
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RestaurantRepositoryTest {
     @Autowired
     private RestaurantRepository repo;
-
-    @BeforeEach
-    public void addRestaurants() {
-        Restaurant restaurant1 = new Restaurant();
-        restaurant1.setAddress("123 W Dr");
-        restaurant1.setCuisine("American");
-        restaurant1.setName("Burgers!");
-        repo.save(restaurant1);
-
-        Restaurant restaurant2 = new Restaurant();
-        restaurant2.setAddress("782 S Dr");
-        restaurant2.setCuisine("Asian");
-        restaurant2.setName("Noodles!");
-        repo.save(restaurant2);
-
-        Restaurant restaurant3 = new Restaurant();
-        restaurant3.setAddress("855 S Dr");
-        restaurant3.setCuisine("American");
-        restaurant3.setName("Burgers!");
-        repo.save(restaurant3);
-    }
 
      /**
      * Test create, read, update, and delete
      */
     @Test
+    @Order(1)
     public void testCrud() {
         Restaurant rtest = new Restaurant();
         rtest.setAddress("311 W Dr");
@@ -73,38 +62,67 @@ public class RestaurantRepositoryTest {
     }   
 
     @Test
+    @Order(2)
     public void findByAddress() {
+        Restaurant restaurant1 = new Restaurant();
+        restaurant1.setAddress("111 W Dr");
+        restaurant1.setCuisine("American");
+        restaurant1.setName("Burgers");
+        repo.save(restaurant1);
+
         long count = repo.count();
-        Restaurant addr = repo.findByAddress("123 W Dr");
+        Restaurant addr = repo.findByAddress("111 W Dr");
 
         assertNotEquals(0, count);
-        assertEquals("123 W Dr", addr.getAddress());
-        assertEquals("Burgers!", addr.getName());
+        assertEquals("111 W Dr", addr.getAddress());
+        assertEquals("Burgers", addr.getName());
+
+        repo.delete(restaurant1);
     }
 
     @Test
     public void findByCuisine() {
+        Restaurant restaurant2 = new Restaurant();
+        restaurant2.setAddress("782 S Dr");
+        restaurant2.setCuisine("Asian");
+        restaurant2.setName("Noodles!");
+        repo.save(restaurant2);
+
         long count = repo.count();
-        List<Restaurant> american = repo.findByCuisine("American");
         List<Restaurant> asian = repo.findByCuisine("Asian");
         List<Restaurant> ethiopian = repo.findByCuisine("Ethiopian");
 
         assertNotEquals(0, count);
-        assertEquals(2, american.size());
         assertEquals(1, asian.size());
         assertEquals(0, ethiopian.size());
+
+        repo.delete(restaurant2);
     }
 
     @Test
+    @Order(3)
     public void findByName() {
+        Restaurant restaurant1 = new Restaurant();
+        restaurant1.setAddress("123 W Dr");
+        restaurant1.setCuisine("American");
+        restaurant1.setName("Burgers!");
+        repo.save(restaurant1);
+
+        Restaurant restaurant3 = new Restaurant();
+        restaurant3.setAddress("855 S Dr");
+        restaurant3.setCuisine("American");
+        restaurant3.setName("Burgers!");
+        repo.save(restaurant3);
+
         long count = repo.count();
         List<Restaurant> burger = repo.findByName("Burgers!");
-        List<Restaurant> noodles = repo.findByName("Noodles!");
         List<Restaurant> eggs = repo.findByCuisine("Eggs!");
 
         assertNotEquals(0, count);
         assertEquals(2, burger.size());
-        assertEquals(1, noodles.size());
         assertEquals(0, eggs.size());
+        
+        repo.delete(restaurant1);
+        repo.delete(restaurant3);
     }
 }

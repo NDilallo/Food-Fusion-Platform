@@ -11,25 +11,16 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3b37e5a4d33637191d5a4dc1f6a0af596eb5f255
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PostedRecipeRepositoryTest {
     @Autowired
     private PostedRecipeRepository repo;
-/* 
-    @BeforeEach
-    public void addRecipes() {
-        PostedRecipe recipe1 = new PostedRecipe();
-        recipe1.setAvgRating(3.5);
-        recipe1.setIngredients("rice, veggies, soy sauce");
-        recipe1.setName("Stir fry");
-        recipe1.setRecipeCuisine("Asian");
-        recipe1.setSteps("make rice, cook veggies, combine");
-        repo.save(recipe1);
-        
-        
-    }
-    */
+
      /**
      * Test create, read, update, and delete
      */
@@ -111,6 +102,10 @@ public class PostedRecipeRepositoryTest {
         assertEquals(2, cheeseburger.size());
         assertEquals(1, stirFry.size());
         assertEquals(0, chicken.size());
+
+        repo.delete(rtest);
+        repo.delete(recipe3);
+        repo.delete(recipe2);
     }
 
     @Test
@@ -135,12 +130,15 @@ public class PostedRecipeRepositoryTest {
 
         long count = repo.count();
         System.out.println(count);
-        List<PostedRecipe> american = repo.findByRecipeCuisine("USA");
+        List<PostedRecipe> usa = repo.findByRecipeCuisine("USA");
         List<PostedRecipe> ethiopian = repo.findByRecipeCuisine("Ethiopian");
 
         assertNotEquals(0, count);
-        assertEquals(2, american.size());
+        assertEquals(2, usa.size());
         assertEquals(0, ethiopian.size());
+        
+        repo.delete(recipe3);
+        repo.delete(recipe2);
     }
 
 }

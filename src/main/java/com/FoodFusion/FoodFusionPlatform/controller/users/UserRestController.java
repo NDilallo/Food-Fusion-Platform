@@ -30,8 +30,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/*
- * Documented controller using OpenAPI
+/**
+ * Controller for managing User entities.
+ * @author Nick Dilallo
  */
 @CrossOrigin("*")
 @RestController
@@ -42,6 +43,10 @@ public class UserRestController {
     @Autowired
     private UserService service;
 
+    /**
+     * List all Users in the table
+     * @return a list of User instances
+     */
     @GetMapping
     @Operation(summary = "Returns all the users on the website")
     @ApiResponse(responseCode = "200", description = "valid response", 
@@ -50,6 +55,11 @@ public class UserRestController {
         return service.list();
     }
 
+    /**
+     * Save a new User to the table
+     * @param user
+     * @return long id of the saved User
+     */
     @PostMapping
     @Operation(summary = "Save the user and returns the user id")
     public long save(@RequestBody User user) {
@@ -59,6 +69,11 @@ public class UserRestController {
         return user.getId();
     }
 
+    /**
+     * Validate a saved User
+     * @param user
+     * @return ResponseEntity<String>
+     */
     @PostMapping("/validated")
     @Operation(summary = "Save the user and returns the user id")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody User user) {
@@ -68,6 +83,10 @@ public class UserRestController {
         return ResponseEntity.ok("new id is " + user.getId());
     }
 
+    /**
+     * Delete a User from the table
+     * @param id
+     */
     @DeleteMapping
     @Operation(summary = "Delete the user")
     public void delete(long id) {
@@ -76,6 +95,10 @@ public class UserRestController {
         log.traceExit("Exit delete");
     }
     
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

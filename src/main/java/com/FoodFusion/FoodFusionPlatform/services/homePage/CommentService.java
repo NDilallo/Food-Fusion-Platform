@@ -14,6 +14,10 @@ import com.foodFusion.foodFusionPlatform.rdbm.homePage.PostComments;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Defines the services for Comments
+ * @author Matt Nice
+ */
 @Service
 @Log4j2
 public class CommentService {
@@ -21,6 +25,10 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    /**
+     * List all comments
+     * @return a list of PostedComments
+     */
     public List<PostComments> listAll() {
         log.traceEntry("Enter listAll");
         List<PostComments> comments = StreamSupport.stream(commentRepository.findAll().spliterator(), false).collect(Collectors.toList());
@@ -28,6 +36,11 @@ public class CommentService {
         return comments;
     }
 
+    /**
+     * Save a comment
+     * @param comment
+     * @return the saved PostComments instanced
+     */
     public PostComments save(PostComments comment) {
         log.traceEntry("Enter save", comment);
         PostComments savedComment = commentRepository.save(comment);
@@ -35,6 +48,11 @@ public class CommentService {
         return savedComment;
     }
 
+    /**
+     * Retrieve a comment with the given id
+     * @param id
+     * @return the retrieved comment
+     */
     public Optional<PostComments> getById(long id) {
         log.traceEntry("Enter getById", id);
         Optional<PostComments> comment = commentRepository.findById(id);
@@ -42,6 +60,10 @@ public class CommentService {
         return comment;
     }
 
+    /**
+     * delete a comment with the given id
+     * @param id
+     */
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         commentRepository.deleteById(id);

@@ -34,6 +34,7 @@ import lombok.extern.log4j.Log4j2;
 
 /**
  * Controller for managing PostComments entities.
+ * @author Matt Nice 
  */
 @RestController
 @RequestMapping("/api/comment")
@@ -44,6 +45,10 @@ public class CommentRestController {
     @Autowired
     private CommentService commentService;
 
+    /**
+     * List all comments in the Comment table
+     * @return a list of PostComments
+     */
     @GetMapping
     @Operation(summary = "Returns all the comments")
     @ApiResponse(responseCode = "200", description = "Valid response", 
@@ -52,6 +57,11 @@ public class CommentRestController {
         return commentService.listAll();
     }
 
+    /**
+     * Get a PostComment with the given id
+     * @param id
+     * @return ResponseEntity<PostComments>
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Returns a comment by ID")
     @ApiResponse(responseCode = "200", description = "Valid response", 
@@ -61,6 +71,11 @@ public class CommentRestController {
         return comment.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /**
+     * Save a PostComment to the PostComments table
+     * @param comment
+     * @return ResponseEntity<Long> id of saved PostComment
+     */
     @PostMapping
     @Operation(summary = "Save a new comment and returns the comment ID")
     public ResponseEntity<Long> save(@Valid @RequestBody PostComments comment) {
@@ -70,6 +85,12 @@ public class CommentRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedComment.getId());
     }
 
+    /**
+     * Update a PostComment in the table
+     * @param id
+     * @param comment
+     * @return ResponseEntity<Void>
+     */
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing comment")
     public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody PostComments comment) {
@@ -84,6 +105,11 @@ public class CommentRestController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Delete a PostComment form the table
+     * @param id
+     * @return ResponseEntity<Void>
+     */
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a comment by ID")
     public ResponseEntity<Void> delete(@PathVariable long id) {
@@ -96,6 +122,10 @@ public class CommentRestController {
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

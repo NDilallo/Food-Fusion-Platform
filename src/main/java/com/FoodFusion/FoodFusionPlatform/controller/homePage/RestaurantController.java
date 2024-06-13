@@ -29,8 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/*
- * Documented controller using OpenAPI
+/**
+ * Controller for managing Restaurant entities.
+ * @author Marisa Ban
  */
 @RestController
 @RequestMapping("/api/restaurant")
@@ -40,6 +41,10 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
+    /**
+     * List all Restaurant instances from the table 
+     * @return a list of Restaurant instances
+     */
     @GetMapping
     @Operation(summary = "Returns all the restaurants in the system")
     @ApiResponse(responseCode = "200", description = "valid response", 
@@ -48,6 +53,11 @@ public class RestaurantController {
         return service.list();
     }
 
+    /**
+     * Save a new Restaurant to the table
+     * @param r
+     * @return long id of saved Restaurant
+     */
     @PostMapping
     @Operation(summary = "Save the restaurant and returns the saved restaurant's id")
     public long save(@RequestBody Restaurant r) {
@@ -57,6 +67,11 @@ public class RestaurantController {
         return r.getRestaurantId();
     }
 
+    /**
+     * Validate the save of a Restaurant to the table
+     * @param r
+     * @return ResponseEntity<String> 
+     */
     @PostMapping("/validated")
     @Operation(summary = "Save the restaurant")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody Restaurant r) {
@@ -66,14 +81,22 @@ public class RestaurantController {
         return ResponseEntity.ok("new id is " + r.getRestaurantId());
     }
 
+    /**
+     * Delete a Restaurant with the given id from the table
+     * @param id
+     */
     @DeleteMapping
-    @Operation(summary = "Delete the posted recipe")
+    @Operation(summary = "Delete the restaurant")
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         service.delete(id);
         log.traceExit("Exit delete");
     }
     
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

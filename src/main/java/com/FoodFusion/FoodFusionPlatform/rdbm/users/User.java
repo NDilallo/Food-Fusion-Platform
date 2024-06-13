@@ -14,7 +14,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-
+/**
+ * 
+ * @author Nick Dilallo 
+ * This class defines the contents of the User table.
+ * 
+ */
 @Data
 @Entity
 @Table(name = "app_user") // Escape the table name "user" to avoid conflicts with reserved keywords

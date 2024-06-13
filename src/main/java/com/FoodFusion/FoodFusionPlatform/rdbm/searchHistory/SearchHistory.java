@@ -7,7 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-
+/**
+ * 
+ * @author Nick Dilallo
+ * This class defines the contents of the SearchHistory table.
+ * 
+ */
 @Data
 @Entity
 @Table(name = "search history") // Escape the table name "user" to avoid conflicts with reserved keywords

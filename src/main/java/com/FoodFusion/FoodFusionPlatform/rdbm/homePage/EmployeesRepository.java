@@ -10,4 +10,3 @@ public interface EmployeesRepository extends CrudRepository<Employees, Long> {
     List<Employees> findByRole(String role);
 }
 
-
