@@ -22,5 +22,4 @@ public class SearchHistory {
     private long id;
 
     private String recent_searches;
-    private String recent_recipes;
 }

@@ -60,12 +60,22 @@ public class SearchHistoryRestController {
      */
     @PostMapping
     @Operation(summary = "Save the search and returns the search id")
+    public ResponseEntity<String> save(@RequestBody Map<String, String> searchData) {
+        SearchHistory search = new SearchHistory();
+        search.setRecent_searches(searchData.get("userSearch"));
+
+        service.save(search);
+
+        return ResponseEntity.ok("recipe received and saved");
+    }
+    /* 
     public long save(@RequestBody SearchHistory user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);        
         return user.getId();
     }
+        */
 
     /**
      * Validate the saved SearchHistory
