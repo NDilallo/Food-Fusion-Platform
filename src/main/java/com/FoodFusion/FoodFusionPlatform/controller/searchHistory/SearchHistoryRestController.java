@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +27,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 /**
  * Controller for managing SearchHistory entities.
  * @author Nick Dilallo
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/searchHistory")
 @Tag(name = "SearchHistory", description = "All previous searches for user")
@@ -64,18 +65,10 @@ public class SearchHistoryRestController {
         SearchHistory search = new SearchHistory();
         search.setRecent_searches(searchData.get("userSearch"));
 
-        service.save(search);
-
-        return ResponseEntity.ok("recipe received and saved");
+        SearchHistory savedSearch = service.save(search);
+        log.info("Search history saved: " + savedSearch);
+        return ResponseEntity.ok("Search history received and saved");
     }
-    /* 
-    public long save(@RequestBody SearchHistory user) {
-        log.traceEntry("enter save", user);
-        service.save(user);
-        log.traceExit("exit save", user);        
-        return user.getId();
-    }
-        */
 
     /**
      * Validate the saved SearchHistory
@@ -84,7 +77,7 @@ public class SearchHistoryRestController {
      */
     @PostMapping("/validated")
     @Operation(summary = "Save the search to history and return the search")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody SearchHistory user) {
+    public ResponseEntity<String> validatedSave(@RequestBody SearchHistory user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);

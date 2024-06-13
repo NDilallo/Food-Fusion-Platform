@@ -3,6 +3,7 @@ package com.foodFusion.foodFusionPlatform.controller.users;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +29,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 /**
@@ -55,6 +56,7 @@ public class UserRestController {
         return service.list();
     }
 
+
     /**
      * Save a new User to the table
      * @param user
@@ -76,7 +78,7 @@ public class UserRestController {
      */
     @PostMapping("/validated")
     @Operation(summary = "Save the user and returns the user id")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody User user) {
+    public ResponseEntity<String> validatedSave(@RequestBody User user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);
@@ -93,6 +95,17 @@ public class UserRestController {
         log.traceEntry("Enter delete", id);
         service.delete(id);
         log.traceExit("Exit delete");
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "Search users by username")
+    public List<User> searchUsers(@RequestParam String username) {
+        log.traceEntry("Enter searchUsers", username);
+        List<User> users = service.list().stream()
+                                   .filter(user -> user.getUsername().contains(username))
+                                   .collect(Collectors.toList());
+        log.traceExit("Exit searchUsers", users);
+        return users;
     }
     
     /**
