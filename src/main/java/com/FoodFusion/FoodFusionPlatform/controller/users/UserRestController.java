@@ -66,19 +66,6 @@ public class UserRestController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/search")
-    @Operation(summary = "Search for a user by username")
-    @ApiResponse(responseCode = "200", description = "valid response", 
-        content = {@Content(mediaType="application/json", schema=@Schema(implementation=User.class))})
-    public ResponseEntity<List<User>> searchUser(@RequestParam String username) {
-        List<User> users = service.searchByUsername(username);
-        if (users.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(users);
-    }
-
-
     /**
      * Save a new User to the table
      * @param user
