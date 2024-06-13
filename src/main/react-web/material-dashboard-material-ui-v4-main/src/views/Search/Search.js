@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Box, TextField, Button, Typography } from "@material-ui/core";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
-export default function SearchPage() {
+export default function SearchPage({ onFollowUser }) {
   const [userSearch, setUserSearch] = useState('');
   const [searchResult, setSearchResult] = useState(null);
   const [searchError, setSearchError] = useState('');
@@ -47,13 +48,15 @@ export default function SearchPage() {
     if (searchResult) {
       const followData = {
         userID: 1, // Assuming current user ID is 1 for now
-        profileID: searchResult.id // Assuming the profile ID is the same as user ID
+        profileID: searchResult.id, // Assuming the profile ID is the same as user ID
+        username: searchResult.username // Pass the username
       };
 
       console.log('Follow Data:', followData);
 
       axios.post('http://localhost:8080/api/following', followData)
         .then(() => {
+          onFollowUser(searchResult.username); // Call the function passed via props
           alert('You are now following this user.');
         })
         .catch(error => {
@@ -99,3 +102,7 @@ export default function SearchPage() {
     </Box>
   );
 }
+
+SearchPage.propTypes = {
+  onFollowUser: PropTypes.func.isRequired,
+};

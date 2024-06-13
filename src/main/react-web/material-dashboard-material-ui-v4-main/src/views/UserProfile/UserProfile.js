@@ -73,7 +73,7 @@ export default function UserProfile() {
         console.error('There was an error fetching the recipes!', error);
       });
 
-    axios.get('http://localhost:8080/api/following')
+    axios.get('http://localhost:8080/api/following?userId=1') // Assuming userID 1 for now
       .then(response => {
         setFollowing(response.data);
       })
@@ -317,8 +317,7 @@ export default function UserProfile() {
                     <GridItem key={index} xs={12} sm={6} md={4}>
                       <Card>
                         <CardBody>
-                          <h4>Following User ID: {follow.userID}</h4>
-                          <p><strong>Following Profile ID:</strong> {follow.profileID}</p>
+                          <h4>{follow.username}</h4>
                         </CardBody>
                       </Card>
                     </GridItem>
