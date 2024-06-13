@@ -48,6 +48,7 @@ export default function UserProfile() {
   });
   const [recipes, setRecipes] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const [drafts, setDrafts] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isNewProfile, setIsNewProfile] = useState(true); // Flag to check if the profile is new
 
@@ -78,6 +79,14 @@ export default function UserProfile() {
       })
       .catch(error => {
         console.error('There was an error fetching the followers!', error);
+      });
+
+    axios.get('http://localhost:8080/api/draft')
+      .then(response => {
+        setDrafts(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the drafts!', error);
       });
   }, []);
 
@@ -120,7 +129,9 @@ export default function UserProfile() {
       <Tabs value={tabIndex} onChange={handleTabChange}>
         <Tab label="Profile" />
         <Tab label="Recipes" />
+        <Tab label="My Drafts" />
         <Tab label="Followers" />
+        <Tab label="Saved" />
       </Tabs>
 
       {tabIndex === 0 && (
@@ -269,6 +280,35 @@ export default function UserProfile() {
           <GridItem xs={12}>
             <Card>
               <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>My Drafts</h4>
+              </CardHeader>
+              <CardBody>
+                <GridContainer>
+                  {drafts.map((draft, index) => (
+                    <GridItem key={index} xs={12} sm={6} md={4}>
+                      <Card>
+                        <CardBody>
+                          <h4>{draft.recipeName}</h4>
+                          <p><strong>Ingredients:</strong> {draft.ingredients}</p>
+                          <p><strong>Steps:</strong> {draft.description}</p>
+                          <p><strong>Cuisine:</strong> {draft.cuisine}</p>
+                          <p><strong>Notes:</strong> {draft.draftNotes}</p>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  ))}
+                </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      )}
+
+      {tabIndex === 3 && (
+        <GridContainer>
+          <GridItem xs={12}>
+            <Card>
+              <CardHeader color="primary">
                 <h4 className={classes.cardTitleWhite}>Followers</h4>
               </CardHeader>
               <CardBody>
@@ -285,6 +325,21 @@ export default function UserProfile() {
                     </GridItem>
                   ))}
                 </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      )}
+
+      {tabIndex === 4 && (
+        <GridContainer>
+          <GridItem xs={12}>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>Saved</h4>
+              </CardHeader>
+              <CardBody>
+                {/* Add any content for the Saved tab here */}
               </CardBody>
             </Card>
           </GridItem>
