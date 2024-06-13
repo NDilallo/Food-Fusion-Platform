@@ -3,8 +3,6 @@ package com.foodFusion.foodFusionPlatform.controller.users;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +54,30 @@ public class UserRestController {
         return service.list();
     }
 
+    /**
+     * Find users by username
+     * @param username
+     * @return a list of User instances
+     */
+    @GetMapping("/search")
+    @Operation(summary = "Find users by username")
+    public ResponseEntity<List<User>> findByUsername(@RequestParam String username) {
+        List<User> users = service.searchByUsername(username);
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "Search for a user by username")
+    @ApiResponse(responseCode = "200", description = "valid response", 
+        content = {@Content(mediaType="application/json", schema=@Schema(implementation=User.class))})
+    public ResponseEntity<List<User>> searchUser(@RequestParam String username) {
+        List<User> users = service.searchByUsername(username);
+        if (users.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(users);
+    }
+
 
     /**
      * Save a new User to the table
@@ -96,17 +118,6 @@ public class UserRestController {
         service.delete(id);
         log.traceExit("Exit delete");
     }
-
-    @GetMapping("/search")
-    @Operation(summary = "Search users by username")
-    public List<User> searchUsers(@RequestParam String username) {
-        log.traceEntry("Enter searchUsers", username);
-        List<User> users = service.list().stream()
-                                   .filter(user -> user.getUsername().contains(username))
-                                   .collect(Collectors.toList());
-        log.traceExit("Exit searchUsers", users);
-        return users;
-    }
     
     /**
      * @param ex
@@ -123,4 +134,6 @@ public class UserRestController {
         });
         return errors;
     }
+
+
 }

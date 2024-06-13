@@ -47,8 +47,8 @@ export default function UserProfile() {
     emailAddress: ""
   });
   const [recipes, setRecipes] = useState([]);
-  const [followers, setFollowers] = useState([]);
   const [drafts, setDrafts] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isNewProfile, setIsNewProfile] = useState(true); // Flag to check if the profile is new
 
@@ -73,12 +73,12 @@ export default function UserProfile() {
         console.error('There was an error fetching the recipes!', error);
       });
 
-    axios.get('http://localhost:8080/api/followers')
+    axios.get('http://localhost:8080/api/following')
       .then(response => {
-        setFollowers(response.data);
+        setFollowing(response.data);
       })
       .catch(error => {
-        console.error('There was an error fetching the followers!', error);
+        console.error('There was an error fetching the following list!', error);
       });
 
     axios.get('http://localhost:8080/api/draft')
@@ -313,13 +313,12 @@ export default function UserProfile() {
               </CardHeader>
               <CardBody>
                 <GridContainer>
-                  {followers.map((follower, index) => (
+                  {following.map((follow, index) => (
                     <GridItem key={index} xs={12} sm={6} md={4}>
                       <Card>
                         <CardBody>
-                          <h4>Follower ID: {follower.followerID}</h4>
-                          <p><strong>User ID:</strong> {follower.userID}</p>
-                          <p><strong>Profile ID:</strong> {follower.profileID}</p>
+                          <h4>Following User ID: {follow.userID}</h4>
+                          <p><strong>Following Profile ID:</strong> {follow.profileID}</p>
                         </CardBody>
                       </Card>
                     </GridItem>
@@ -339,7 +338,9 @@ export default function UserProfile() {
                 <h4 className={classes.cardTitleWhite}>Saved</h4>
               </CardHeader>
               <CardBody>
-                {/* Add any content for the Saved tab here */}
+                <GridContainer>
+                  <p>No saved items yet</p>
+                </GridContainer>
               </CardBody>
             </Card>
           </GridItem>

@@ -62,8 +62,13 @@ public class UserService {
      */
     public List<User> searchByUsername(String username) {
         log.traceEntry("Enter searchByUsername", username);
-        List<User> retval = repo.findByUsernameContaining(username);
+        List<User> retval = repo.findByUsername(username);
         log.traceExit("Exit searchByUsername", retval);
         return retval;
     }
+
+    public List<User> findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
+    
 }

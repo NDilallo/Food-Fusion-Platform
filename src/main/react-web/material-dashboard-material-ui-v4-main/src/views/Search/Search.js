@@ -1,70 +1,101 @@
 import React, { useState } from "react";
-import { Box, TextField, Button } from "@material-ui/core";
+import { Box, TextField, Button, Typography } from "@material-ui/core";
 import axios from "axios";
 
 export default function SearchPage() {
-    const [userSearch, setUserSearch] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
-    const [error, setError] = useState(null);
+  const [userSearch, setUserSearch] = useState('');
+  const [searchResult, setSearchResult] = useState(null);
+  const [searchError, setSearchError] = useState('');
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        const searchData = {
-            userSearch: userSearch,
-        };
+  const handleSearch = (e) => {
+    e.preventDefault();
 
-        try {
-            // Save search history
-            await axios.post('http://localhost:8080/api/searchHistory', searchData);
+    if (!userSearch) {
+      setSearchError('Please enter a search term.');
+      setSearchResult(null);
+      return;
+    }
 
-            // Search for users
-            const response = await axios.get(`http://localhost:8080/api/user/search?username=${userSearch}`);
-            setSearchResults(response.data);
-            setError(null); // Clear any previous errors
-        } catch (error) {
-            setError('There was an error searching for users');
-            console.error('Error searching for users:', error);
-        }
-
-        setUserSearch('');
+    const searchData = {
+      userSearch: userSearch,
     };
 
-    return (
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { width: 500, maxWidth: '100%', },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <h1>Search for a User</h1>
-          <div>
-              <TextField
-                  fullWidth
-                  id="outlined-basic"
-                  label="Search"
-                  variant="outlined"
-                  value={userSearch}
-                  onChange={(e) => setUserSearch(e.target.value)}
-              />
-          </div>
-          <br></br>
-          <div>
-               <Button variant="contained" onClick={handleSearch}>Search</Button>
-          </div>
-          <br></br>
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          <div>
-              <h2>Search Results</h2>
-              {searchResults.length > 0 ? (
-                  searchResults.map((user, index) => (
-                      <p key={index}>{user.username} - {user.profile_link?.firstName} {user.profile_link?.lastName}</p>
-                  ))
-              ) : (
-                  <p>No users found</p>
-              )}
-          </div>
-        </Box>
-      );
+    axios.post('http://localhost:8080/api/searchHistory', searchData)
+      .then(() => {
+        // Now search for the user in the user table
+        return axios.get(`http://localhost:8080/api/user/search?username=${userSearch}`);
+      })
+      .then(response => {
+        if (response.data.length > 0) {
+          setSearchResult(response.data[0]);
+          setSearchError('');
+        } else {
+          setSearchResult(null);
+          setSearchError('No user found with that username.');
+        }
+      })
+      .catch(error => {
+        console.error('Error searching for the user', error);
+        setSearchResult(null);
+        setSearchError('An error occurred while searching. Please try again.');
+      });
+
+    setUserSearch('');
+  };
+
+  const handleFollow = () => {
+    if (searchResult) {
+      const followData = {
+        userID: 1, // Assuming current user ID is 1 for now
+        profileID: searchResult.id // Assuming the profile ID is the same as user ID
+      };
+
+      console.log('Follow Data:', followData);
+
+      axios.post('http://localhost:8080/api/following', followData)
+        .then(() => {
+          alert('You are now following this user.');
+        })
+        .catch(error => {
+          console.error('Error following the user', error);
+          alert('An error occurred while following. Please try again.');
+        });
+    }
+  };
+
+  return (
+    <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { width: 500, maxWidth: '100%', },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <h1>Search for a User</h1>
+      <div>
+        <TextField
+          fullWidth
+          id="outlined-basic"
+          label="Search"
+          variant="outlined"
+          value={userSearch}
+          onChange={(e) => setUserSearch(e.target.value)}
+        />
+      </div>
+      <br></br>
+      <div>
+        <Button variant="contained" onClick={handleSearch}>Search</Button>
+      </div>
+      <br></br>
+      <Typography variant="h6">Search Results</Typography>
+      {searchError && <Typography color="error">{searchError}</Typography>}
+      {searchResult && (
+        <div>
+          <Typography>{searchResult.username}</Typography>
+          <Button variant="contained" onClick={handleFollow}>Follow</Button>
+        </div>
+      )}
+    </Box>
+  );
 }
