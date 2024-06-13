@@ -130,7 +130,7 @@ export default function UserProfile() {
         <Tab label="Profile" />
         <Tab label="Recipes" />
         <Tab label="My Drafts" />
-        <Tab label="Followers" />
+        <Tab label="Following" />
         <Tab label="Saved" />
       </Tabs>
 
@@ -309,7 +309,7 @@ export default function UserProfile() {
           <GridItem xs={12}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Followers</h4>
+                <h4 className={classes.cardTitleWhite}>Following</h4>
               </CardHeader>
               <CardBody>
                 <GridContainer>
