@@ -7,6 +7,9 @@ const Restaurant = () => {
     name: "",
     cuisine: "",
     address: "",
+    mainChef: "",
+    sousChef: "",
+    dessertChef: "",
   });
   const [chefs, setChefs] = useState([]);
   const [employees, setEmployees] = useState([]);
@@ -57,6 +60,10 @@ const Restaurant = () => {
       });
   };
 
+  const mainChef = chefs.find(chef => chef.role === 'main chef');
+  const sousChef = chefs.find(chef => chef.role === 'sous chef');
+  const dessertChef = chefs.find(chef => chef.role === 'dessert chef');
+
   return (
     <div>
       <Grid container spacing={3}>
@@ -92,19 +99,45 @@ const Restaurant = () => {
             </CardContent>
           </Card>
         </Grid>
+
         <Grid item xs={12} md={4}>
           <Card>
             <CardHeader title="Chefs" />
             <CardContent>
-              {chefs.map((chef, index) => (
-                <div key={index}>
-                  <h4>{chef.name}</h4>
-                  <p><strong>Role:</strong> {chef.role}</p>
+              {mainChef && (
+                <div>
+                  <h4>
+                    <Link to={`/restaurants/${mainChef.name}`} className={classes.link}>
+                      {mainChef.name}
+                    </Link>
+                  </h4>
+                  <p><strong>Role:</strong> Main Chef</p>
                 </div>
-              ))}
+              )}
+              {sousChef && (
+                <div>
+                  <h4>
+                    <Link to={`/restaurants/${sousChef.name}`} className={classes.link}>
+                      {sousChef.name}
+                    </Link>
+                  </h4>
+                  <p><strong>Role:</strong> Sous Chef</p>
+                </div>
+              )}
+              {dessertChef && (
+                <div>
+                  <h4>
+                    <Link to={`/restaurants/${dessertChef.name}`} className={classes.link}>
+                      {dessertChef.name}
+                    </Link>
+                  </h4>
+                  <p><strong>Role:</strong> Dessert Chef</p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </Grid>
+
         <Grid item xs={12} md={4}>
           <Card>
             <CardHeader title="Employees" />
