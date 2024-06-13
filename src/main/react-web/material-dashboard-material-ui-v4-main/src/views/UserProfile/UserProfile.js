@@ -12,7 +12,7 @@ import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import avatar from "assets/img/faces/marc.jpg";
+import avatar from "assets/img/faces/fritz.jpeg";
 import axios from "axios";
 
 const styles = {
