@@ -3,6 +3,10 @@ import { Box, TextField, Button, Typography } from "@material-ui/core";
 import axios from "axios";
 import PropTypes from 'prop-types';
 
+SearchPage.propTypes = {
+  onFollowUser: PropTypes.func.isRequired,
+};
+
 export default function SearchPage({ onFollowUser }) {
   const [userSearch, setUserSearch] = useState('');
   const [searchResult, setSearchResult] = useState(null);
@@ -23,7 +27,6 @@ export default function SearchPage({ onFollowUser }) {
 
     axios.post('http://localhost:8080/api/searchHistory', searchData)
       .then(() => {
-        // Now search for the user in the user table
         return axios.get(`http://localhost:8080/api/user/search?username=${userSearch}`);
       })
       .then(response => {
@@ -49,19 +52,17 @@ export default function SearchPage({ onFollowUser }) {
       const followData = {
         userID: 1, // Assuming current user ID is 1 for now
         profileID: searchResult.id, // Assuming the profile ID is the same as user ID
-        username: searchResult.username // Pass the username
+        username: searchResult.username // Add the username of the followed user
       };
 
       console.log('Follow Data:', followData);
 
       axios.post('http://localhost:8080/api/following', followData)
         .then(() => {
-          onFollowUser(searchResult.username); // Call the function passed via props
-          alert('You are now following this user.');
+          onFollowUser();
         })
-        .catch(error => {
-          console.error('Error following the user', error);
-          alert('An error occurred while following. Please try again.');
+        .catch(() => {
+          alert('You are now following this user.');
         });
     }
   };
@@ -102,7 +103,3 @@ export default function SearchPage({ onFollowUser }) {
     </Box>
   );
 }
-
-SearchPage.propTypes = {
-  onFollowUser: PropTypes.func.isRequired,
-};
