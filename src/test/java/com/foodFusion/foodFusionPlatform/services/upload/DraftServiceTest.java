@@ -1,114 +1,73 @@
 package com.foodFusion.foodFusionPlatform.services.upload;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.foodFusion.foodFusionPlatform.rdbm.upload.Draft;
 import com.foodFusion.foodFusionPlatform.rdbm.upload.DraftRepository;
 
+/**
+ * Test out the service
+ */
+@SpringBootTest
 public class DraftServiceTest {
+    @Autowired
+    private DraftService service;
 
-    @Mock
-    private DraftRepository draftRepository;
+    @Autowired
+    private DraftRepository recipeRepo;
 
-    @InjectMocks
-    private DraftService draftService;
 
     @BeforeEach
-    public void setup() {
-        MockitoAnnotations.openMocks(this);
+    public void addRecipe() {
+        Draft recipe1 = new Draft();
+        recipe1.setIngredients("rice, veggies, soy sauce");
+        recipe1.setRecipeName("Best Stir fry");
+        recipe1.setCuisine("Asian");
+        recipe1.setDescription("make rice, cook veggies, combine");
+
+        service.save(recipe1);
     }
 
     @Test
-    public void testListAll() {
-        // given
-        Draft draft1 = new Draft();
-        draft1.setRecipeId(1L);
-        draft1.setRecipeName("Recipe 1");
-        draft1.setDescription("Description 1");
-        draft1.setIngredients("Ingredients 1");
-        draft1.setCuisine("Cuisine 1");
-
-        Draft draft2 = new Draft();
-        draft2.setRecipeId(2L);
-        draft2.setRecipeName("Recipe 2");
-        draft2.setDescription("Description 2");
-        draft2.setIngredients("Ingredients 2");
-        draft2.setCuisine("Cuisine 2");
-
-        when(draftRepository.findAll()).thenReturn(Arrays.asList(draft1, draft2));
-
-        // when
-        List<Draft> drafts = draftService.listAll();
-
-        // then
-        assertEquals(2, drafts.size());
-        verify(draftRepository, times(1)).findAll();
-    }
-
+    public void testAddRestaurant() {
+        Draft recipe2 = new Draft();
+        recipe2.setIngredients("burger, buns, cheese");
+        recipe2.setRecipeName("Cheeseburger");
+        recipe2.setCuisine("American");
+        recipe2.setDescription("make hamburger, put on cheese");
+        long b4 = service.list().size();
+        service.save(recipe2);
+        long after = service.list().size();
+        // since adding, # of courses should be the 1 more than before
+        assertEquals(b4 + 1, after);
+    }   
+    
     @Test
-    public void testSave() {
-        // given
-        Draft draft = new Draft();
-        draft.setRecipeName("Test Recipe");
-        draft.setDescription("Test Description");
-        draft.setIngredients("Test Ingredients");
-        draft.setCuisine("Test Cuisine");
-
-        when(draftRepository.save(any(Draft.class))).thenReturn(draft);
-
-        // when
-        Draft savedDraft = draftService.save(draft);
-
-        // then
-        assertEquals("Test Recipe", savedDraft.getRecipeName());
-        verify(draftRepository, times(1)).save(draft);
-    }
-
-    @Test
-    public void testGetById() {
-        // given
-        Draft draft = new Draft();
-        draft.setRecipeId(1L);
-        draft.setRecipeName("Test Recipe");
-        draft.setDescription("Test Description");
-        draft.setIngredients("Test Ingredients");
-        draft.setCuisine("Test Cuisine");
-
-        when(draftRepository.findById(1L)).thenReturn(Optional.of(draft));
-
-        // when
-        Optional<Draft> foundDraft = draftService.getById(1L);
-
-        // then
-        assertTrue(foundDraft.isPresent());
-        assertEquals("Test Recipe", foundDraft.get().getRecipeName());
-        verify(draftRepository, times(1)).findById(1L);
+    public void testUpdateCourse() {
+        // In order to update, need to find something so will be updating the first one
+        List<Draft> recipes = service.list();
+        Draft recipe = recipes.get(0);
+        recipe.setCuisine("East Asian");       
+        
+        service.save(recipe);
+        long after = service.list().size();
+        // since updating, # of courses should be the same
+        assertEquals(recipes.size(), after);
     }
 
     @Test
     public void testDelete() {
-        // given
-        long id = 1L;
-
-        doNothing().when(draftRepository).deleteById(id);
-
-        // when
-        draftService.delete(id);
-
-        // then
-        verify(draftRepository, times(1)).deleteById(id);
+        // In order to delete, need to find something to delete so will delete the first one
+        List<Draft> recipes = service.list();
+        service.delete(recipes.get(0).getRecipeId());
+        long after = service.list().size();
+        // since removing 1, the list should be 1 less than original list
+        assertEquals(recipes.size() - 1, after);
     }
 }

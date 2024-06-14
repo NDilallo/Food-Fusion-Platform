@@ -5,9 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
-
 import lombok.Data;
 
+/**
+ * 
+ * @author Matt Nice
+ * This class defines the contents of the Settings table.
+ * 
+ */
 @Data
 @Entity
 public class Settings {

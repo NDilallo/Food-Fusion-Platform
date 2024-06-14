@@ -1,8 +1,9 @@
 package com.foodFusion.foodFusionPlatform.controller.profile;
 
-import org.hamcrest.CoreMatchers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,6 +21,7 @@ import com.foodFusion.foodFusionPlatform.rdbm.profile.ProfileRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ProfileControllerTest {
+
     private static final String PROFILE_URL = "/api/profile";
 
     @Autowired
@@ -28,65 +30,57 @@ public class ProfileControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void getAllProfiles() throws Exception {
-        // when - action
-        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.get(PROFILE_URL));
-
-        var recordCount = (int) profileRepository.count();
-        
-        // then - verify the output
-        response.andExpect(MockMvcResultMatchers.status().isOk());
-        response.andExpect(MockMvcResultMatchers.jsonPath("$.size()", CoreMatchers.is(recordCount)));
-    }
-
     @Autowired
     private ObjectMapper objectMapper;
 
     @Test
+    public void getAllProfiles() throws Exception {
+        ResultActions response = mockMvc.perform(MockMvcRequestBuilders.get(PROFILE_URL));
+
+        var recordCount = (int) profileRepository.count();
+
+        response.andExpect(MockMvcResultMatchers.status().isOk());
+        response.andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(recordCount));
+    }
+
+    @Test
     public void addProfile() throws Exception {
-        // given - setup or precondition
         Profile profile = new Profile();
-        profile.setPostedRecipesTableID(1);
-        profile.setSettingsTableID(1);
-        profile.setFollowingTableID(1);
-        profile.setDraftsTableID(1);
-        profile.setCommentID(1);
-        profile.setNotificationID(1);
-        profileRepository.save(profile);
+        profile.setFirstName("John");
+        profile.setLastName("Doe");
+        profile.setCity("Chicago");
+        profile.setAboutMe("This is a test profile");
+        profile.setEmailAddress("john.doe@example.com");
+
         String profileAsJson = objectMapper.writeValueAsString(profile);
 
-        // when - action
-        var request = MockMvcRequestBuilders.post(PROFILE_URL);
-        request.contentType(MediaType.APPLICATION_JSON);
-        request.content(profileAsJson);
+        var request = MockMvcRequestBuilders.post(PROFILE_URL)
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .content(profileAsJson);
         ResultActions response = mockMvc.perform(request);
 
         var jsonResponse = response.andReturn().getResponse().getContentAsString();
-        // then - verify the output
-        Profile updatedProfile = new ObjectMapper().readValue(jsonResponse, Profile.class);
+
+        Profile savedProfile = objectMapper.readValue(jsonResponse, Profile.class);
 
         response.andExpect(MockMvcResultMatchers.status().isOk());
-        assertNotEquals(updatedProfile.getUserID(), profile.getUserID());
+        assertNotEquals(savedProfile.getUserID(), 0);
     }
 
     @Test
     public void addProfileValidationFail() throws Exception {
-        // given - setup or precondition
         Profile profile = new Profile();
-        profile.setPostedRecipesTableID(1);
-        profile.setSettingsTableID(1);
-        profile.setFollowingTableID(1);
-        profile.setDraftsTableID(1);
-        profile.setCommentID(1);
-        profile.setNotificationID(1);
-        profileRepository.save(profile);
+        profile.setFirstName("John");
+        profile.setLastName("Doe");
+        // Omitting required email field to trigger validation error
+        profile.setCity("Chicago");
+        profile.setAboutMe("This is a test profile");
+
         String profileAsJson = objectMapper.writeValueAsString(profile);
 
-        // when - action
-        var request = MockMvcRequestBuilders.post(PROFILE_URL + "/valid");
-        request.contentType(MediaType.APPLICATION_JSON);
-        request.content(profileAsJson);
+        var request = MockMvcRequestBuilders.post(PROFILE_URL + "/validated")
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .content(profileAsJson);
         ResultActions response = mockMvc.perform(request);
 
         response.andExpect(MockMvcResultMatchers.status().isBadRequest());
@@ -94,21 +88,18 @@ public class ProfileControllerTest {
 
     @Test
     public void addProfileValidationPass() throws Exception {
-        // given - setup or precondition
         Profile profile = new Profile();
-        profile.setPostedRecipesTableID(1);
-        profile.setSettingsTableID(1);
-        profile.setFollowingTableID(1);
-        profile.setDraftsTableID(1);
-        profile.setCommentID(1);
-        profile.setNotificationID(1);
-        profileRepository.save(profile);
+        profile.setFirstName("John");
+        profile.setLastName("Doe");
+        profile.setCity("Chicago");
+        profile.setAboutMe("This is a test profile");
+        profile.setEmailAddress("john.doe@example.com");
+
         String profileAsJson = objectMapper.writeValueAsString(profile);
 
-        // when - action
-        var request = MockMvcRequestBuilders.post(PROFILE_URL + "/valid");
-        request.contentType(MediaType.APPLICATION_JSON);
-        request.content(profileAsJson);
+        var request = MockMvcRequestBuilders.post(PROFILE_URL + "/validated")
+                                            .contentType(MediaType.APPLICATION_JSON)
+                                            .content(profileAsJson);
         ResultActions response = mockMvc.perform(request);
 
         response.andExpect(MockMvcResultMatchers.status().isOk());
@@ -116,16 +107,20 @@ public class ProfileControllerTest {
 
     @Test
     public void removeProfile() throws Exception {
-        // given - setup or precondition
-        long beforeSize = profileRepository.count();
+        Profile profile = new Profile();
+        profile.setFirstName("John");
+        profile.setLastName("Doe");
+        profile.setCity("Chicago");
+        profile.setAboutMe("This is a test profile");
+        profile.setEmailAddress("john.doe@example.com");
 
-        // when - action
-        var request = MockMvcRequestBuilders.delete(PROFILE_URL + "/1");
+        profile = profileRepository.save(profile);
+        long id = profile.getUserID();
+
+        var request = MockMvcRequestBuilders.delete(PROFILE_URL + "/" + id);
         ResultActions response = mockMvc.perform(request);
 
-        long afterSize = profileRepository.count();
-
         response.andExpect(MockMvcResultMatchers.status().isOk());
-        assertEquals(beforeSize - 1, afterSize);
+        assertEquals(profileRepository.findById(id).isPresent(), false);
     }
 }

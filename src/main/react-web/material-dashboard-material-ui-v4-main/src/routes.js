@@ -34,7 +34,8 @@ import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import TestPage from "views/Test/Test.js";
-import SettingsPage from "views/Settings/Settings.js";
+import Upload from "views/Upload/Upload";
+import Search from "views/Search/Search"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -118,12 +119,21 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: TestPage,
     layout: "/admin",
-  },{
-    path: "/settings",
-    name: "Settings",
-    rtlName: "idk",
+  },
+  {
+    path: "/upload",
+    name: "Upload",
+    rtlName: "yeehaw",
     icon: Dashboard,
-    component: SettingsPage,
+    component: Upload,
+    layout: "/admin",
+  },
+  {
+    path: "/search",
+    name: "Search",
+    rtlName: "halp",
+    icon: Dashboard,
+    component: Search,
     layout: "/admin",
   },
 ];

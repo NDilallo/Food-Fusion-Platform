@@ -6,7 +6,7 @@
  */
 
  /*
- * Marisa Ban - PostedRecipeController
+ * Marisa Ban - PostedRecipeController, javadoc comments
  * 
  */
 

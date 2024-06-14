@@ -7,10 +7,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
 import lombok.Data;
-import lombok.ToString;
 
+/**
+ * 
+ * @author Marisa Ban
+ * This class defines the contents of the Restaurants table.
+ * 
+ */
 @Data
 @Entity
 @Table(name="Restaurants")

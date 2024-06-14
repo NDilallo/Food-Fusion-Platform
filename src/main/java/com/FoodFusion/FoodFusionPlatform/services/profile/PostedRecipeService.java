@@ -12,12 +12,20 @@ import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipeRepository;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Defines the services for the PostedRecipe table
+ * @author Marisa Ban
+ */
 @Service
 @Log4j2
 public class PostedRecipeService {
     @Autowired
     private PostedRecipeRepository repo;
 
+     /**
+     * list all the PostedRecipes
+     * @return a list of PostedRecipe instances
+     */
     public List<PostedRecipe> list() {
         log.traceEntry("Enter List");
         List<PostedRecipe> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
@@ -25,6 +33,11 @@ public class PostedRecipeService {
         return retval;
     }
 
+    /**
+     * save a posted recipe
+     * @param postedRecipe
+     * @return the saved PostedRecipe instance
+     */
     public PostedRecipe save(PostedRecipe postedRecipe) {
         log.traceEntry("enter save", postedRecipe);
         repo.save(postedRecipe);
@@ -32,6 +45,10 @@ public class PostedRecipeService {
         return postedRecipe;                
     }
 
+    /**
+     * Delete a posted recipe with the given id
+     * @param id 
+     */
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);

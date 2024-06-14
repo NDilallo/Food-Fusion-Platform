@@ -1,20 +1,23 @@
 package com.foodFusion.foodFusionPlatform.rdbm.upload;
 
-import com.foodFusion.foodFusionPlatform.rdbm.profile.Profile;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import jakarta.validation.constraints.NotNull;
-
 import lombok.Data;
 
+/**
+ * 
+ * @author Matt Nice
+ * This class defines the contents of the Draft table.
+ * 
+ */
 @Data
 @Entity
+@Table(name = "Drafts") // Escape the table name "user" to avoid conflicts with reserved keywords
 public class Draft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

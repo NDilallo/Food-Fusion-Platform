@@ -11,6 +11,10 @@ import com.foodFusion.foodFusionPlatform.rdbm.upload.IngredientsRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Controller for managing Ingredients entities.
+ * @author Dhruvi
+ */
 @RestController
 @RequestMapping("/ingredients")
 @RequiredArgsConstructor
@@ -18,6 +22,12 @@ public class IngredientsController {
 
     private final IngredientsRepository ingredientsRepository;
 
+    /**
+     * Add a protein to an Ingredient
+     * @param protein
+     * @param ingredients
+     * @return String success message
+     */
     @PostMapping("/addProtein")
     public String addProtein(@RequestParam String protein, @RequestBody Ingredients ingredients) {
         ingredients.addProtein(protein);
@@ -25,6 +35,12 @@ public class IngredientsController {
         return "Protein added successfully!";
     }
 
+    /**
+     * Add a veggie to an Ingredient
+     * @param veggies
+     * @param ingredients
+     * @return String success message
+     */
     @PostMapping("/addVeggies")
     public String addVeggies(@RequestParam String veggies, @RequestBody Ingredients ingredients) {
         ingredients.addVegetables(veggies);
@@ -32,6 +48,12 @@ public class IngredientsController {
         return "All Vegetables added successfully!";
     }
 
+    /**
+     * Add a dietary restriction to an Ingredient
+     * @param dietaryRestrictions
+     * @param ingredients
+     * @return String success message
+     */
     @PostMapping("/addDietaryRestrictions")
     public String addDietaryRestrictions(@RequestParam String dietaryRestrictions, @RequestBody Ingredients ingredients) {
         ingredients.addDietaryRestrictions(dietaryRestrictions);
@@ -39,6 +61,11 @@ public class IngredientsController {
         return "The Dietary restrictions added successfully!";
     }
 
+    /**
+     * Chech if a given ingredient has dietary restrictions
+     * @param ingredients
+     * @return String message
+     */
     @GetMapping("/checkDietaryRestrictions")
     public String checkDietaryRestrictions(@RequestBody Ingredients ingredients) {
         if (ingredients.hasDietaryRestrictions()) {
@@ -48,6 +75,11 @@ public class IngredientsController {
         }
     }
 
+    /**
+     * Check if an ingredient is vegetarian
+     * @param ingredients
+     * @return String message
+     */
     @GetMapping("/checkVegetarian")
     public String checkVegetarian(@RequestBody Ingredients ingredients) {
         if (ingredients.isVegetarian()) {
@@ -57,6 +89,11 @@ public class IngredientsController {
         }
     }
 
+    /**
+     * Check if ingredient is gluten free
+     * @param ingredients
+     * @return String message 
+     */
     @GetMapping("/checkGlutenFree")
     public String checkGlutenFree(@RequestBody Ingredients ingredients) {
         if (ingredients.isGlutenFree()) {
@@ -66,6 +103,11 @@ public class IngredientsController {
         }
     }
 
+    /**
+     * Check if ingredient is lactose and dairy free
+     * @param ingredients
+     * @return String message
+     */
     @GetMapping("/checkLactoseDairyFree")
     public String checkLactoseFree(@RequestBody Ingredients ingredients) {
         if (ingredients.isLactoseDairyFree()) {

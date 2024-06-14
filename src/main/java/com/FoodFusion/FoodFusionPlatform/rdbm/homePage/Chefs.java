@@ -7,6 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author Dhruvi
+ * This class defines the contents of the Chefs table.
+ * 
+ */
 @Data
 @Entity
 @NoArgsConstructor

@@ -1,19 +1,20 @@
 package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
-import com.foodFusion.foodFusionPlatform.rdbm.profile.PostedRecipe;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
-import lombok.ToString;
 
+/**
+ * 
+ * @author Marisa Ban
+ * This class defines the contents of the Rating table.
+ * 
+ */
 @Data
 @Entity
 @Table(name="Ratings")
