@@ -1,13 +1,15 @@
 package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import lombok.Data;
+import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 
@@ -15,29 +17,18 @@ import lombok.Data;
  * This class defines the contents of the Rating table.
  * 
  */
-@Data
-@Entity
-@Table(name="Ratings")
+@ToString
+@EqualsAndHashCode
+@Getter
+@RequiredArgsConstructor
+@Document("ratings")
 public class Rating {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long ratingId;
+    private String id = UUID.randomUUID().toString();
 
-    /*
-    // link to the profile of the rater (foreign key)
-    // one to many relationship -> put this relationship in user class
-    @ManyToOne(fetch = FetchType.EAGER)
-    @ToString.Exclude
-    private User user
-     */
+    @Setter
+    private long recipeId;
 
-    // foreign key, link to recipe that was rated
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // @ToString.Exclude
-    // //@JsonBackReference
-    // private PostedRecipe recipe;
-
-    @Min(value = 0, message = "Rating must be at least 0")
-    @Max(value = 5, message = "Rating must be at most 5")
+    @Setter
     private double rating;
 }

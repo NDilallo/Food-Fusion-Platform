@@ -20,3 +20,8 @@ spring:
   sql:
     init:
       mode: always
+  data:
+    monogdb:
+      uri: mongodb://sa:password@localhost:27017/food_fusion_mongodb
+  mvc:
+    validation: true
