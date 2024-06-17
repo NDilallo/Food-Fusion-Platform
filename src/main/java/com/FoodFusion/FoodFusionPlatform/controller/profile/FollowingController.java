@@ -74,7 +74,7 @@ public class FollowingController {
         service.delete(id);
         log.traceExit("Exit delete");
     }
-
+    
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
