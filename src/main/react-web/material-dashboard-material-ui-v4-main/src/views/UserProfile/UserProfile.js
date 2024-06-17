@@ -47,8 +47,8 @@ export default function UserProfile() {
     emailAddress: ""
   });
   const [recipes, setRecipes] = useState([]);
-  const [followers, setFollowers] = useState([]);
   const [drafts, setDrafts] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isNewProfile, setIsNewProfile] = useState(true); // Flag to check if the profile is new
 
@@ -73,12 +73,12 @@ export default function UserProfile() {
         console.error('There was an error fetching the recipes!', error);
       });
 
-    axios.get('http://localhost:8080/api/followers')
+    axios.get('http://localhost:8080/api/following?userId=1') // Assuming userID 1 for now
       .then(response => {
-        setFollowers(response.data);
+        setFollowing(response.data);
       })
       .catch(error => {
-        console.error('There was an error fetching the followers!', error);
+        console.error('There was an error fetching the following list!', error);
       });
 
     axios.get('http://localhost:8080/api/draft')
@@ -130,7 +130,7 @@ export default function UserProfile() {
         <Tab label="Profile" />
         <Tab label="Recipes" />
         <Tab label="My Drafts" />
-        <Tab label="Followers" />
+        <Tab label="Following" />
         <Tab label="Saved" />
       </Tabs>
 
@@ -309,17 +309,15 @@ export default function UserProfile() {
           <GridItem xs={12}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Followers</h4>
+                <h4 className={classes.cardTitleWhite}>Following</h4>
               </CardHeader>
               <CardBody>
                 <GridContainer>
-                  {followers.map((follower, index) => (
+                  {following.map((follow, index) => (
                     <GridItem key={index} xs={12} sm={6} md={4}>
                       <Card>
                         <CardBody>
-                          <h4>Follower ID: {follower.followerID}</h4>
-                          <p><strong>User ID:</strong> {follower.userID}</p>
-                          <p><strong>Profile ID:</strong> {follower.profileID}</p>
+                          <h4>{follow.username}</h4>
                         </CardBody>
                       </Card>
                     </GridItem>
@@ -339,7 +337,9 @@ export default function UserProfile() {
                 <h4 className={classes.cardTitleWhite}>Saved</h4>
               </CardHeader>
               <CardBody>
-                {/* Add any content for the Saved tab here */}
+                <GridContainer>
+                  <p>No saved items yet</p>
+                </GridContainer>
               </CardBody>
             </Card>
           </GridItem>

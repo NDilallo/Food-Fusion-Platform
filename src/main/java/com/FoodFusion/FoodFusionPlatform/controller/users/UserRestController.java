@@ -3,7 +3,6 @@ package com.foodFusion.foodFusionPlatform.controller.users;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +27,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
 /**
@@ -56,6 +55,18 @@ public class UserRestController {
     }
 
     /**
+     * Find users by username
+     * @param username
+     * @return a list of User instances
+     */
+    @GetMapping("/search")
+    @Operation(summary = "Find users by username")
+    public ResponseEntity<List<User>> findByUsername(@RequestParam String username) {
+        List<User> users = service.searchByUsername(username);
+        return ResponseEntity.ok(users);
+    }
+
+    /**
      * Save a new User to the table
      * @param user
      * @return long id of the saved User
@@ -76,7 +87,7 @@ public class UserRestController {
      */
     @PostMapping("/validated")
     @Operation(summary = "Save the user and returns the user id")
-    public ResponseEntity<String> validatedSave(@Valid @RequestBody User user) {
+    public ResponseEntity<String> validatedSave(@RequestBody User user) {
         log.traceEntry("enter save", user);
         service.save(user);
         log.traceExit("exit save", user);
@@ -110,4 +121,6 @@ public class UserRestController {
         });
         return errors;
     }
+
+
 }

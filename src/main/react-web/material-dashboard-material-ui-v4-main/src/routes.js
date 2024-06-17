@@ -33,6 +33,7 @@ import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
 import TestPage from "views/Test/Test.js";
 import Upload from "views/Upload/Upload";
+import Search from "views/Search/Search"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
 
@@ -115,6 +116,14 @@ const dashboardRoutes = [
     rtlName: "yeehaw",
     icon: Dashboard,
     component: Upload,
+    layout: "/admin",
+  },
+  {
+    path: "/search",
+    name: "Search",
+    rtlName: "halp",
+    icon: Dashboard,
+    component: Search,
     layout: "/admin",
   },
 ];
