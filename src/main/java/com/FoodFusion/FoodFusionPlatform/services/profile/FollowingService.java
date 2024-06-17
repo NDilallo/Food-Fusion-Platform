@@ -1,7 +1,5 @@
 package com.foodFusion.foodFusionPlatform.services.profile;
 
-
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -24,6 +22,13 @@ public class FollowingService {
         log.traceEntry("Enter list");
         List<Following> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
         log.traceExit("Exit list", retval);
+        return retval;
+    }
+
+    public List<Following> listByUserId(long userId) {
+        log.traceEntry("Enter listByUserId");
+        List<Following> retval = repo.findByUserID(userId);
+        log.traceExit("Exit listByUserId", retval);
         return retval;
     }
 
