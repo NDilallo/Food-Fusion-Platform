@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, TextField, Button, Typography } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
 import axios from "axios";
 import PropTypes from 'prop-types';
-
+import getPaletteTypeFromSettings from "views/theme.js";
 SearchPage.propTypes = {
   onFollowUser: PropTypes.func.isRequired,
 };
@@ -11,6 +12,22 @@ export default function SearchPage({ onFollowUser }) {
   const [userSearch, setUserSearch] = useState('');
   const [searchResult, setSearchResult] = useState(null);
   const [searchError, setSearchError] = useState('');
+  const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
+
+  useEffect(() => {
+   const fetchPaletteType = async () => {
+        const type = await getPaletteTypeFromSettings();
+        console.log("Palette type fetched:", type); // Print the fetched palette type
+        setPaletteType(type);
+   };
+   fetchPaletteType();
+}, []);
+
+const darkTheme = createMuiTheme({
+   palette: {
+        type: paletteType, // Use the state variable
+   },
+});
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -68,6 +85,8 @@ export default function SearchPage({ onFollowUser }) {
   };
 
   return (
+    <ThemeProvider theme={darkTheme}>
+     <CssBaseline />
     <Box
       component="form"
       sx={{
@@ -101,5 +120,6 @@ export default function SearchPage({ onFollowUser }) {
         </div>
       )}
     </Box>
+    </ThemeProvider>
   );
 }

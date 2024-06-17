@@ -24,4 +24,8 @@ public class Settings {
 
     @NotNull(message = "User ID must be set")
     private long userID; // Link to Profile Table
+
+    
+    @NotNull(message = "Enable Dark Mode must be set")
+    private boolean enableDarkMode;
 }

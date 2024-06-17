@@ -32,7 +32,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="com.FoodFusion.FoodFusionPlatform" level="debug">
+        <Logger name="com.foodFusion.FoodFusionPlatform" level="debug">
             <AppenderRef ref="File" level="info" />
         </Logger>
         <Root level="error">

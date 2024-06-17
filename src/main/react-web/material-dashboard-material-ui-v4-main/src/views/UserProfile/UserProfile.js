@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomInput from "../../components/CustomInput/CustomInput.js";
@@ -14,7 +15,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import avatar from "assets/img/faces/fritz.jpeg";
 import axios from "axios";
-
+import getPaletteTypeFromSettings from "views/theme.js";
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -24,7 +25,7 @@ const styles = {
     marginBottom: "0",
   },
   cardTitleWhite: {
-    color: "#FFFFFF",
+    color: "#FFFFF",
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
@@ -97,6 +98,21 @@ export default function UserProfile() {
       [id]: value
     }));
   };
+  const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
+  useEffect(() => {
+    const fetchPaletteType = async () => {
+         const type = await getPaletteTypeFromSettings();
+         console.log("Palette type fetched:", type); // Print the fetched palette type
+         setPaletteType(type);
+    };
+    fetchPaletteType();
+}, []);
+
+const darkTheme = createMuiTheme({
+    palette: {
+         type: paletteType, // Use the state variable
+    },
+});
 
   const handleCreateProfile = () => {
     axios.post('http://localhost:8080/api/profile', profile)
@@ -125,6 +141,8 @@ export default function UserProfile() {
   };
 
   return (
+    <ThemeProvider theme={darkTheme}>
+     <CssBaseline />
     <div>
       <Tabs value={tabIndex} onChange={handleTabChange}>
         <Tab label="Profile" />
@@ -346,5 +364,6 @@ export default function UserProfile() {
         </GridContainer>
       )}
     </div>
+    </ThemeProvider>
   );
 }
