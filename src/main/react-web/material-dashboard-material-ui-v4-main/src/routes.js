@@ -38,6 +38,7 @@ import Upload from "views/Upload/Upload";
 import Search from "views/Search/Search"
 // core components/views for RTL layout
 import RTLPage from "views/RTLPage/RTLPage.js";
+import Settings from "views/Settings/Settings.js";
 
 const dashboardRoutes = [
   {
@@ -126,6 +127,14 @@ const dashboardRoutes = [
     rtlName: "yeehaw",
     icon: Dashboard,
     component: Upload,
+    layout: "/admin",
+  },
+  {
+    path: "/settings",
+    name: "settings",
+    rtlName: "bruh",
+    icon: Dashboard,
+    component: Settings,
     layout: "/admin",
   },
   {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
+
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomInput from "../../components/CustomInput/CustomInput.js";
@@ -24,7 +25,7 @@ const styles = {
     marginBottom: "0",
   },
   cardTitleWhite: {
-    color: "#FFFFFF",
+    color: "#FFFFF",
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
@@ -125,6 +126,7 @@ export default function UserProfile() {
   };
 
   return (
+    
     <div>
       <Tabs value={tabIndex} onChange={handleTabChange}>
         <Tab label="Profile" />
