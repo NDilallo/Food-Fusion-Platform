@@ -105,14 +105,7 @@ const dashboardRoutes = [
     component: RTLPage,
     layout: "/rtl",
   },
-  {
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    rtlName: "التطور للاحترافية",
-    icon: Unarchive,
-    component: UpgradeToPro,
-    layout: "/admin",
-  },
+  
   {
     path: "/test",
     name: "Test",

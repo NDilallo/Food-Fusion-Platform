@@ -1,32 +1,30 @@
-// theme.js
-import { createMuiTheme } from '@material-ui/core/styles';
 import axios from 'axios';
 
-// Function to fetch settings and create theme
-const createThemeFromSettings = async () => {
+// theme.js
+
+// Function to fetch settings and return palette type
+const getPaletteTypeFromSettings = async () => {
     try {
         const response = await axios.get('http://localhost:8080/api/settings');
-        const settings = response.data;
+        const settings = response.data[0];
         
         // Determine palette type based on settings (example logic)
-        const paletteType = settings.enableDarkMode ? 'dark' : 'light';
-
-        // Create and return the theme
-        return createMuiTheme({
-            palette: {
-                type: paletteType,
-                // other theme settings
-            },
-        });
+        console.log('Settings:', settings); // Print the fetched settings
+        let paletteType; settings;
+    console.log('Settings:', settings.enableDarkMode); // Print the fetched settings
+        if (settings.enableDarkMode) {
+            paletteType = 'dark';
+        } else {
+            paletteType = 'light';
+        }
+        console.log('Palette Type:', paletteType); // Print the determined palette type
+        
+        return paletteType;
     } catch (error) {
         console.error('Error fetching settings:', error);
-        // Fallback to a default theme in case of error
-        return createMuiTheme({
-            palette: {
-                type: 'dark', // or any default type you prefer
-            },
-        });
+        // Fallback to a default type in case of error
+        return 'dark'; // or 'light', as your default preference
     }
 };
 
-export default createThemeFromSettings;
+export default getPaletteTypeFromSettings;
