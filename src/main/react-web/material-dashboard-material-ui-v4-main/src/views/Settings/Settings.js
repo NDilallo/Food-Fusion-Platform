@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
+import getPaletteTypeFromSettings from "views/theme.js";
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
+import 
+
+{
     Container,
     Typography,
     Table,
@@ -11,39 +15,38 @@ import {
     TableRow,
     Paper,
     Checkbox,
-    CssBaseline
+    Button,
 } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 
-const createTheme = (paletteType) => createMuiTheme({
-    palette: {
-        type: paletteType,
-        // other theme settings
-    },
-});
-
-export default function Test() {
+export default function Settings() {
+    const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
     const [settings, setSettings] = useState([]);
-    const [dynamicTheme, setDynamicTheme] = useState(createTheme('dark'));
+
+    useEffect(() => {
+        const fetchPaletteType = async () => {
+            const type = await getPaletteTypeFromSettings();
+            console.log("Palette type fetched:", type); // Print the fetched palette type
+            setPaletteType(type);
+        };
+        fetchPaletteType();
+    }, []);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/settings')
             .then(response => {
                 const fetchedSettings = response.data;
                 setSettings(fetchedSettings);
-
-                if (fetchedSettings.enableDarkMode) {
-                    setDynamicTheme(createTheme('dark'));
-                    localStorage.setItem('themePreference', 'dark');
-                } else {
-                    setDynamicTheme(createTheme('light'));
-                    localStorage.setItem('themePreference', 'light');
-                }
             })
             .catch(error => {
                 console.log('Error fetching settings:', error);
             });
     }, []);
+
+    const darkTheme = createMuiTheme({
+        palette: {
+            type: paletteType, // Use the state variable
+        },
+    });
 
     const handleDarkModeChange = (settingsID, enableDarkMode) => {
         axios.put(`http://localhost:8080/api/settings/${settingsID}`, { enableDarkMode })
@@ -57,13 +60,7 @@ export default function Test() {
                     return setting;
                 }));
 
-                if (enableDarkMode) {
-                    setDynamicTheme(createTheme('dark'));
-                    localStorage.setItem('themePreference', 'dark');
-                } else {
-                    setDynamicTheme(createTheme('light'));
-                    localStorage.setItem('themePreference', 'light');
-                }
+                window.location.reload(); // Refresh the page
             })
             .catch(error => {
                 console.error('Error updating settings:', error);
@@ -71,7 +68,7 @@ export default function Test() {
     };
 
     return (
-        <MuiThemeProvider theme={dynamicTheme}>
+        <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Container>
                 <Typography variant="h4" component="h2" gutterBottom>
@@ -99,7 +96,8 @@ export default function Test() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Button variant="contained" color="primary" onClick={() => window.location.reload()}>Refresh</Button> {/* Add a refresh button */}
             </Container>
-        </MuiThemeProvider>
+        </ThemeProvider>
     );
 }

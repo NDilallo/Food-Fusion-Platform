@@ -23,6 +23,7 @@ import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import Upload from "views/Upload/Upload";
 import Search from "views/Search/Search"
+import Settings from "views/Settings/Settings"
 // core components/views for RTL layout
 
 const dashboardRoutes = [
@@ -50,6 +51,14 @@ const dashboardRoutes = [
     component: Upload,
     layout: "/admin",
   },
+  {
+  path: "/settings",
+  name: "Settings",
+  rtlName: "bruh",
+  icon: Dashboard,
+  component: Settings,
+  layout: "/admin",
+},
   {
     path: "/search",
     name: "Search",

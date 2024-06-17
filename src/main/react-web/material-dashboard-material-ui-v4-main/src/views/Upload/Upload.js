@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, TextField, MenuItem, Button } from "@material-ui/core";
 import axios from "axios";
-
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
+import getPaletteTypeFromSettings from "views/theme.js";
 const cuisines = [
   { value: "American", label: "American" },
   { value: "Asian", label: "Asian" },
@@ -16,7 +17,22 @@ export default function UserPage() {
   const [description, setDescription] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [draftNotes, setDraftNotes] = useState("");
+  const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
 
+  useEffect(() => {
+   const fetchPaletteType = async () => {
+        const type = await getPaletteTypeFromSettings();
+        console.log("Palette type fetched:", type); // Print the fetched palette type
+        setPaletteType(type);
+   };
+   fetchPaletteType();
+}, []);
+
+const darkTheme = createMuiTheme({
+   palette: {
+        type: paletteType, // Use the state variable
+   },
+});
   const handlePost = (e) => {
     e.preventDefault();
     const recipeData = {
@@ -70,6 +86,8 @@ export default function UserPage() {
   };
 
   return (
+    <ThemeProvider theme={darkTheme}>
+     <CssBaseline />
     <Box
       component="form"
       sx={{
@@ -164,5 +182,6 @@ export default function UserPage() {
         </Button>
       </div>
     </Box>
+    </ThemeProvider>
   );
 }

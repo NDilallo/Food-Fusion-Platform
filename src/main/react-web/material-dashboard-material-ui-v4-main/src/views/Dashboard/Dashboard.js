@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -17,6 +18,8 @@ import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
 // core components
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
+
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
@@ -28,8 +31,9 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardIcon from "components/Card/CardIcon.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-
+import getPaletteTypeFromSettings from "views/theme.js";
 import { bugs, website, server } from "variables/general.js";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 import {
   dailySalesChart,
@@ -37,12 +41,40 @@ import {
   completedTasksChart,
 } from "variables/charts.js";
 
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+export default function Settings() {
+//for darkmode. 
+
+
+
+
+
 const useStyles = makeStyles(styles);
 
-export default function Dashboard() {
+  //for darkmode. 
+
+const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
+
+useEffect(() => {
+ const fetchPaletteType = async () => {
+      const type = await getPaletteTypeFromSettings();
+      console.log("Palette type fetched:", type); // Print the fetched palette type
+      setPaletteType(type);
+ };
+ fetchPaletteType();
+}, []);
+
+const darkTheme = createMuiTheme({
+ palette: {
+      type: paletteType, // Use the state variable
+ },
+});
+//for darkmode 
+
+
   const classes = useStyles();
   return (
+    <ThemeProvider theme={darkTheme}>
+     <CssBaseline />
     <div>
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
@@ -260,5 +292,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
     </div>
+    </ThemeProvider>
+    
   );
 }
