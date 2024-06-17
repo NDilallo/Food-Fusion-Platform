@@ -49,7 +49,7 @@ export default function Settings() {
     });
 
     const handleDarkModeChange = (settingsID, enableDarkMode) => {
-        axios.put(`http://localhost:8080/api/settings/${settingsID}`, { enableDarkMode })
+        axios.put(`http://localhost:8080/api/settings/${1}`, { enableDarkMode })
             .then(response => {
                 console.log('Settings updated', response.data);
 
