@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomInput from "../../components/CustomInput/CustomInput.js";
@@ -14,7 +15,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import avatar from "assets/img/faces/fritz.jpeg";
 import axios from "axios";
-
+import getPaletteTypeFromSettings from "views/theme.js";
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -24,7 +25,7 @@ const styles = {
     marginBottom: "0",
   },
   cardTitleWhite: {
-    color: "#FFFFFF",
+    color: "#FFFFF",
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
@@ -47,8 +48,8 @@ export default function UserProfile() {
     emailAddress: ""
   });
   const [recipes, setRecipes] = useState([]);
-  const [followers, setFollowers] = useState([]);
   const [drafts, setDrafts] = useState([]);
+  const [following, setFollowing] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isNewProfile, setIsNewProfile] = useState(true); // Flag to check if the profile is new
 
@@ -73,12 +74,12 @@ export default function UserProfile() {
         console.error('There was an error fetching the recipes!', error);
       });
 
-    axios.get('http://localhost:8080/api/followers')
+    axios.get('http://localhost:8080/api/following?userId=1') // Assuming userID 1 for now
       .then(response => {
-        setFollowers(response.data);
+        setFollowing(response.data);
       })
       .catch(error => {
-        console.error('There was an error fetching the followers!', error);
+        console.error('There was an error fetching the following list!', error);
       });
 
     axios.get('http://localhost:8080/api/draft')
@@ -97,6 +98,21 @@ export default function UserProfile() {
       [id]: value
     }));
   };
+  const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
+  useEffect(() => {
+    const fetchPaletteType = async () => {
+         const type = await getPaletteTypeFromSettings();
+         console.log("Palette type fetched:", type); // Print the fetched palette type
+         setPaletteType(type);
+    };
+    fetchPaletteType();
+}, []);
+
+const darkTheme = createMuiTheme({
+    palette: {
+         type: paletteType, // Use the state variable
+    },
+});
 
   const handleCreateProfile = () => {
     axios.post('http://localhost:8080/api/profile', profile)
@@ -125,12 +141,14 @@ export default function UserProfile() {
   };
 
   return (
+    <ThemeProvider theme={darkTheme}>
+     <CssBaseline />
     <div>
       <Tabs value={tabIndex} onChange={handleTabChange}>
         <Tab label="Profile" />
         <Tab label="Recipes" />
         <Tab label="My Drafts" />
-        <Tab label="Followers" />
+        <Tab label="Following" />
         <Tab label="Saved" />
       </Tabs>
 
@@ -309,17 +327,15 @@ export default function UserProfile() {
           <GridItem xs={12}>
             <Card>
               <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Followers</h4>
+                <h4 className={classes.cardTitleWhite}>Following</h4>
               </CardHeader>
               <CardBody>
                 <GridContainer>
-                  {followers.map((follower, index) => (
+                  {following.map((follow, index) => (
                     <GridItem key={index} xs={12} sm={6} md={4}>
                       <Card>
                         <CardBody>
-                          <h4>Follower ID: {follower.followerID}</h4>
-                          <p><strong>User ID:</strong> {follower.userID}</p>
-                          <p><strong>Profile ID:</strong> {follower.profileID}</p>
+                          <h4>{follow.username}</h4>
                         </CardBody>
                       </Card>
                     </GridItem>
@@ -339,12 +355,15 @@ export default function UserProfile() {
                 <h4 className={classes.cardTitleWhite}>Saved</h4>
               </CardHeader>
               <CardBody>
-                {/* Add any content for the Saved tab here */}
+                <GridContainer>
+                  <p>No saved items yet</p>
+                </GridContainer>
               </CardBody>
             </Card>
           </GridItem>
         </GridContainer>
       )}
     </div>
+    </ThemeProvider>
   );
 }

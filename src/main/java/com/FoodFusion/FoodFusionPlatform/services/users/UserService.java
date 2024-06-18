@@ -54,4 +54,21 @@ public class UserService {
         repo.deleteById(id);
         log.traceExit("Exit delete");
     }
+
+    /**
+     * search for users by username
+     * @param username
+     * @return a list of User instances
+     */
+    public List<User> searchByUsername(String username) {
+        log.traceEntry("Enter searchByUsername", username);
+        List<User> retval = repo.findByUsername(username);
+        log.traceExit("Exit searchByUsername", retval);
+        return retval;
+    }
+
+    public List<User> findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
+    
 }

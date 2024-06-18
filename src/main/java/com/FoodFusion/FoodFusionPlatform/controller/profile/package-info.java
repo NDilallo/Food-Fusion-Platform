@@ -7,7 +7,7 @@
 
  /*
  * Marisa Ban - PostedRecipeController, javadoc comments
- * 
+ * Matt Nice - added Settings get{id} and put methods only
  */
 
 package com.foodFusion.foodFusionPlatform.controller.profile;

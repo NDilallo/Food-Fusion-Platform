@@ -20,11 +20,12 @@ public class Following {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long followingID;
 
-    // Other fields
-
     @NotNull(message = "User ID must be set")
     private long userID; // Link to Profile Table
 
     @NotNull(message = "Profile ID must be set")
     private long profileID; // Link to Profile Table
+    
+    @NotNull(message = "Username must be set")
+    private String username; // Username of the followed user
 }

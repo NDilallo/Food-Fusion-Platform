@@ -16,28 +16,18 @@
 
 */
 // @material-ui/icons
-import BubbleChart from "@material-ui/icons/BubbleChart";
 import Dashboard from "@material-ui/icons/Dashboard";
-import Language from "@material-ui/icons/Language";
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Notifications from "@material-ui/icons/Notifications";
 import Person from "@material-ui/icons/Person";
-import Unarchive from "@material-ui/icons/Unarchive";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
-import Icons from "views/Icons/Icons.js";
-import Maps from "views/Maps/Maps.js";
-import NotificationsPage from "views/Notifications/Notifications.js";
 import Restaurant from "views/Restaurant/Restaurant";
-import TableList from "views/TableList/TableList.js";
-import TestPage from "views/Test/Test.js";
-import Typography from "views/Typography/Typography.js";
-import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import Upload from "views/Upload/Upload";
 import UserProfile from "views/UserProfile/UserProfile.js";
+
+// core components/views for Admin layout
+import Search from "views/Search/Search";
+import Settings from "views/Settings/Settings";
 // core components/views for RTL layout
-import RTLPage from "views/RTLPage/RTLPage.js";
 
 const dashboardRoutes = [
   {
@@ -57,70 +47,6 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/table",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-    component: TableList,
-    layout: "/admin",
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
-    icon: LibraryBooks,
-    component: Typography,
-    layout: "/admin",
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "الرموز",
-    icon: BubbleChart,
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    rtlName: "خرائط",
-    icon: LocationOn,
-    component: Maps,
-    layout: "/admin",
-  },
-  {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: Notifications,
-    component: NotificationsPage,
-    layout: "/admin",
-  },
-  {
-    path: "/rtl-page",
-    name: "RTL Support",
-    rtlName: "پشتیبانی از راست به چپ",
-    icon: Language,
-    component: RTLPage,
-    layout: "/rtl",
-  },
-  {
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    rtlName: "التطور للاحترافية",
-    icon: Unarchive,
-    component: UpgradeToPro,
-    layout: "/admin",
-  },
-  {
-    path: "/test",
-    name: "Test",
-    rtlName: "idk",
-    icon: Dashboard,
-    component: TestPage,
-    layout: "/admin",
-  },
-  {
     path: "/upload",
     name: "Upload",
     rtlName: "yeehaw",
@@ -129,11 +55,26 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+
     path: "/restaurant",
     name: "Restaurant",
     rtlName: "woohoo", 
     icon: Dashboard,
     component: Restaurant,
+
+  path: "/settings",
+  name: "Settings",
+  rtlName: "bruh",
+  icon: Dashboard,
+  component: Settings,
+  layout: "/admin",
+},
+  {
+    path: "/search",
+    name: "Search",
+    rtlName: "halp",
+    icon: Dashboard,
+    component: Search,
     layout: "/admin",
   },
 ];

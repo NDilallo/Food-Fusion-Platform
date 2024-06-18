@@ -7,7 +7,7 @@ package com.foodFusion.foodFusionPlatform.rdbm.homePage;
  * 
  * Marisa Ban - javadoc comments
  * 
- * 
+ * Matt Nice - Comment and Notification tables, CommentRepository and NotificationRepository
  * 
  * 
  */
