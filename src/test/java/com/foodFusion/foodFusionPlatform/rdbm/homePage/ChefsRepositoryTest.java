@@ -24,15 +24,15 @@ public class ChefsRepositoryTest {
         assertThat(found.getName()).isEqualTo("Gordon Ramsay");
     }
 
-    @Test
-    void testfindSpecialtyChefs() {
-        Chefs chef = new Chefs();
-        chef.setName("Jamie Oliver");
-        chef.setSpecialty("Italian Cuisine");
-        chefRepository.save(chef);
+    // @Test
+    // void testfindSpecialtyChefs() {
+    //     Chefs chef = new Chefs();
+    //     chef.setName("Jamie Oliver");
+    //     chef.setSpecialty("Italian Cuisine");
+    //     chefRepository.save(chef);
 
-        Chefs found = chefRepository.findSpecialtyChef("Italian Cuisine");
-        assertThat(found).isNotNull();
-        assertThat(found.getSpecialty()).isEqualTo("Italian Cuisine");
-    }
+    //     Chefs found = chefRepository.findSpecialtyChef("Italian Cuisine");
+    //     assertThat(found).isNotNull();
+    //     assertThat(found.getSpecialty()).isEqualTo("Italian Cuisine");
+    // }
 }

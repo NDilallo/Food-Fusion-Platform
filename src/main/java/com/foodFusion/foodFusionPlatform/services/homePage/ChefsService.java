@@ -35,9 +35,9 @@ import lombok.extern.log4j.Log4j2;
     public Chefs getChefByName(String name) {
         return chefRepository.findByName(name);
     }
-    public Chefs getChefBySpecialtyChefs(String name) {
-        return chefRepository.findSpecialtyChef(name);
-    }
+    // public Chefs getChefBySpecialtyChefs(String name) {
+    //     return chefRepository.findSpecialtyChef(name);
+    // }
 }
 
     // private final ChefsRepository chefRepository;
