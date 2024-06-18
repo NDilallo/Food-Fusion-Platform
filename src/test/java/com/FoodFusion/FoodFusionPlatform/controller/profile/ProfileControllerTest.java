@@ -1,12 +1,5 @@
 package com.foodFusion.foodFusionPlatform.controller.profile;
-
-<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.*;
-=======
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
->>>>>>> dbd0e4b74fc7b78e45b6ee1ca8d5f4232abc0f9a
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
