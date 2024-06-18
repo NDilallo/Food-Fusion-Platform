@@ -11,4 +11,17 @@
  * to the database.
  * Matt Nice extra: added mui components to Settings.js to make it look nice
  * 
+ * 
+ * Nick Dilallo:
+ *  In views folder:
+ *      Dashboard.js - Developed the dashboard to display all posts - Added features to the posts for saving and rating
+ *      UserProfile.js - TabIndex = 4 aka the saved tab of profile page - Pull from Saved table and display any posts that the user clicked to save on the dashboard
+ *  In Services folder:
+ *      SavedService - Made functions/services for pulling and posting to Saved table via frontend
+ *      UserService - Made the listUsers function for pulling and viewing all users on the site
+ *      PostedRecipeService - Made the listUsers to pull into dashboard - Made the addRating for adding a Rating to a specific post
+ *  In public/index.html:
+ *      Changed the title that appears on user's tab
+ *  In components/sidebar.js
+ *      Cleaned up old/unused pages and removed incorrect titling
  */
