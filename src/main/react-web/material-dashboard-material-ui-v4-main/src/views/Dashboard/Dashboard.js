@@ -77,9 +77,7 @@ export default function Dashboard() {
   
     SavedService.savePost(savedPost)
       .then((response) => {
-        console.log('Save post response:', response); // Log the response for debugging
-  
-        // Handle successful response as needed
+        console.log('Save post response:', response);
       })
       .catch((error) => {
         console.error('There was an error saving the post!', error);
@@ -87,7 +85,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="container mt-4"> {/* Bootstrap container class */}
+    <div className="container mt-4">
       <h4 className="mb-4">Your Feed</h4>
       <div className="row">
         {posts.map((recipe, index) => (
