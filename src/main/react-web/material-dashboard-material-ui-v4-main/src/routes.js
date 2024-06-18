@@ -61,7 +61,9 @@ const dashboardRoutes = [
     rtlName: "woohoo", 
     icon: Dashboard,
     component: Restaurant,
-
+    layout: "/admin",
+  },
+{
   path: "/settings",
   name: "Settings",
   rtlName: "bruh",
