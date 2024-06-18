@@ -11,8 +11,6 @@
  * to the database.
  * Matt Nice extra: added mui components to Settings.js to make it look nice
  * 
-<<<<<<< HEAD
- * 
  * Nick Dilallo:
  *  Initialized/incorporated the initial react project
  *  In views folder:
@@ -26,9 +24,9 @@
  *      Changed the title that appears on user's tab
  *  In components/sidebar.js
  *      Cleaned up old/unused pages and removed incorrect titling
-=======
+ * 
  * Dhruvi Solanki: Restaurant.js in views and Components/Restaurant folder
  * Dhruvi Solanki's non persistence: Added Bootstrap elements to Restaurant.js (Container, Tabs, Dropdown elememts)
  * Dhruvi Solanki: Created Chefs, Employees, Ingredients classes
->>>>>>> 003b395c8a0ff739007b5ebc3c50942d58efd767
+ * 
  */
