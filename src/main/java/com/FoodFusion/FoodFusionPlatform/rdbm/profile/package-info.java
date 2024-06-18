@@ -8,7 +8,9 @@
  * 
  * Marisa Ban - PostedRecipe and PostedRecipe Repository
  * Created posted recipes which holds the recipes a user posts on their profile.
- * 
+ * Fritz Nastor - Profile, Settings, and Following tables and repositories
+ * Users can edit their profile such as first name, last name, city, about me, etc.
+ * Following tables show who you are following
  * Marisa Ban - javadoc comments
  * 
 */

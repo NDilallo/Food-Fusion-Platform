@@ -1,7 +1,7 @@
 /*
  * Nick Dilallo - SavedController
  * Provides web access for the interactions of the Profile Tables.
- * Fritz Nastor - ProfileRestController
+ * Fritz Nastor - ProfileRestController and SettingsController
  * Added crud featues for web acesss interactions of the Profile Tables
  */
 
