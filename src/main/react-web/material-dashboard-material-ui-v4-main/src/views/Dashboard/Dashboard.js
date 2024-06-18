@@ -13,6 +13,9 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import IconButton from "@material-ui/core/IconButton";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import SavedService from "services/SavedService";
 
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
@@ -40,9 +43,7 @@ export default function Dashboard() {
   const handleSubmitRating = (recipeId) => {
     const rating = ratingInputs[recipeId];
     if (rating >= 1 && rating <= 5) {
-      console.log('recipeId: ', recipeId);
-      console.log('rating: ', rating);
-      addRating(recipeId,  Math.floor(rating))
+      addRating(recipeId, Math.floor(rating))
         .then((updatedRecipe) => {
           setPosts((prevPosts) =>
             prevPosts.map((post) =>
@@ -64,6 +65,36 @@ export default function Dashboard() {
     }
   };
 
+  const handleSavePost = (post) => {
+    const savedPost = {
+      user_comment: null,
+      saved_post: [
+        {
+          ratings: [
+            {
+              rating: post.ratings.rating
+            }
+          ],
+          name: post.name,
+          ingredients: post.ingredients,
+          steps: post.steps,
+          recipeCuisine: post.recipeCuisine,
+          avgRating: post.avgRating
+        }
+      ]
+    };
+  
+    SavedService.savePost(savedPost)
+      .then((response) => {
+        console.log('Save post response:', response); // Log the response for debugging
+  
+        // Handle successful response as needed
+      })
+      .catch((error) => {
+        console.error('There was an error saving the post!', error);
+      });
+  };
+
   return (
     <GridContainer>
       <GridItem xs={12}>
@@ -76,8 +107,19 @@ export default function Dashboard() {
               {posts.map((recipe, index) => (
                 <GridItem key={index} xs={12} sm={6} md={4}>
                   <Card>
-                    <CardBody>
+                    <CardHeader
+                      color="secondary"
+                      style={{ display: "flex", justifyContent: "space-between" }}
+                    >
                       <h4>{recipe.name}</h4>
+                      <IconButton
+                        color="primary"
+                        onClick={() => handleSavePost(recipe)}
+                      >
+                        <BookmarkIcon />
+                      </IconButton>
+                    </CardHeader>
+                    <CardBody>
                       <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
                       <p><strong>Steps:</strong> {recipe.steps}</p>
                       <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>

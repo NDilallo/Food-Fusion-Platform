@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
+import { createMuiTheme, ThemeProvider, CssBaseline } from "@material-ui/core";
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomInput from "../../components/CustomInput/CustomInput.js";
@@ -11,11 +11,12 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import avatar from "assets/img/faces/fritz.jpeg";
 import axios from "axios";
 import getPaletteTypeFromSettings from "views/theme.js";
+
 const styles = {
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
@@ -25,7 +26,7 @@ const styles = {
     marginBottom: "0",
   },
   cardTitleWhite: {
-    color: "#FFFFF",
+    color: "#FFFFFF",
     marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
@@ -45,94 +46,111 @@ export default function UserProfile() {
     lastName: "",
     city: "",
     aboutMe: "",
-    emailAddress: ""
+    emailAddress: "",
   });
   const [recipes, setRecipes] = useState([]);
   const [drafts, setDrafts] = useState([]);
   const [following, setFollowing] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isNewProfile, setIsNewProfile] = useState(true); // Flag to check if the profile is new
+  const [savedRecipes, setSavedRecipes] = useState([]);
 
   useEffect(() => {
     // Fetch profile data
-    axios.get('http://localhost:8080/api/profile/1') // Assuming userID 1 for now
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/profile/1") // Assuming userID 1 for now
+      .then((response) => {
         if (response.data) {
           setProfile(response.data);
           setIsNewProfile(false);
         }
       })
-      .catch(error => {
-        console.error('There was an error fetching the profile!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the profile!", error);
       });
 
-    axios.get('http://localhost:8080/api/postedrecipe')
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/postedrecipe")
+      .then((response) => {
         setRecipes(response.data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the recipes!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the recipes!", error);
       });
 
-    axios.get('http://localhost:8080/api/following?userId=1') // Assuming userID 1 for now
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/following?userId=1") // Assuming userID 1 for now
+      .then((response) => {
         setFollowing(response.data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the following list!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the following list!", error);
       });
 
-    axios.get('http://localhost:8080/api/draft')
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/draft")
+      .then((response) => {
         setDrafts(response.data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the drafts!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the drafts!", error);
+      });
+
+    axios
+      .get("http://localhost:8080/api/saved")
+      .then((response) => {
+        setSavedRecipes(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the saved posts!", error);
       });
   }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setProfile(prevState => ({
+    setProfile((prevState) => ({
       ...prevState,
-      [id]: value
+      [id]: value,
     }));
   };
-  const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
+
+  const [paletteType, setPaletteType] = useState("light"); // Default to 'light'
   useEffect(() => {
     const fetchPaletteType = async () => {
-         const type = await getPaletteTypeFromSettings();
-         console.log("Palette type fetched:", type); // Print the fetched palette type
-         setPaletteType(type);
+      const type = await getPaletteTypeFromSettings();
+      console.log("Palette type fetched:", type); // Print the fetched palette type
+      setPaletteType(type);
     };
     fetchPaletteType();
-}, []);
+  }, []);
 
-const darkTheme = createMuiTheme({
+  const darkTheme = createMuiTheme({
     palette: {
-         type: paletteType, // Use the state variable
+      type: paletteType, // Use the state variable
     },
-});
+  });
 
   const handleCreateProfile = () => {
-    axios.post('http://localhost:8080/api/profile', profile)
-      .then(response => {
+    axios
+      .post("http://localhost:8080/api/profile", profile)
+      .then((response) => {
         setProfile(response.data);
         setIsNewProfile(false);
-        alert('Profile created successfully');
+        alert("Profile created successfully");
       })
-      .catch(error => {
-        console.error('There was an error creating the profile!', error);
+      .catch((error) => {
+        console.error("There was an error creating the profile!", error);
       });
   };
 
   const handleUpdateProfile = () => {
-    axios.put(`http://localhost:8080/api/profile/${profile.userID}`, profile)
+    axios
+      .put(`http://localhost:8080/api/profile/${profile.userID}`, profile)
       .then(() => {
-        alert('Profile updated successfully');
+        alert("Profile updated successfully");
       })
-      .catch(error => {
-        console.error('There was an error updating the profile!', error);
+      .catch((error) => {
+        console.error("There was an error updating the profile!", error);
       });
   };
 
@@ -142,228 +160,244 @@ const darkTheme = createMuiTheme({
 
   return (
     <ThemeProvider theme={darkTheme}>
-     <CssBaseline />
-    <div>
-      <Tabs value={tabIndex} onChange={handleTabChange}>
-        <Tab label="Profile" />
-        <Tab label="Recipes" />
-        <Tab label="My Drafts" />
-        <Tab label="Following" />
-        <Tab label="Saved" />
-      </Tabs>
+      <CssBaseline />
+      <div>
+        <Tabs value={tabIndex} onChange={handleTabChange}>
+          <Tab label="Profile" />
+          <Tab label="Recipes" />
+          <Tab label="My Drafts" />
+          <Tab label="Following" />
+          <Tab label="Saved" />
+        </Tabs>
 
-      {tabIndex === 0 && (
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={8}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-                <p className={classes.cardCategoryWhite}>Complete your profile</p>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="First Name"
-                      id="firstName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.firstName,
-                        onChange: handleInputChange,
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Last Name"
-                      id="lastName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.lastName,
-                        onChange: handleInputChange,
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="City"
-                      id="city"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.city,
-                        onChange: handleInputChange,
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Email Address"
-                      id="emailAddress"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.emailAddress,
-                        onChange: handleInputChange,
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <InputLabel style={{ color: "#AAAAAA" }}>About Me</InputLabel>
-                    <CustomInput
-                      labelText="About Me"
-                      id="aboutMe"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        multiline: true,
-                        rows: 5,
-                        value: profile.aboutMe,
-                        onChange: handleInputChange,
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
-              <CardFooter>
-                {isNewProfile ? (
-                  <Button color="primary" onClick={handleCreateProfile}>Create Profile</Button>
-                ) : (
-                  <Button color="primary" onClick={handleUpdateProfile}>Update Profile</Button>
-                )}
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card profile>
-              <CardAvatar profile>
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
-                </a>
-              </CardAvatar>
-              <CardBody profile>
-                <h6 className={classes.cardCategory}>Profile</h6>
-                <h4 className={classes.cardTitle}>{`${profile.firstName} ${profile.lastName}`}</h4>
-                <p className={classes.description}>
-                  {profile.aboutMe}
-                </p>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
-
-      {tabIndex === 1 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Your Recipes</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {recipes.map((recipe, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{recipe.name}</h4>
-                          <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                          <p><strong>Steps:</strong> {recipe.steps}</p>
-                          <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>
-                          <p><strong>Rating:</strong> {recipe.avgRating}</p>
-                        </CardBody>
-                      </Card>
+        {tabIndex === 0 && (
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={8}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
+                  <p className={classes.cardCategoryWhite}>Complete your profile</p>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <CustomInput
+                        labelText="First Name"
+                        id="firstName"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          value: profile.firstName,
+                          onChange: handleInputChange,
+                        }}
+                      />
                     </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
-
-      {tabIndex === 2 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>My Drafts</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {drafts.map((draft, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{draft.recipeName}</h4>
-                          <p><strong>Ingredients:</strong> {draft.ingredients}</p>
-                          <p><strong>Steps:</strong> {draft.description}</p>
-                          <p><strong>Cuisine:</strong> {draft.cuisine}</p>
-                          <p><strong>Notes:</strong> {draft.draftNotes}</p>
-                        </CardBody>
-                      </Card>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <CustomInput
+                        labelText="Last Name"
+                        id="lastName"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          value: profile.lastName,
+                          onChange: handleInputChange,
+                        }}
+                      />
                     </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
-
-      {tabIndex === 3 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Following</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {following.map((follow, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{follow.username}</h4>
-                        </CardBody>
-                      </Card>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <CustomInput
+                        labelText="City"
+                        id="city"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          value: profile.city,
+                          onChange: handleInputChange,
+                        }}
+                      />
                     </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
+                    <GridItem xs={12} sm={12} md={6}>
+                      <CustomInput
+                        labelText="Email Address"
+                        id="emailAddress"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          value: profile.emailAddress,
+                          onChange: handleInputChange,
+                        }}
+                      />
+                    </GridItem>
+                  </GridContainer>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <InputLabel style={{ color: "#AAAAAA" }}>About Me</InputLabel>
+                      <CustomInput
+                        labelText="About Me"
+                        id="aboutMe"
+                        formControlProps={{
+                          fullWidth: true,
+                        }}
+                        inputProps={{
+                          multiline: true,
+                          rows: 5,
+                          value: profile.aboutMe,
+                          onChange: handleInputChange,
+                        }}
+                      />
+                    </GridItem>
+                  </GridContainer>
+                </CardBody>
+                <CardFooter>
+                  {isNewProfile ? (
+                    <Button color="primary" onClick={handleCreateProfile}>
+                      Create Profile
+                    </Button>
+                  ) : (
+                    <Button color="primary" onClick={handleUpdateProfile}>
+                      Update Profile
+                    </Button>
+                  )}
+                </CardFooter>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={4}>
+              <Card profile>
+                <CardAvatar profile>
+                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                    <img src={avatar} alt="..." />
+                  </a>
+                </CardAvatar>
+                <CardBody profile>
+                  <h6 className={classes.cardCategory}>Profile</h6>
+                  <h4 className={classes.cardTitle}>{`${profile.firstName} ${profile.lastName}`}</h4>
+                  <p className={classes.description}>{profile.aboutMe}</p>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        )}
 
-      {tabIndex === 4 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Saved</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <p>No saved items yet</p>
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
-    </div>
+        {tabIndex === 1 && (
+          <GridContainer>
+            <GridItem xs={12}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Your Recipes</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    {recipes.map((recipe, index) => (
+                      <GridItem key={index} xs={12} sm={6} md={4}>
+                        <Card>
+                          <CardBody>
+                            <h4>{recipe.name}</h4>
+                            <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+                            <p><strong>Steps:</strong> {recipe.steps}</p>
+                            <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>
+                            <p><strong>Rating:</strong> {recipe.avgRating}</p>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    ))}
+                  </GridContainer>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        )}
+
+        {tabIndex === 2 && (
+          <GridContainer>
+            <GridItem xs={12}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>My Drafts</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    {drafts.map((draft, index) => (
+                      <GridItem key={index} xs={12} sm={6} md={4}>
+                        <Card>
+                          <CardBody>
+                            <h4>{draft.recipeName}</h4>
+                            <p><strong>Ingredients:</strong> {draft.ingredients}</p>
+                            <p><strong>Steps:</strong> {draft.description}</p>
+                            <p><strong>Cuisine:</strong> {draft.cuisine}</p>
+                            <p><strong>Notes:</strong> {draft.draftNotes}</p>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    ))}
+                  </GridContainer>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        )}
+
+        {tabIndex === 3 && (
+          <GridContainer>
+            <GridItem xs={12}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Following</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    {following.map((follow, index) => (
+                      <GridItem key={index} xs={12} sm={6} md={4}>
+                        <Card>
+                          <CardBody>
+                            <h4>{follow.username}</h4>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    ))}
+                  </GridContainer>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        )}
+
+        {tabIndex === 4 && (
+          <GridContainer>
+            <GridItem xs={12}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Your Saved Recipes</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    {savedRecipes.map((savedPost, index) => (
+                      savedPost.saved_post.map((post, postIndex) => (
+                        <GridItem key={`${index}-${postIndex}`} xs={12} sm={6} md={4}>
+                          <Card>
+                            <CardBody>
+                              <h4>{post.name}</h4>
+                              <p><strong>Ingredients:</strong> {post.ingredients}</p>
+                              <p><strong>Steps:</strong> {post.steps}</p>
+                              <p><strong>Cuisine:</strong> {post.recipeCuisine}</p>
+                              <p><strong>Rating:</strong> {post.avgRating}</p>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      ))
+                    ))}
+                  </GridContainer>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        )}
+      </div>
     </ThemeProvider>
   );
 }
