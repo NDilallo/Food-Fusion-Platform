@@ -13,7 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface ChefsRepository extends CrudRepository<Chefs, Long> {
     Chefs findByName(String name);
-    Chefs findSpecialtyChef(String specialty);
+    // Chefs findSpecialtyChef(String specialty);
     //@SuppressWarnings("null")
     List<Chefs> findAll();  // Make sure this method returns a List<Chef>
 }

@@ -64,14 +64,14 @@ public class ChefsServiceTest {
         verify(chefRepository).findByName("Gordon Ramsay");
     }
 
-    @Test
-    void testFindSpecialtyChef() {
-        given(chefRepository.findSpecialtyChef("International Cuisine")).willReturn(chef);
+    // @Test
+    // void testFindSpecialtyChef() {
+    //     given(chefRepository.findSpecialtyChef("International Cuisine")).willReturn(chef);
 
-        Chefs foundChef = chefService.getChefBySpecialtyChefs("International Cuisine");
+    //     Chefs foundChef = chefService.getChefBySpecialtyChefs("International Cuisine");
 
-        assertThat(foundChef).isNotNull();
-        assertThat(foundChef.getSpecialty()).isEqualTo("International Cuisine");
-        verify(chefRepository).findSpecialtyChef("International Cuisine");
-    }
+    //     assertThat(foundChef).isNotNull();
+    //     assertThat(foundChef.getSpecialty()).isEqualTo("International Cuisine");
+    //     verify(chefRepository).findSpecialtyChef("International Cuisine");
+    // }
 }
