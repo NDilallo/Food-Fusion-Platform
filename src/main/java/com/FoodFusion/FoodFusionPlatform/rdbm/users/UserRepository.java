@@ -1,6 +1,7 @@
 package com.foodFusion.foodFusionPlatform.rdbm.users;
 
 import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 /**

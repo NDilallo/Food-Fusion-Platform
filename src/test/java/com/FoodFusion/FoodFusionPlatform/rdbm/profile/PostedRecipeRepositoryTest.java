@@ -1,16 +1,15 @@
 package com.foodFusion.foodFusionPlatform.rdbm.profile;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

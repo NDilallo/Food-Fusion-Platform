@@ -2,40 +2,37 @@ package com.foodFusion.foodFusionPlatform.controller.homePage;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodFusion.foodFusionPlatform.rdbm.homePage.Chefs;
 import com.foodFusion.foodFusionPlatform.services.homePage.ChefsService;
 
-@SpringBootApplication
-public class ChefsController {
-
-    public static void main(String[] args) {
-        SpringApplication.run(ChefsController.class, args);
-    }
-}
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/chef")
-class ChefController {
+@RequestMapping("/chefs")
+@RequiredArgsConstructor
+public class ChefsController {
 
-    @Autowired
-    private ChefsService chefService;
+    private final ChefsService chefsService;
 
-    @PostMapping
-    public String addChef(@RequestBody Chefs chef) {
-        return chefService.addChef(chef);
+    @PostMapping("/add")
+    public Chefs addChef(@RequestBody Chefs chef) {
+        return chefsService.addChef(chef);
     }
 
     @GetMapping
     public List<Chefs> getAllChefs() {
-        return chefService.getAllChefs();
+        return chefsService.getAllChefs();
+    }
+
+    @GetMapping("/find")
+    public Chefs getChefByName(@RequestParam String name) {
+        return chefsService.getChefByName(name);
     }
 }

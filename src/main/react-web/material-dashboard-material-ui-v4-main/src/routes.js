@@ -20,10 +20,13 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
-import UserProfile from "views/UserProfile/UserProfile.js";
+import Restaurant from "views/Restaurant/Restaurant";
 import Upload from "views/Upload/Upload";
-import Search from "views/Search/Search"
-import Settings from "views/Settings/Settings"
+import UserProfile from "views/UserProfile/UserProfile.js";
+
+// core components/views for Admin layout
+import Search from "views/Search/Search";
+import Settings from "views/Settings/Settings";
 // core components/views for RTL layout
 
 const dashboardRoutes = [
@@ -52,6 +55,15 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
+
+    path: "/restaurant",
+    name: "Restaurant",
+    rtlName: "woohoo", 
+    icon: Dashboard,
+    component: Restaurant,
+    layout: "/admin",
+  },
+{
   path: "/settings",
   name: "Settings",
   rtlName: "bruh",

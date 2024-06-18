@@ -1,19 +1,12 @@
 package com.foodFusion.foodFusionPlatform.rdbm.homePage;
 
-    import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-    /**
- * 
- * @author Dhruvi
- * This class defines the repository for the Employees table.
- * 
- */
-    public interface EmployeesRepository extends CrudRepository<Employees, Long> {
-        /**
-         * @param name
-         * @return Employees
-         */
-        public Employees findByName(String name);
-    }
-    
+import org.springframework.data.repository.CrudRepository;
+
+public interface EmployeesRepository extends CrudRepository<Employees, Long> {
+    Employees findByName(String name);
+    List<Employees> findAll();
+    List<Employees> findByRole(String role);
+}
 
