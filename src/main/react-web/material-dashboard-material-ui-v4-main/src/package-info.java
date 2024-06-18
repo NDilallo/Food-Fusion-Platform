@@ -26,7 +26,7 @@
  *      Cleaned up old/unused pages and removed incorrect titling
  * 
  * Dhruvi Solanki: Restaurant.js in views and Components/Restaurant folder
- * Dhruvi Solanki's non persistence: Added Bootstrap elements to Restaurant.js (Container, Tabs, Dropdown elememts)
+ * Dhruvi Solanki's non persistence extra: Added Bootstrap elements to Restaurant.js (Container, Tabs, Dropdown elememts)
  * Dhruvi Solanki: Created Chefs, Employees, Ingredients classes
  * 
  */
