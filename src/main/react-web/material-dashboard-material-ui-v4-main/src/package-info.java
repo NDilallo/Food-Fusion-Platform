@@ -15,7 +15,7 @@
  * Nick Dilallo:
  *  Initialized/incorporated the initial react project
  *  In views folder:
- *      Dashboard.js - Developed the dashboard to display all posts - Added features to the posts for saving and rating
+ *      Dashboard.js - Developed the dashboard to display all posts - Added features to the posts for saving and rating  - Used boostrap for page design (Bootstrap is our additional non-persistence feature)
  *      UserProfile.js - TabIndex = 4 aka the saved tab of profile page - Pull from Saved table and display any posts that the user clicked to save on the dashboard
  *  In Services folder:
  *      SavedService - Made functions/services for pulling and posting to Saved table via frontend
