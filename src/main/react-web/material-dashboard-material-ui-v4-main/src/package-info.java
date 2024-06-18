@@ -9,4 +9,7 @@
  * to the database.
  * Matt Nice extra: added mui components to Settings.js to make it look nice
  * 
+ * Dhruvi Solanki: Restaurant.js in views and Components/Restaurant folder
+ * Dhruvi Solanki's non persistence: Added Bootstrap elements to Restaurant.js (Container, Tabs, Dropdown elememts)
+ * Dhruvi Solanki: Created Chefs, Employees, Ingredients classes
  */

@@ -1,91 +1,122 @@
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
-import Card from "../../components/Card/Card.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import GridItem from "../../components/Grid/GridItem.js";
-
-const useStyles = makeStyles({
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0",
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-  },
-});
+import { Button, Card, Col, Container, Dropdown, Row, Tab, Tabs } from 'react-bootstrap';
 
 const Restaurant = () => {
-  const classes = useStyles();
-
   const [restaurant, setRestaurant] = useState([{
     name: "Spice World",
     cuisine: "Indian",
-    address: "456 Oak Ave, Townsville",
+    address: "456 Oak Ave, Chicago",
     chefs: [
-      { role: 'Main Chef', name: 'Michael Brown' },
+      { role: 'Executive Chef', name: 'Michael Brown' },
       { role: 'Sous Chef', name: 'Emily White' },
       { role: 'Dessert Chef', name: 'David Lee' }
     ]},
     {
-      name: "S",
-      cuisine: "India",
-      address: "456 OaAve, Townsville",
+      name: "Chicago Diner",
+      cuisine: "American",
+      address: "4444 halsted, Chicago",
       chefs: [
-        { role: 'Main Chef', name: 'Michal Brown' },
-        { role: 'Sous Chef', name: 'Emly White' },
-        { role: 'Dessert Chef', name: 'Daid Lee' }
-      ]}]);
-    
-  // const [restaurant, setRestaurant] = useState({
-  //   name: "Spice World",
-  //   cuisine: "Indian",
-  //   address: "456 Oak Ave, Townsville",
-  //   chefs: [
-  //     { role: 'Main Chef', name: 'Michael Brown' },
-  //     { role: 'Sous Chef', name: 'Emily White' },
-  //     { role: 'Dessert Chef', name: 'David Lee' }
-  //   ]}
-  //   // {
-  //   //   name: "Portofino",
-  //   //   cuisine: "Italian",
-  //   //   address: "456 Oak Ave, Chicago",
-  //   //   chefs: [
-  //   //     { role: 'Main Chef', name: 'Michael Spears' },
-  //   //     { role: 'Sous Chef', name: 'Emily Lee' },
-  //   //     { role: 'Dessert Chef', name: 'David Copper' }
-  //   //   ]},
-  //);
-  // const [restaurant2, setRestaurant2] = useState({
-  //     name: "Portofino",
-  //     cuisine: "Italian",
-  //     address: "456 Oak Ave, Chicago",
-  //     chefs: [
-  //       { role: 'Main Chef', name: 'Michael Spears' },
-  //       { role: 'Sous Chef', name: 'Emily Lee' },
-  //       { role: 'Dessert Chef', name: 'David Copper' }
-  //     ]},
-  // );
-  const [chefs, setChefs] = useState({
-    executiveChefs: [],
-    sousChefs: [],
-    pastryChefs: []
-  });
-  const [employees, setEmployees] = useState([]);
+        { role: 'Executive Chef', name: 'DJ Brown' },
+        { role: 'Sous Chef', name: 'AJ White' },
+        { role: 'Dessert Chef', name: 'MJ Lee' }
+      ]},
+      {
+        name: "The Gourmet Kitchen",
+        cuisine: "American",
+        address: "1234 N LSD, Chicago",
+        chefs: [
+          { role: 'Executive Chef', name: 'Emma' },
+          { role: 'Sous Chef', name: 'Watson' },
+          { role: 'Dessert Chef', name: 'Thomas' }
+        ]},
+        {
+          name: "Demera",
+          cuisine: "Ethiopian",
+          address: "1234 N Broadway, Chicago",
+          chefs: [
+            { role: 'Executive Chef', name: 'Leo' },
+            { role: 'Sous Chef', name: 'Nardo' },
+            { role: 'Dessert Chef', name: 'DiCaprio' }
+          ]},
+          {
+            name: "Portofino",
+            cuisine: "Italian",
+            address: "1234 E Wacker, Chicago",
+            chefs: [
+              { role: 'Executive Chef', name: 'Martin' },
+              { role: 'Sous Chef', name: 'Cooper' },
+              { role: 'Dessert Chef', name: 'Junior' }
+            ]},
+          {
+            name: "Tzuco",
+            cuisine: "Mexican",
+            address: "1234 State St, Chicago",
+            chefs: [
+              { role: 'Executive Chef', name: 'Jesus' },
+              { role: 'Sous Chef', name: 'Rodriqguez' },
+              { role: 'Dessert Chef', name: 'Angelo' }
+            ]}
+    ]);
+  
+  const initialChefs = {
+    executiveChefs: [
+      { name: restaurant[0].chefs[0].name, role: "Executive Chef", restaurant: { name: restaurant[0].name, address: restaurant[0].address, cuisine: restaurant[0].cuisine } },
+      { name: restaurant[1].chefs[0].name, role: "Executive Chef", restaurant: { name: restaurant[1].name, address: restaurant[1].address, cuisine: restaurant[1].cuisine } },
+      { name: restaurant[2].chefs[0].name, role: "Executive Chef", restaurant: { name: restaurant[2].name, address: restaurant[2].address, cuisine: restaurant[2].cuisine } },
+      { name: restaurant[3].chefs[0].name, role: "Executive Chef", restaurant: { name: restaurant[3].name, address: restaurant[3].address, cuisine: restaurant[3].cuisine } },
+      { name: restaurant[4].chefs[0].name, role: "Executive Chef", restaurant: { name: restaurant[4].name, address: restaurant[4].address, cuisine: restaurant[4].cuisine } },
+      { name: restaurant[5].chefs[0].name, role: "Executive Chef", restaurant: { name: restaurant[5].name, address: restaurant[5].address, cuisine: restaurant[5].cuisine } },
+    ],
+    sousChefs: [
+      { name: restaurant[0].chefs[1].name, role: "Sous Chef", restaurant: { name: restaurant[0].name, address: restaurant[0].address, cuisine: restaurant[0].cuisine } },
+      { name: restaurant[1].chefs[1].name, role: "Sous Chef", restaurant: { name: restaurant[1].name, address: restaurant[1].address, cuisine: restaurant[1].cuisine } },
+      { name: restaurant[2].chefs[1].name, role: "Sous Chef", restaurant: { name: restaurant[2].name, address: restaurant[2].address, cuisine: restaurant[2].cuisine } },
+      { name: restaurant[3].chefs[1].name, role: "Sous Chef", restaurant: { name: restaurant[3].name, address: restaurant[3].address, cuisine: restaurant[3].cuisine } },
+      { name: restaurant[4].chefs[1].name, role: "Sous Chef", restaurant: { name: restaurant[4].name, address: restaurant[4].address, cuisine: restaurant[4].cuisine } },
+      { name: restaurant[5].chefs[1].name, role: "Sous Chef", restaurant: { name: restaurant[5].name, address: restaurant[5].address, cuisine: restaurant[5].cuisine } },
+    ],
+    dessertChefs: [
+      { name: restaurant[0].chefs[2].name, role: "Dessert Chef", restaurant:{name: restaurant[0].name, address: restaurant[0].address, cuisine: restaurant[0].cuisine } },
+      { name: restaurant[1].chefs[2].name, role: "Dessert Chef", restaurant: { name: restaurant[1].name, address: restaurant[1].address, cuisine: restaurant[1].cuisine } },
+      { name: restaurant[2].chefs[2].name, role: "Dessert Chef", restaurant:{name: restaurant[2].name, address: restaurant[2].address, cuisine: restaurant[2].cuisine } },
+      { name: restaurant[3].chefs[2].name, role: "Dessert Chef", restaurant: { name: restaurant[3].name, address: restaurant[3].address, cuisine: restaurant[3].cuisine } },
+      { name: restaurant[4].chefs[2].name, role: "Dessert Chef", restaurant:{name: restaurant[4].name, address: restaurant[4].address, cuisine: restaurant[4].cuisine } },
+      { name: restaurant[5].chefs[2].name, role: "Dessert Chef", restaurant: { name: restaurant[5].name, address: restaurant[5].address, cuisine: restaurant[5].cuisine } },
+    ]
+  };
+  
+  const options = [
+    { value: 'executiveChefs', label: 'Executive Chefs' },
+    { value: 'sousChefs', label: 'Sous Chefs' },
+    { value: 'dessertChefs', label: 'Dessert Chefs' }
+  ];
+
+  const initialWaiters = [
+    { name: "John Doe", restaurant: { name: restaurant[3].name, address: restaurant[3].address } },
+    { name: "Dakota Johnson", restaurant: { name: restaurant[1].name, address: restaurant[1].address } },
+    { name: "Barbara Barber", restaurant: { name: restaurant[5].name, address: restaurant[5].address } },
+    { name: "Cheyyene Cabar", restaurant: { name: restaurant[4].name, address: restaurant[4].address } },
+  ];
+  const [setEmployees] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
+
+  const [selectedCategory, setSelectedCategory] = useState(options[0].value);
+  const [chefs, setChefs] = useState(initialChefs);
+  const [waiters] = useState(initialWaiters);
+  const [selectedChef, setSelectedChef] = useState(null);
+
+  const handleChange = (event) => {
+    setSelectedCategory(event);
+    setSelectedChef(null); // Reset selected chef when changing category
+  };
+
+  const handleChefClick = (chef) => {
+    setSelectedChef(chef);
+  };
+
+  const currentChefs = chefs[selectedCategory];
 
   useEffect(() => {
     // Fetch restaurant data
@@ -104,11 +135,11 @@ const Restaurant = () => {
       .then(response => {
         const executiveChefs = response.data.filter(chef => chef.type === 'Executive Chef');
         const sousChefs = response.data.filter(chef => chef.type === 'Sous Chef');
-        const pastryChefs = response.data.filter(chef => chef.type === 'Pastry Chef');
+        const dessertChefs = response.data.filter(chef => chef.type === 'Dessert Chef');
         setChefs({
           executiveChefs,
           sousChefs,
-          pastryChefs
+          dessertChefs
         });
       })
       .catch(error => {
@@ -130,172 +161,94 @@ const Restaurant = () => {
   };
 
   return (
-    <div>
-          {/* <h1>Restaurant List</h1> */}
-          {/* <ul>
+    <Container>
+      <Tabs activeKey={tabIndex} onSelect={(k) => handleTabChange(null, k)}>
+        <Tab eventKey={0} title="Restaurant Information">
+          <Row>
             {restaurant.map((restaurant, index) => (
-              <li key={index}>
-                <h2>{restaurant.name}</h2>
-                <p>Cuisine: {restaurant.cuisine}</p>
-                <p>Address: {restaurant.address}</p>
-              </li>
+              <Col key={index} xs={12} sm={6} md={4}>
+                <Card className="mt-3">
+                  <Card.Header className="bg-primary text-white">{restaurant.name}</Card.Header>
+                  <Card.Body>
+                    <Card.Text><strong>Cuisine: </strong> {restaurant.cuisine}</Card.Text>
+                    <Card.Text><strong>Address: </strong> {restaurant.address}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
             ))}
-          </ul> */}
-      <Tabs value={tabIndex} onChange={handleTabChange}>
-        <Tab label="Restaurant Info" />
-        <Tab label="Chefs" />
-        <Tab label="Employees" />
+          </Row>
+        </Tab>
+
+        <Tab eventKey={1} title="Chefs">
+          <Dropdown onSelect={handleChange} className="mt-3 mb-3">
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              {options.find(option => option.value === selectedCategory).label}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {options.map(option => (
+                <Dropdown.Item key={option.value} eventKey={option.value}>
+                  {option.label}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Row>
+            {currentChefs.map((chef, index) => (
+              <Col key={index} xs={12} sm={6} md={4}>
+                <Card className="mt-3">
+                  <Card.Header className="bg-primary text-white">{chef.name}</Card.Header>
+                  <Card.Body>
+                    <Card.Text><strong>Role:</strong> {chef.role}</Card.Text>
+                    <Button variant="primary" onClick={() => handleChefClick(chef)}>
+                      View Restaurant Details
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          {selectedChef && (
+            <Card className="mt-3">
+              <Card.Header className="bg-secondary text-white">Restaurant Details</Card.Header>
+              <Card.Body>
+                <Card.Text><strong>Name:</strong> {selectedChef.restaurant.name}</Card.Text>
+                <Card.Text><strong>Address:</strong> {selectedChef.restaurant.address}</Card.Text>
+                <Card.Text><strong>Cuisine:</strong> {selectedChef.restaurant.cuisine}</Card.Text>
+              </Card.Body>
+            </Card>
+          )}
+        </Tab>
+
+        <Tab eventKey={2} title="Employees">
+          <Row>
+            {Object.keys(chefs).map((category) =>
+              chefs[category].map((chef, index) => (
+                <Col key={index} xs={12} sm={6} md={4}>
+                  <Card className="mt-3">
+                    <Card.Header className="bg-primary text-white">{chef.name}</Card.Header>
+                    <Card.Body>
+                      <Card.Text><strong>Role:</strong> {chef.role}</Card.Text>
+                      <Card.Text><strong>Restaurant:</strong> {chef.restaurant.name}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            )}
+            {waiters.map((waiter, index) => (
+              <Col key={index} xs={12} sm={6} md={4}>
+                <Card className="mt-3">
+                  <Card.Header className="bg-primary text-white">{waiter.name}</Card.Header>
+                  <Card.Body>
+                    <Card.Text><strong>Role:</strong> Waiter</Card.Text>
+                    <Card.Text><strong>Restaurant:</strong> {waiter.restaurant.name}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Tab>
       </Tabs>
-
-      {tabIndex === 0 && (
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={8}>
-            {/* <Card>
-              <CardHeader color="primary"> */}
-                <h4 className={classes.cardTitleBlack}>Restaurant Information</h4>
-                <ul>
-            {restaurant.map((restaurant, index) => (
-              <li key={index}>
-                <h2>{restaurant.name}</h2>
-                <p>Cuisine: {restaurant.cuisine}</p>
-                <p>Address: {restaurant.address}</p>
-              </li>
-            ))}
-          </ul>
-              {/* </CardHeader>
-              </Card> */}
-              </GridItem>
-              </GridContainer>
-              /* <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      //labelText="Restaurant Name"
-                      //id="name"
-                      formControlProps={{
-                        //fullWidth: true,
-                      }}
-                      inputProps={{
-                        //value: restaurant.name,
-                        //readOnly: true,
-                      }}
-                      // inputProps2={{
-                      //   value: restaurant2.name,
-                      //   readOnly: true,
-                      // }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Cuisine"
-                      id="cuisine"
-                      formControlProps={{
-                        //fullWidth: true,
-                      }}
-                      inputProps={{
-                        //value: restaurant.cuisine,
-                        //readOnly: true,
-                      }}
-                      // inputProps2={{
-                      //   value: restaurant2.cuisine,
-                      //   readOnly: true,
-                      // }}
-                    />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <CustomInput
-                      labelText="Address"
-                      id="address"
-                      formControlProps={{
-                        //fullWidth: true,
-                      }}
-                      inputProps={{
-                        //value: restaurant.address,
-                        //readOnly: true,
-                      }}
-                      // inputProps2={{
-                      //   value: restaurant2.address,
-                      //   readOnly: true,
-                      // }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>*/
-           // </Card>
-          //</GridItem>
-       // </GridContainer>
-      )}
-
-      {tabIndex === 1 && (
-        <GridContainer>
-          {chefs.executiveChefs.map((chef, index) => (
-            <GridItem key={index} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>{chef.name}</h4>
-                </CardHeader>
-                <CardBody>
-                  <p><strong>Role:</strong> {chef.role}</p>
-                </CardBody>
-              </Card>
-            </GridItem>
-          ))}
-        </GridContainer>
-      )}
-
-      {tabIndex === 2 && (
-        <GridContainer>
-          {chefs.sousChefs.map((chef, index) => (
-            <GridItem key={index} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>{chef.name}</h4>
-                </CardHeader>
-                <CardBody>
-                  <p><strong>Role:</strong> {chef.role}</p>
-                </CardBody>
-              </Card>
-            </GridItem>
-          ))}
-        </GridContainer>
-      )}
-
-      {tabIndex === 3 && (
-        <GridContainer>
-          {chefs.pastryChefs.map((chef, index) => (
-            <GridItem key={index} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>{chef.name}</h4>
-                </CardHeader>
-                <CardBody>
-                  <p><strong>Role:</strong> {chef.role}</p>
-                </CardBody>
-              </Card>
-            </GridItem>
-          ))}
-        </GridContainer>
-      )}
-
-      {tabIndex === 4 && (
-        <GridContainer>
-          {employees.map((employee, index) => (
-            <GridItem key={index} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>{employee.name}</h4>
-                </CardHeader>
-                <CardBody>
-                  <p><strong>Role:</strong> {employee.role}</p>
-                </CardBody>
-              </Card>
-            </GridItem>
-          ))}
-        </GridContainer>
-      )}
-    </div>
+    </Container>
   );
 };
 
