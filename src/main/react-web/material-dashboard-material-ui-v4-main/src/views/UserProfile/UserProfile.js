@@ -1,44 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import CustomInput from "../../components/CustomInput/CustomInput.js";
-import Button from "../../components/CustomButtons/Button.js";
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardAvatar from "../../components/Card/CardAvatar.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import avatar from "assets/img/faces/fritz.jpeg";
+import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
 import axios from "axios";
 import getPaletteTypeFromSettings from "views/theme.js";
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0",
-  },
-  cardTitleWhite: {
-    color: "#FFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-  },
-};
-
-const useStyles = makeStyles(styles);
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './UserProfile.css'; // Import the custom CSS file
 
 export default function UserProfile() {
-  const classes = useStyles();
   const [profile, setProfile] = useState({
     userID: null, // Ensure you have userID to correctly identify the profile
     firstName: "",
@@ -98,21 +65,22 @@ export default function UserProfile() {
       [id]: value
     }));
   };
+  
   const [paletteType, setPaletteType] = useState('light'); // Default to 'light'
   useEffect(() => {
     const fetchPaletteType = async () => {
-         const type = await getPaletteTypeFromSettings();
-         console.log("Palette type fetched:", type); // Print the fetched palette type
-         setPaletteType(type);
+      const type = await getPaletteTypeFromSettings();
+      console.log("Palette type fetched:", type); // Print the fetched palette type
+      setPaletteType(type);
     };
     fetchPaletteType();
-}, []);
+  }, []);
 
-const darkTheme = createMuiTheme({
+  const darkTheme = createMuiTheme({
     palette: {
-         type: paletteType, // Use the state variable
+      type: paletteType, // Use the state variable
     },
-});
+  });
 
   const handleCreateProfile = () => {
     axios.post('http://localhost:8080/api/profile', profile)
@@ -142,228 +110,175 @@ const darkTheme = createMuiTheme({
 
   return (
     <ThemeProvider theme={darkTheme}>
-     <CssBaseline />
-    <div>
-      <Tabs value={tabIndex} onChange={handleTabChange}>
-        <Tab label="Profile" />
-        <Tab label="Recipes" />
-        <Tab label="My Drafts" />
-        <Tab label="Following" />
-        <Tab label="Saved" />
-      </Tabs>
+      <CssBaseline />
+      <div className="container mt-4">
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <a className={`nav-link ${tabIndex === 0 ? 'active' : ''}`} onClick={() => handleTabChange(null, 0)}>Profile</a>
+          </li>
+          <li className="nav-item">
+            <a className={`nav-link ${tabIndex === 1 ? 'active' : ''}`} onClick={() => handleTabChange(null, 1)}>Recipes</a>
+          </li>
+          <li className="nav-item">
+            <a className={`nav-link ${tabIndex === 2 ? 'active' : ''}`} onClick={() => handleTabChange(null, 2)}>My Drafts</a>
+          </li>
+          <li className="nav-item">
+            <a className={`nav-link ${tabIndex === 3 ? 'active' : ''}`} onClick={() => handleTabChange(null, 3)}>Following</a>
+          </li>
+          <li className="nav-item">
+            <a className={`nav-link ${tabIndex === 4 ? 'active' : ''}`} onClick={() => handleTabChange(null, 4)}>Saved</a>
+          </li>
+        </ul>
 
-      {tabIndex === 0 && (
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={8}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-                <p className={classes.cardCategoryWhite}>Complete your profile</p>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="First Name"
+        {tabIndex === 0 && (
+          <div className="card mt-3">
+            <div className="card-header bg-primary text-white">
+              <h4>Edit Profile</h4>
+              <p>Complete your profile</p>
+            </div>
+            <div className="card-body">
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label>First Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
                       id="firstName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.firstName,
-                        onChange: handleInputChange,
-                      }}
+                      value={profile.firstName}
+                      onChange={handleInputChange}
                     />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Last Name"
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label>Last Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
                       id="lastName"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.lastName,
-                        onChange: handleInputChange,
-                      }}
+                      value={profile.lastName}
+                      onChange={handleInputChange}
                     />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="City"
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label>City</label>
+                    <input
+                      type="text"
+                      className="form-control"
                       id="city"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.city,
-                        onChange: handleInputChange,
-                      }}
+                      value={profile.city}
+                      onChange={handleInputChange}
                     />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <CustomInput
-                      labelText="Email Address"
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <label>Email Address</label>
+                    <input
+                      type="email"
+                      className="form-control"
                       id="emailAddress"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        value: profile.emailAddress,
-                        onChange: handleInputChange,
-                      }}
+                      value={profile.emailAddress}
+                      onChange={handleInputChange}
                     />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <InputLabel style={{ color: "#AAAAAA" }}>About Me</InputLabel>
-                    <CustomInput
-                      labelText="About Me"
-                      id="aboutMe"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                      inputProps={{
-                        multiline: true,
-                        rows: 5,
-                        value: profile.aboutMe,
-                        onChange: handleInputChange,
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
-              <CardFooter>
-                {isNewProfile ? (
-                  <Button color="primary" onClick={handleCreateProfile}>Create Profile</Button>
-                ) : (
-                  <Button color="primary" onClick={handleUpdateProfile}>Update Profile</Button>
-                )}
-              </CardFooter>
-            </Card>
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card profile>
-              <CardAvatar profile>
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <img src={avatar} alt="..." />
-                </a>
-              </CardAvatar>
-              <CardBody profile>
-                <h6 className={classes.cardCategory}>Profile</h6>
-                <h4 className={classes.cardTitle}>{`${profile.firstName} ${profile.lastName}`}</h4>
-                <p className={classes.description}>
-                  {profile.aboutMe}
-                </p>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
+                  </div>
+                </div>
+              </div>
+              <div className="form-group">
+                <label>About Me</label>
+                <textarea
+                  className="form-control"
+                  id="aboutMe"
+                  rows="5"
+                  value={profile.aboutMe}
+                  onChange={handleInputChange}
+                ></textarea>
+              </div>
+            </div>
+            <div className="card-footer">
+              {isNewProfile ? (
+                <button className="btn btn-primary" onClick={handleCreateProfile}>Create Profile</button>
+              ) : (
+                <button className="btn btn-primary" onClick={handleUpdateProfile}>Update Profile</button>
+              )}
+            </div>
+          </div>
+        )}
 
-      {tabIndex === 1 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Your Recipes</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {recipes.map((recipe, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{recipe.name}</h4>
-                          <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                          <p><strong>Steps:</strong> {recipe.steps}</p>
-                          <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>
-                          <p><strong>Rating:</strong> {recipe.avgRating}</p>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
+        {tabIndex === 1 && (
+          <div className="container mt-3">
+            <div className="row">
+              {recipes.map((recipe, index) => (
+                <div className="col-md-4" key={index}>
+                  <div className="card mb-3">
+                    <div className="card-body">
+                      <h4>{recipe.name}</h4>
+                      <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+                      <p><strong>Steps:</strong> {recipe.steps}</p>
+                      <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>
+                      <p><strong>Rating:</strong> {recipe.avgRating}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
-      {tabIndex === 2 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>My Drafts</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {drafts.map((draft, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{draft.recipeName}</h4>
-                          <p><strong>Ingredients:</strong> {draft.ingredients}</p>
-                          <p><strong>Steps:</strong> {draft.description}</p>
-                          <p><strong>Cuisine:</strong> {draft.cuisine}</p>
-                          <p><strong>Notes:</strong> {draft.draftNotes}</p>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
+        {tabIndex === 2 && (
+          <div className="container mt-3">
+            <div className="row">
+              {drafts.map((draft, index) => (
+                <div className="col-md-4" key={index}>
+                  <div className="card mb-3">
+                    <div className="card-body">
+                      <h4>{draft.recipeName}</h4>
+                      <p><strong>Ingredients:</strong> {draft.ingredients}</p>
+                      <p><strong>Steps:</strong> {draft.description}</p>
+                      <p><strong>Cuisine:</strong> {draft.cuisine}</p>
+                      <p><strong>Notes:</strong> {draft.draftNotes}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
-      {tabIndex === 3 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Following</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {following.map((follow, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{follow.username}</h4>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
+        {tabIndex === 3 && (
+          <div className="container mt-3">
+            <div className="row">
+              {following.map((follow, index) => (
+                <div className="col-md-4" key={index}>
+                  <div className="card mb-3">
+                    <div className="card-body">
+                      <h4>{follow.username}</h4>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
-      {tabIndex === 4 && (
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Saved</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  <p>No saved items yet</p>
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      )}
-    </div>
+        {tabIndex === 4 && (
+          <div className="container mt-3">
+            <div className="card">
+              <div className="card-header bg-primary text-white">
+                <h4>Saved</h4>
+              </div>
+              <div className="card-body">
+                <p>No saved items yet</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </ThemeProvider>
   );
 }
