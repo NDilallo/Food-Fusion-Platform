@@ -1,20 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "assets/css/material-dashboard-react.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { listUsers, addRating } from "services/PostedRecipeService";
-
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardBody from "../../components/Card/CardBody.js";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import IconButton from "@material-ui/core/IconButton";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
+import Card from "react-bootstrap/esm/Card";
+import Button from "react-bootstrap/esm/Button";
+import Form from "react-bootstrap/esm/Form";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 import SavedService from "services/SavedService";
 
 export default function Dashboard() {
@@ -96,71 +87,52 @@ export default function Dashboard() {
   };
 
   return (
-    <GridContainer>
-      <GridItem xs={12}>
-        <Card>
-          <CardHeader color="primary">
-            <h4>Your Feed</h4>
-          </CardHeader>
-          <CardBody>
-            <GridContainer>
-              {posts.map((recipe, index) => (
-                <GridItem key={index} xs={12} sm={6} md={4}>
-                  <Card>
-                    <CardHeader
-                      color="secondary"
-                      style={{ display: "flex", justifyContent: "space-between" }}
+    <div className="container mt-4"> {/* Bootstrap container class */}
+      <h4 className="mb-4">Your Feed</h4>
+      <div className="row">
+        {posts.map((recipe, index) => (
+          <div key={index} className="col-sm-6 col-md-4 mb-4">
+            <Card>
+              <Card.Body>
+                <h4>{recipe.name}</h4>
+                <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
+                <p><strong>Steps:</strong> {recipe.steps}</p>
+                <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>
+                <p><strong>Rating:</strong> {recipe.avgRating}</p>
+                <Form.Group as={Row}>
+                  <Form.Label column sm="6">Select Rating</Form.Label>
+                  <Col sm="6">
+                    <Form.Control
+                      as="select"
+                      value={ratingInputs[recipe.recipeId] || ""}
+                      onChange={(event) => handleInputChange(event, recipe.recipeId)}
                     >
-                      <h4>{recipe.name}</h4>
-                      <IconButton
-                        color="primary"
-                        onClick={() => handleSavePost(recipe)}
-                      >
-                        <BookmarkIcon />
-                      </IconButton>
-                    </CardHeader>
-                    <CardBody>
-                      <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                      <p><strong>Steps:</strong> {recipe.steps}</p>
-                      <p><strong>Cuisine:</strong> {recipe.recipeCuisine}</p>
-                      <p><strong>Rating:</strong> {recipe.avgRating}</p>
-                      <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={6}>
-                          <FormControl fullWidth>
-                            <InputLabel id={`rating-label-${recipe.recipeId}`}>Select Rating</InputLabel>
-                            <Select
-                              labelId={`rating-label-${recipe.recipeId}`}
-                              id={`rating-select-${recipe.recipeId}`}
-                              value={ratingInputs[recipe.recipeId] || ""}
-                              onChange={(event) => handleInputChange(event, recipe.recipeId)}
-                              fullWidth
-                            >
-                              <MenuItem value={1}>1</MenuItem>
-                              <MenuItem value={2}>2</MenuItem>
-                              <MenuItem value={3}>3</MenuItem>
-                              <MenuItem value={4}>4</MenuItem>
-                              <MenuItem value={5}>5</MenuItem>
-                            </Select>
-                          </FormControl>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => handleSubmitRating(recipe.recipeId)}
-                          >
-                            Submit Rating
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </CardBody>
-                  </Card>
-                </GridItem>
-              ))}
-            </GridContainer>
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                      <option value={4}>4</option>
+                      <option value={5}>5</option>
+                    </Form.Control>
+                  </Col>
+                </Form.Group>
+                <Button
+                  variant="primary"
+                  onClick={() => handleSubmitRating(recipe.recipeId)}
+                >
+                  Submit Rating
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="ml-2"
+                  onClick={() => handleSavePost(recipe)}
+                >
+                  Save Post
+                </Button>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
