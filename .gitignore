@@ -34,3 +34,6 @@ build/
 data/demo.trace.db
 
 .fake
+
+### Logs ###
+/logs
