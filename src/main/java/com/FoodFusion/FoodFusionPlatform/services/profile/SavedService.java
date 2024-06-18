@@ -12,12 +12,20 @@ import com.foodFusion.foodFusionPlatform.rdbm.profile.SavedRepository;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Defines the services for the Saved table
+ * @author Nick Dilallo
+ */
 @Service
 @Log4j2
 public class SavedService {
     @Autowired
     private SavedRepository repo;
 
+    /**
+     * list all the Saved posts
+     * @return a list of Saved instances
+     */
     public List<Saved> list() {
         log.traceEntry("Enter list");
         List<Saved> retval = StreamSupport.stream(repo.findAll().spliterator(), false).collect(Collectors.toList());
@@ -25,6 +33,11 @@ public class SavedService {
         return retval;
     }
 
+    /**
+     * save a saved post
+     * @param user
+     * @return the saved instance
+     */
     public Saved save(Saved user) {
         log.traceEntry("enter save", user);
         repo.save(user);
@@ -32,6 +45,10 @@ public class SavedService {
         return user;
     }
 
+    /**
+     * delete a saved post with the given id
+     * @param id
+     */
     public void delete(long id) {
         log.traceEntry("Enter delete", id);
         repo.deleteById(id);

@@ -3,7 +3,10 @@ package com.foodFusion.foodFusionPlatform.rdbm.profile;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * @see JpaRepository that extends PagingAndSortingRepository that expends CrudRepository
+ * 
+ * @author Nick Dilallo
+ * This class defines the repository for the Saved table.
+ * 
  */
 public interface SavedRepository extends CrudRepository<Saved, Long> {
     

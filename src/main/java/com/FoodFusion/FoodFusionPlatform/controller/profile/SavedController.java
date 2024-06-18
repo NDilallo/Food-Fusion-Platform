@@ -3,6 +3,7 @@ package com.foodFusion.foodFusionPlatform.controller.profile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.log4j.Log4j2;
 
-/*
- * Documented controller using OpenAPI
+/**
+ * Controller for managing Saved entities.
+ * @author Nick Dilallo
  */
 @RestController
 @RequestMapping("/api/saved")
@@ -39,6 +41,10 @@ public class SavedController {
     @Autowired
     private SavedService service;
 
+    /**
+     * List all the Saved instances in the table
+     * @return a list of Saved instances
+     */
     @GetMapping
     @Operation(summary = "Returns all the saved posts for a user")
     @ApiResponse(responseCode = "200", description = "valid response", 
@@ -47,6 +53,11 @@ public class SavedController {
         return service.list();
     }
 
+    /**
+     * Save a post to the table
+     * @param user
+     * @return long id of the saved post
+     */
     @PostMapping
     @Operation(summary = "Save the post and returns the saved post's id")
     public long save(@RequestBody Saved user) {
@@ -56,6 +67,11 @@ public class SavedController {
         return user.getId();
     }
 
+    /**
+     * Validate the saved post
+     * @param user
+     * @return ResponseEntity<String>
+     */
     @PostMapping("/validated")
     @Operation(summary = "Save the post to user's profile")
     public ResponseEntity<String> validatedSave(@Valid @RequestBody Saved user) {
@@ -65,6 +81,10 @@ public class SavedController {
         return ResponseEntity.ok("new id is " + user.getId());
     }
 
+    /**
+     * Delete a Saved instance from the table
+     * @param id
+     */
     @DeleteMapping
     @Operation(summary = "Delete the saved post")
     public void delete(long id) {
@@ -73,6 +93,10 @@ public class SavedController {
         log.traceExit("Exit delete");
     }
     
+    /**
+     * @param ex
+     * @return Map<String, String>
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {

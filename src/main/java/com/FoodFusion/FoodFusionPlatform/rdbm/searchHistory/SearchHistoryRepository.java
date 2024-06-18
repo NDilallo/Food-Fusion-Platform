@@ -4,7 +4,10 @@ package com.foodFusion.foodFusionPlatform.rdbm.searchHistory;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * @see JpaRepository that extends PagingAndSortingRepository that expends CrudRepository
+ * 
+ * @author Nick Dilallo
+ * This class defines the repository for the SearchHistory table.
+ * 
  */
 public interface SearchHistoryRepository extends CrudRepository<SearchHistory, Long> {
     

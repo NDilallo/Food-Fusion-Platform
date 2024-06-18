@@ -2,6 +2,7 @@ package com.foodFusion.foodFusionPlatform.rdbm.profile;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,43 +13,37 @@ public class ProfileRepositoryTest {
     @Autowired
     private ProfileRepository repo;
 
-    /**
-     * Test create, read, update, and delete
-     */
     @Test
     public void testCrud() {
-        Profile ptest = new Profile();
-        ptest.setPostedRecipesTableID(1);
-        ptest.setSettingsTableID(1);
-        ptest.setFollowingTableID(1);
-        ptest.setDraftsTableID(1);
-        ptest.setCommentID(1);
-        ptest.setNotificationID(1);
+        Profile profile = new Profile();
+        profile.setFirstName("John");
+        profile.setLastName("Doe");
+        profile.setCity("Chicago");
+        profile.setAboutMe("This is a test profile");
+        profile.setEmailAddress("john.doe@example.com");
 
-        long b4count = repo.count();
-        long b4id = ptest.getUserID();
-        repo.save(ptest);
-        long aftercount = repo.count();
-        long afterid = ptest.getUserID();
+        long beforeCount = repo.count();
+        long beforeId = profile.getUserID();
 
-        // there should be 1 more in the database after the save
-        assertEquals(b4count + 1, aftercount);
+        repo.save(profile);
 
-        // original id was 0 but afterwards the id was generated and so should not be equal
-        assertNotEquals(b4id, afterid);
+        long afterCount = repo.count();
+        long afterId = profile.getUserID();
 
-        // Scenario of updating profile
-        Profile updated = repo.findById(afterid).orElse(null);
-        updated.setCommentID(2);
-        repo.save(updated);
+        assertEquals(beforeCount + 1, afterCount);
+        assertNotEquals(beforeId, afterId);
 
-        Profile updatedCheck = repo.findById(afterid).orElse(null);
-        assertNotEquals(updatedCheck, ptest);
-        assertEquals(2, updatedCheck.getCommentID());
+        Profile updatedProfile = repo.findById(afterId).orElse(null);
+        updatedProfile.setCity("New York");
+        repo.save(updatedProfile);
 
-        b4count = repo.count();
+        Profile updatedCheck = repo.findById(afterId).orElse(null);
+        assertNotEquals(updatedCheck.getCity(), profile.getCity());
+        assertEquals(updatedCheck.getCity(), "New York");
+
+        beforeCount = repo.count();
         repo.delete(updatedCheck);
-        aftercount = repo.count();
-        assertEquals(b4count - 1, aftercount);
+        afterCount = repo.count();
+        assertEquals(beforeCount - 1, afterCount);
     }
 }

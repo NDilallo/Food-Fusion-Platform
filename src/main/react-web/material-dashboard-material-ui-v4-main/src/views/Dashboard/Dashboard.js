@@ -30,5 +30,7 @@ export default function Dashboard() {
         <p>No posts available</p>
       )}
     </div>
+    </ThemeProvider>
+    
   );
 }
