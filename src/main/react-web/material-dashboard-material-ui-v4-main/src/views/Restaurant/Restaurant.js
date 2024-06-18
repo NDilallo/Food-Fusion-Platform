@@ -6,11 +6,10 @@ import React, { useEffect, useState } from 'react';
 import Card from "../../components/Card/Card.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardHeader from "../../components/Card/CardHeader.js";
-import CustomInput from "../../components/CustomInput/CustomInput.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import GridItem from "../../components/Grid/GridItem.js";
 
-const styles = {
+const useStyles = makeStyles({
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",
@@ -27,18 +26,64 @@ const styles = {
     marginBottom: "3px",
     textDecoration: "none",
   },
-};
+});
 
-const useStyles = makeStyles(styles);
-
-export default function Restaurant() {
+const Restaurant = () => {
   const classes = useStyles();
-  const [restaurant, setRestaurant] = useState({
-    name: "",
-    cuisine: "",
-    address: "",
+
+  const [restaurant, setRestaurant] = useState([{
+    name: "Spice World",
+    cuisine: "Indian",
+    address: "456 Oak Ave, Townsville",
+    chefs: [
+      { role: 'Main Chef', name: 'Michael Brown' },
+      { role: 'Sous Chef', name: 'Emily White' },
+      { role: 'Dessert Chef', name: 'David Lee' }
+    ]},
+    {
+      name: "S",
+      cuisine: "India",
+      address: "456 OaAve, Townsville",
+      chefs: [
+        { role: 'Main Chef', name: 'Michal Brown' },
+        { role: 'Sous Chef', name: 'Emly White' },
+        { role: 'Dessert Chef', name: 'Daid Lee' }
+      ]}]);
+    
+  // const [restaurant, setRestaurant] = useState({
+  //   name: "Spice World",
+  //   cuisine: "Indian",
+  //   address: "456 Oak Ave, Townsville",
+  //   chefs: [
+  //     { role: 'Main Chef', name: 'Michael Brown' },
+  //     { role: 'Sous Chef', name: 'Emily White' },
+  //     { role: 'Dessert Chef', name: 'David Lee' }
+  //   ]}
+  //   // {
+  //   //   name: "Portofino",
+  //   //   cuisine: "Italian",
+  //   //   address: "456 Oak Ave, Chicago",
+  //   //   chefs: [
+  //   //     { role: 'Main Chef', name: 'Michael Spears' },
+  //   //     { role: 'Sous Chef', name: 'Emily Lee' },
+  //   //     { role: 'Dessert Chef', name: 'David Copper' }
+  //   //   ]},
+  //);
+  // const [restaurant2, setRestaurant2] = useState({
+  //     name: "Portofino",
+  //     cuisine: "Italian",
+  //     address: "456 Oak Ave, Chicago",
+  //     chefs: [
+  //       { role: 'Main Chef', name: 'Michael Spears' },
+  //       { role: 'Sous Chef', name: 'Emily Lee' },
+  //       { role: 'Dessert Chef', name: 'David Copper' }
+  //     ]},
+  // );
+  const [chefs, setChefs] = useState({
+    executiveChefs: [],
+    sousChefs: [],
+    pastryChefs: []
   });
-  const [chefs, setChefs] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -46,6 +91,8 @@ export default function Restaurant() {
     // Fetch restaurant data
     axios.get('http://localhost:8080/api/restaurant/1') // Assuming restaurant ID 1 for now
       .then(response => {
+        
+        // setRestaurant(response.data);
         setRestaurant(response.data);
       })
       .catch(error => {
@@ -55,7 +102,14 @@ export default function Restaurant() {
     // Fetch chefs data
     axios.get('http://localhost:8080/api/chefs')
       .then(response => {
-        setChefs(response.data);
+        const executiveChefs = response.data.filter(chef => chef.type === 'Executive Chef');
+        const sousChefs = response.data.filter(chef => chef.type === 'Sous Chef');
+        const pastryChefs = response.data.filter(chef => chef.type === 'Pastry Chef');
+        setChefs({
+          executiveChefs,
+          sousChefs,
+          pastryChefs
+        });
       })
       .catch(error => {
         console.error('There was an error fetching the chefs data!', error);
@@ -77,6 +131,16 @@ export default function Restaurant() {
 
   return (
     <div>
+          {/* <h1>Restaurant List</h1> */}
+          {/* <ul>
+            {restaurant.map((restaurant, index) => (
+              <li key={index}>
+                <h2>{restaurant.name}</h2>
+                <p>Cuisine: {restaurant.cuisine}</p>
+                <p>Address: {restaurant.address}</p>
+              </li>
+            ))}
+          </ul> */}
       <Tabs value={tabIndex} onChange={handleTabChange}>
         <Tab label="Restaurant Info" />
         <Tab label="Chefs" />
@@ -86,23 +150,39 @@ export default function Restaurant() {
       {tabIndex === 0 && (
         <GridContainer>
           <GridItem xs={12} sm={12} md={8}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Restaurant Information</h4>
-              </CardHeader>
-              <CardBody>
+            {/* <Card>
+              <CardHeader color="primary"> */}
+                <h4 className={classes.cardTitleBlack}>Restaurant Information</h4>
+                <ul>
+            {restaurant.map((restaurant, index) => (
+              <li key={index}>
+                <h2>{restaurant.name}</h2>
+                <p>Cuisine: {restaurant.cuisine}</p>
+                <p>Address: {restaurant.address}</p>
+              </li>
+            ))}
+          </ul>
+              {/* </CardHeader>
+              </Card> */}
+              </GridItem>
+              </GridContainer>
+              /* <CardBody>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText="Restaurant Name"
-                      id="name"
+                      //labelText="Restaurant Name"
+                      //id="name"
                       formControlProps={{
-                        fullWidth: true,
+                        //fullWidth: true,
                       }}
                       inputProps={{
-                        value: restaurant.name,
-                        readOnly: true,
+                        //value: restaurant.name,
+                        //readOnly: true,
                       }}
+                      // inputProps2={{
+                      //   value: restaurant2.name,
+                      //   readOnly: true,
+                      // }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
@@ -110,12 +190,16 @@ export default function Restaurant() {
                       labelText="Cuisine"
                       id="cuisine"
                       formControlProps={{
-                        fullWidth: true,
+                        //fullWidth: true,
                       }}
                       inputProps={{
-                        value: restaurant.cuisine,
-                        readOnly: true,
+                        //value: restaurant.cuisine,
+                        //readOnly: true,
                       }}
+                      // inputProps2={{
+                      //   value: restaurant2.cuisine,
+                      //   readOnly: true,
+                      // }}
                     />
                   </GridItem>
                 </GridContainer>
@@ -125,72 +209,94 @@ export default function Restaurant() {
                       labelText="Address"
                       id="address"
                       formControlProps={{
-                        fullWidth: true,
+                        //fullWidth: true,
                       }}
                       inputProps={{
-                        value: restaurant.address,
-                        readOnly: true,
+                        //value: restaurant.address,
+                        //readOnly: true,
                       }}
+                      // inputProps2={{
+                      //   value: restaurant2.address,
+                      //   readOnly: true,
+                      // }}
                     />
                   </GridItem>
                 </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
+              </CardBody>*/
+           // </Card>
+          //</GridItem>
+       // </GridContainer>
       )}
 
       {tabIndex === 1 && (
         <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Chefs</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {chefs.map((chef, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{chef.name}</h4>
-                          <p><strong>Role:</strong> {chef.role}</p>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
+          {chefs.executiveChefs.map((chef, index) => (
+            <GridItem key={index} xs={12} sm={6} md={4}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>{chef.name}</h4>
+                </CardHeader>
+                <CardBody>
+                  <p><strong>Role:</strong> {chef.role}</p>
+                </CardBody>
+              </Card>
+            </GridItem>
+          ))}
         </GridContainer>
       )}
 
       {tabIndex === 2 && (
         <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="primary">
-                <h4 className={classes.cardTitleWhite}>Employees</h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer>
-                  {employees.map((employee, index) => (
-                    <GridItem key={index} xs={12} sm={6} md={4}>
-                      <Card>
-                        <CardBody>
-                          <h4>{employee.name}</h4>
-                          <p><strong>Role:</strong> {employee.role}</p>
-                        </CardBody>
-                      </Card>
-                    </GridItem>
-                  ))}
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
+          {chefs.sousChefs.map((chef, index) => (
+            <GridItem key={index} xs={12} sm={6} md={4}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>{chef.name}</h4>
+                </CardHeader>
+                <CardBody>
+                  <p><strong>Role:</strong> {chef.role}</p>
+                </CardBody>
+              </Card>
+            </GridItem>
+          ))}
+        </GridContainer>
+      )}
+
+      {tabIndex === 3 && (
+        <GridContainer>
+          {chefs.pastryChefs.map((chef, index) => (
+            <GridItem key={index} xs={12} sm={6} md={4}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>{chef.name}</h4>
+                </CardHeader>
+                <CardBody>
+                  <p><strong>Role:</strong> {chef.role}</p>
+                </CardBody>
+              </Card>
+            </GridItem>
+          ))}
+        </GridContainer>
+      )}
+
+      {tabIndex === 4 && (
+        <GridContainer>
+          {employees.map((employee, index) => (
+            <GridItem key={index} xs={12} sm={6} md={4}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>{employee.name}</h4>
+                </CardHeader>
+                <CardBody>
+                  <p><strong>Role:</strong> {employee.role}</p>
+                </CardBody>
+              </Card>
+            </GridItem>
+          ))}
         </GridContainer>
       )}
     </div>
   );
-}
+};
+
+export default Restaurant;
