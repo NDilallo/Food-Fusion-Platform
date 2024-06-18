@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,6 +35,7 @@ import lombok.extern.log4j.Log4j2;
 /*
  * Documented controller using OpenAPI
  */
+// @CrossOrigin("*")
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/postedrecipe")
@@ -104,6 +107,17 @@ public class PostedRecipeController {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+    
+    @PostMapping("/{recipeId}/rating")
+    public ResponseEntity<PostedRecipe> submitRating(@PathVariable long recipeId, @RequestParam int rating) {
+        System.out.println("Here");
+        PostedRecipe updatedRecipe = service.addRating(recipeId, rating);
+        if (updatedRecipe != null) {
+            return ResponseEntity.ok(updatedRecipe);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

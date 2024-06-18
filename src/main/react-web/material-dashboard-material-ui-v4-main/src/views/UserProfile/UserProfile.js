@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+import { createMuiTheme, ThemeProvider, CssBaseline} from '@material-ui/core';
+import GridItem from "../../components/Grid/GridItem.js";
+import GridContainer from "../../components/Grid/GridContainer.js";
+import CustomInput from "../../components/CustomInput/CustomInput.js";
+import Button from "../../components/CustomButtons/Button.js";
+import Card from "../../components/Card/Card.js";
+import CardHeader from "../../components/Card/CardHeader.js";
+import CardAvatar from "../../components/Card/CardAvatar.js";
+import CardBody from "../../components/Card/CardBody.js";
+import CardFooter from "../../components/Card/CardFooter.js";
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import avatar from "assets/img/faces/fritz.jpeg";
 import axios from "axios";
 import getPaletteTypeFromSettings from "views/theme.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,57 +26,71 @@ export default function UserProfile() {
     lastName: "",
     city: "",
     aboutMe: "",
-    emailAddress: ""
+    emailAddress: "",
   });
   const [recipes, setRecipes] = useState([]);
   const [drafts, setDrafts] = useState([]);
   const [following, setFollowing] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [isNewProfile, setIsNewProfile] = useState(true); // Flag to check if the profile is new
+  const [savedRecipes, setSavedRecipes] = useState([]);
 
   useEffect(() => {
     // Fetch profile data
-    axios.get('http://localhost:8080/api/profile/1') // Assuming userID 1 for now
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/profile/1") // Assuming userID 1 for now
+      .then((response) => {
         if (response.data) {
           setProfile(response.data);
           setIsNewProfile(false);
         }
       })
-      .catch(error => {
-        console.error('There was an error fetching the profile!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the profile!", error);
       });
 
-    axios.get('http://localhost:8080/api/postedrecipe')
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/postedrecipe")
+      .then((response) => {
         setRecipes(response.data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the recipes!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the recipes!", error);
       });
 
-    axios.get('http://localhost:8080/api/following?userId=1') // Assuming userID 1 for now
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/following?userId=1") // Assuming userID 1 for now
+      .then((response) => {
         setFollowing(response.data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the following list!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the following list!", error);
       });
 
-    axios.get('http://localhost:8080/api/draft')
-      .then(response => {
+    axios
+      .get("http://localhost:8080/api/draft")
+      .then((response) => {
         setDrafts(response.data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the drafts!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the drafts!", error);
+      });
+
+    axios
+      .get("http://localhost:8080/api/saved")
+      .then((response) => {
+        setSavedRecipes(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the saved posts!", error);
       });
   }, []);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setProfile(prevState => ({
+    setProfile((prevState) => ({
       ...prevState,
-      [id]: value
+      [id]: value,
     }));
   };
   
@@ -76,31 +104,33 @@ export default function UserProfile() {
     fetchPaletteType();
   }, []);
 
-  const darkTheme = createMuiTheme({
+const darkTheme = createMuiTheme({
     palette: {
       type: paletteType, // Use the state variable
     },
-  });
+});
 
   const handleCreateProfile = () => {
-    axios.post('http://localhost:8080/api/profile', profile)
-      .then(response => {
+    axios
+      .post("http://localhost:8080/api/profile", profile)
+      .then((response) => {
         setProfile(response.data);
         setIsNewProfile(false);
-        alert('Profile created successfully');
+        alert("Profile created successfully");
       })
-      .catch(error => {
-        console.error('There was an error creating the profile!', error);
+      .catch((error) => {
+        console.error("There was an error creating the profile!", error);
       });
   };
 
   const handleUpdateProfile = () => {
-    axios.put(`http://localhost:8080/api/profile/${profile.userID}`, profile)
+    axios
+      .put(`http://localhost:8080/api/profile/${profile.userID}`, profile)
       .then(() => {
-        alert('Profile updated successfully');
+        alert("Profile updated successfully");
       })
-      .catch(error => {
-        console.error('There was an error updating the profile!', error);
+      .catch((error) => {
+        console.error("There was an error updating the profile!", error);
       });
   };
 
@@ -230,55 +260,91 @@ export default function UserProfile() {
           </div>
         )}
 
-        {tabIndex === 2 && (
-          <div className="container mt-3">
-            <div className="row">
-              {drafts.map((draft, index) => (
-                <div className="col-md-4" key={index}>
-                  <div className="card mb-3">
-                    <div className="card-body">
-                      <h4>{draft.recipeName}</h4>
-                      <p><strong>Ingredients:</strong> {draft.ingredients}</p>
-                      <p><strong>Steps:</strong> {draft.description}</p>
-                      <p><strong>Cuisine:</strong> {draft.cuisine}</p>
-                      <p><strong>Notes:</strong> {draft.draftNotes}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+      {tabIndex === 2 && (
+        <GridContainer>
+          <GridItem xs={12}>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>My Drafts</h4>
+              </CardHeader>
+              <CardBody>
+                <GridContainer>
+                  {drafts.map((draft, index) => (
+                    <GridItem key={index} xs={12} sm={6} md={4}>
+                      <Card>
+                        <CardBody>
+                          <h4>{draft.recipeName}</h4>
+                          <p><strong>Ingredients:</strong> {draft.ingredients}</p>
+                          <p><strong>Steps:</strong> {draft.description}</p>
+                          <p><strong>Cuisine:</strong> {draft.cuisine}</p>
+                          <p><strong>Notes:</strong> {draft.draftNotes}</p>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  ))}
+                </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      )}
 
-        {tabIndex === 3 && (
-          <div className="container mt-3">
-            <div className="row">
-              {following.map((follow, index) => (
-                <div className="col-md-4" key={index}>
-                  <div className="card mb-3">
-                    <div className="card-body">
-                      <h4>{follow.username}</h4>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+      {tabIndex === 3 && (
+        <GridContainer>
+          <GridItem xs={12}>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>Following</h4>
+              </CardHeader>
+              <CardBody>
+                <GridContainer>
+                  {following.map((follow, index) => (
+                    <GridItem key={index} xs={12} sm={6} md={4}>
+                      <Card>
+                        <CardBody>
+                          <h4>{follow.username}</h4>
+                        </CardBody>
+                      </Card>
+                    </GridItem>
+                  ))}
+                </GridContainer>
+              </CardBody>
+            </Card>
+          </GridItem>
+        </GridContainer>
+      )}
 
-        {tabIndex === 4 && (
-          <div className="container mt-3">
-            <div className="card">
-              <div className="card-header bg-primary text-white">
-                <h4>Saved</h4>
-              </div>
-              <div className="card-body">
-                <p>No saved items yet</p>
-              </div>
-            </div>
-          </div>
+{tabIndex === 4 && (
+          <GridContainer>
+            <GridItem xs={12}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Your Saved Recipes</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    {savedRecipes.map((savedPost, index) => (
+                      savedPost.saved_post.map((post, postIndex) => (
+                        <GridItem key={`${index}-${postIndex}`} xs={12} sm={6} md={4}>
+                          <Card>
+                            <CardBody>
+                              <h4>{post.name}</h4>
+                              <p><strong>Ingredients:</strong> {post.ingredients}</p>
+                              <p><strong>Steps:</strong> {post.steps}</p>
+                              <p><strong>Cuisine:</strong> {post.recipeCuisine}</p>
+                              <p><strong>Rating:</strong> {post.avgRating}</p>
+                            </CardBody>
+                          </Card>
+                        </GridItem>
+                      ))
+                    ))}
+                  </GridContainer>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
         )}
-      </div>
+    </div>
     </ThemeProvider>
   );
 }

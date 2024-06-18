@@ -20,7 +20,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "saved posts") // Escape the table name "user" to avoid conflicts with reserved keywords
+@Table(name = "saved posts")
 public class Saved {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -52,15 +52,13 @@ export default function Settings() {
         axios.put(`http://localhost:8080/api/settings/${1}`, { enableDarkMode })
             .then(response => {
                 console.log('Settings updated', response.data);
-
+    
                 setSettings(currentSettings => currentSettings.map(setting => {
                     if (setting.settingsID === settingsID) {
                         return { ...setting, enableDarkMode };
                     }
                     return setting;
                 }));
-
-                window.location.reload(); // Refresh the page
             })
             .catch(error => {
                 console.error('Error updating settings:', error);
